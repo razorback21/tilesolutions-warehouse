@@ -77,10 +77,16 @@ const AppTheme = {
             },
         },
         Button: {
-            // Can simply pass default props to change default behaviour of components.
-            defaultProps: {
-                colorScheme: "red"
-            },
+            variants: {
+                solid: (props) => {
+                    console.log(props);
+                    const colorScheme = props.colorScheme
+                    console.log(colorScheme, `${props.theme.colors.warning['100']}`)
+                    return {
+                        rounded: "full"
+                    };
+                }
+            }
         }
     }
 }
