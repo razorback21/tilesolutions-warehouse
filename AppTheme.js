@@ -1,6 +1,7 @@
 const AppTheme = {
     colors: {
         primary: {
+            50: "#fadddd",
             100: "#FDDFD2",
             200: "#FBB8A5",
             300: "#F38777",
@@ -12,6 +13,7 @@ const AppTheme = {
             900: "#68062E",
         },
         secondary: {
+            50: "#f3eae5",
             100: "#F3E5DA",
             200: "#E7C9B9",
             300: "#B88F81",
@@ -23,6 +25,7 @@ const AppTheme = {
             900: "#090103",
         },
         success: {
+            50: "#f1fce4",
             100: "#F3FBCB",
             200: "#E5F79A",
             300: "#CAE864",
@@ -34,6 +37,7 @@ const AppTheme = {
             900: "#345601",
         },
         info: {
+            50: "#e0f6fd",
             100: "#C9F2FB",
             200: "#95E0F8",
             300: "#5EC0EA",
@@ -45,6 +49,7 @@ const AppTheme = {
             900: "#001F59",
         },
         warning: {
+            50: "#fcf2e0",
             100: "#FCF3CA",
             200: "#FAE496",
             300: "#F2CD61",
@@ -56,6 +61,7 @@ const AppTheme = {
             900: "#663800",
         },
         danger: {
+            50: "#fdebe5",
             100: "#FDE5D1",
             200: "#FBC5A5",
             300: "#F49B77",
