@@ -1,25 +1,20 @@
 import React from "react";
+
 import {
   NativeBaseProvider,
   extendTheme,
 } from "native-base";
 import { Platform } from "react-native";
 
-import HomeScreen from "./components/screens/HomeScreen";
-
-// Define the config
-const config = {
-  useSystemColorMode: false,
-  initialColorMode: "dark",
-};
-
-// extend the theme
-export const theme = extendTheme({ config });
+import AppTheme from "./AppTheme";
 
 export default function App() {
+  // extend the theme
+  const theme = extendTheme(AppTheme);
+
   return (
-    <NativeBaseProvider>
-        <HomeScreen />
+    <NativeBaseProvider theme={theme}>
+
     </NativeBaseProvider>
   );
 }
