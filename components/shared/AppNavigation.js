@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, HStack, IconButton, Icon, Text } from 'native-base';
+import { Box, HStack, IconButton, Icon, Text, Menu } from 'native-base';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const AppNavigation = (props) => {
@@ -14,6 +14,19 @@ const AppNavigation = (props) => {
     const handleOpenMoreMenu= () => {
         setMoreMenu(!openMoreMenu);
         console.warn(openMoreMenu);
+    }
+
+
+    function MoreMenu() {
+        return <Box h="80%" w="90%" alignItems="flex-start">
+            <Menu shadow={2} w="190" trigger={triggerProps => {
+                return <Pressable accessibilityLabel="More options menu" {...triggerProps}>
+                    <Ionicons name='md-ellipsis-vertical' size="5"/>
+                </Pressable>;
+            }}>
+                <Menu.Item>Log out</Menu.Item>
+            </Menu>
+        </Box>;
     }
 
     return (
