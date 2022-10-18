@@ -1,48 +1,32 @@
 import React from 'react';
 import { Box, HStack, IconButton, Icon, Text, Menu } from 'native-base';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import AppNavMoreMenu from "./AppNavMoreMenu";
 
 const AppNavigation = (props) => {
     const [openDrawer, setOpenDrawer] = React.useState(false);
-    const [openMoreMenu, setMoreMenu] = React.useState(false);
 
     const handleToggleDrawer = () => {
         setOpenDrawer(!openDrawer);
         console.warn(openDrawer);
     }
 
-    const handleOpenMoreMenu= () => {
-        setMoreMenu(!openMoreMenu);
-        console.warn(openMoreMenu);
-    }
-
-
-    function MoreMenu() {
-        return <Box h="80%" w="90%" alignItems="flex-start">
-            <Menu shadow={2} w="190" trigger={triggerProps => {
-                return <Pressable accessibilityLabel="More options menu" {...triggerProps}>
-                    <Ionicons name='md-ellipsis-vertical' size="5"/>
-                </Pressable>;
-            }}>
-                <Menu.Item>Log out</Menu.Item>
-            </Menu>
-        </Box>;
-    }
-
     return (
         <>
             <Box safeAreaTop bg="primary.500"/>
-            <HStack bg="primary.500" px="1" pt="0" pb="2" justifyContent="space-between" w="100%">
-                <HStack alignItems="center">
+            <HStack bg="primary.500" px="1" pt="0" pb="1" justifyContent="space-between" w="100%">
+                <HStack alignItems="center" marginRight="auto">
                     <IconButton icon={<Icon as={Ionicons} name='md-menu' size='5'/>} _icon={{color: "white"}}
                                 onPress={handleToggleDrawer}/>
-                    <Text color="white" fontSize="20" fontWeight="bold">
+
+                </HStack>
+                <HStack>
+                    <Text color="white" fontSize="16" fontWeight="bold" pt="2" ml="-5">
                         {props.title}
                     </Text>
                 </HStack>
-                <HStack>
-                    <IconButton onPress={handleOpenMoreMenu} icon={<Icon as={Ionicons} name='md-ellipsis-vertical' size='5'/>}
-                                _icon={{color: "white"}}/>
+                <HStack marginLeft="auto">
+                   <AppNavMoreMenu />
                 </HStack>
             </HStack>
         </>
