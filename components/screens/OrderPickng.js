@@ -29,8 +29,8 @@ export default () => {
                    <Heading size="lg" mb="5" color="tertiary.700">Order Picking</Heading>
                 </VStack>
                 <Box>
-                    <Input placeholder="Enter Order Confirmation No." style={{textAlign:"center"}}/>
-                    <Button size="md" mt="2">Submit</Button>
+                    <Input placeholder="Enter Order Confirmation No." fontSize="16" />
+                    <Button size="lg" mt="2">Submit</Button>
                 </Box>
                 <Center>
                     <Heading ize="lg" mb="5" color="text.500" my="3">or</Heading>
