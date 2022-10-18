@@ -88,9 +88,12 @@ const AppTheme = {
     components: {
         Input: {
             defaultProps: {
+                borderColor: 'warmGray.300',
+                backgroundColor: '#ffffff',
+                fontsize: 14,
                 _focus: {
                     borderColor: 'warmGray.400',
-                    backgroundColor: 'transparent'
+                    backgroundColor: '#ffffff'
                 }
             },
         },
@@ -101,7 +104,7 @@ const AppTheme = {
                     const colorScheme = props.colorScheme
                     console.log(colorScheme, `${props.theme.colors.warning['100']}`)
                     return {
-                        rounded: "full"
+                        rounded: "4",
                     };
                 }
             }
