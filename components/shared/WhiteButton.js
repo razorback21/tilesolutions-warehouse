@@ -9,7 +9,7 @@ export default (props) => {
             <Button onPress={props.handler} variant="whiteButton" leftIcon={<Icon as={MaterialIcons} name={props.icon} size="lg" style={{color:"text.700"}}/>} mb={props.mb} mt={props.mt}>
                 <Stack direction="row" >
                     <Text fontWeight="bold" w="80%">{props.title}</Text>
-                    <Icon position="absolute" right="-70" size="sm" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
+                    <Icon position="absolute" right="-70" top="0.5" size="sm" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
                 </Stack>
             </Button>
         </>
