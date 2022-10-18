@@ -100,11 +100,14 @@ const AppTheme = {
         Button: {
             variants: {
                 solid: (props) => {
-                    console.log(props);
                     const colorScheme = props.colorScheme
-                    console.log(colorScheme, `${props.theme.colors.warning['100']}`)
+                    console.log(colorScheme, `${props.theme.colors.primary['500']}`)
                     return {
                         rounded: "4",
+                        backgroundColor: `${props.theme.colors.primary['500']}`,
+                        _pressed: {
+                            backgroundColor: `${props.theme.colors.primary['600']}`
+                        }
                     };
                 }
             }
