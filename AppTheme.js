@@ -109,6 +109,19 @@ const AppTheme = {
                             backgroundColor: `${props.theme.colors.primary['600']}`
                         }
                     };
+                },
+                whiteButton: (props) => {
+                    return {
+                        rounded: "4",
+                        backgroundColor: "#ffffff",
+                        color: `${props.theme.colors.text['900']}`,
+                        justifyContent: "flex-start",
+                        paddingTop:3,
+                        paddingBottom:3,
+                        _pressed: {
+                            backgroundColor: `${props.theme.colors.text['100']}`
+                        }
+                    };
                 }
             }
         }
