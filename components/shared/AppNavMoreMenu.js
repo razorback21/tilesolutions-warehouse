@@ -1,5 +1,4 @@
-import React from 'react';
-import {Box, Menu, Pressable, Text, Button, Icon, IconButton} from 'native-base';
+import {Box, Menu, Icon, IconButton} from 'native-base';
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 
