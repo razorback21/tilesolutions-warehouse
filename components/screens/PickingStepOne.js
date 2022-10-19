@@ -11,7 +11,7 @@ export default () => {
         return (
             <>
                 <Box mb="1">
-                    <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
+                    <Text fontWeight="700" fontSize="12">AA.911.2424   <Box h="2.5" width="2.5" bg="success.500" rounded="full" mt="0.2"></Box></Text>
                 </Box>
                 <Box mb="1">
                     <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
