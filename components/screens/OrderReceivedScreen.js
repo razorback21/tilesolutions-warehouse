@@ -15,7 +15,6 @@ export default () => {
                         <Text fontWeight="700" fontSize="12">C.O. No. 000182857</Text>
                         <Badge _text={{fontSize:10}}>Staff: John Doe</Badge>
                     </HStack>
-
                 </Box>
                 <Box mb="1">
                     <Text fontWeight="300" fontSize="12">Customer: BEEN CONTRACTING</Text>
