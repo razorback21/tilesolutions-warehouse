@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import {Box, Text, Heading, ScrollView, HStack, Stack, Icon, Flex, Spacer } from "native-base";
+import {Box, Text, Heading, ScrollView } from "native-base";
 import AppNavigation from "../shared/AppNavigation";
 import ListItemBox from "../shared/ListItemBox";
 
