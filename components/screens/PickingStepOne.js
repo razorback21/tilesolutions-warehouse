@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import {Box, Text, Heading, ScrollView } from "native-base";
 import AppNavigation from "../shared/AppNavigation";
 import ListItemBox from "../shared/ListItemBox";
+import AppStyles from "../../AppStyles";
 
 
 export default () => {
@@ -26,7 +27,7 @@ export default () => {
     return (
         <>
             <AppNavigation />
-            <Box style={styles.topContainer}>
+            <Box style={styles.topContainerNoFlex}>
                 <Text color="tertiary.500" fontSize="12">STEP 1</Text>
                 <Heading size="md" color="tertiary.700">Picking order for pickup</Heading>
 
@@ -53,22 +54,5 @@ export default () => {
 }
 
 const styles= StyleSheet.create({
-    topContainer: {
-        backgroundColor: "#E7E7E9",
-        paddingTop: 35,
-        paddingLeft: 15,
-        paddingRight: 15,
-        paddingBottom: 15
-    },
-    contentContainer: {
-        backgroundColor: "#FFFFFF",
-        flex:1,
-        paddingTop: 20,
-        paddingHorizontal: 10,
-        paddingBottom:10
-    },
-    innerBox: {
-        flex:1,
-        padding:8
-    }
+    ...AppStyles
 })
