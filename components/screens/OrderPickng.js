@@ -26,14 +26,14 @@ export default () => {
             <AppNavigation />
             <Box style={styles.container}>
                 <VStack>
-                   <Heading size="lg" mb="5" color="tertiary.700">Order Picking</Heading>
+                   <Heading size="md" mb="5" color="tertiary.700">Order Picking</Heading>
                 </VStack>
                 <Box>
-                    <Input placeholder="Enter Order Confirmation No." fontSize="16" />
-                    <Button size="lg" mt="2">Submit</Button>
+                    <Input placeholder="Enter Order Confirmation No."/>
+                    <Button size="md" mt="2">Submit</Button>
                 </Box>
                 <Center>
-                    <Heading ize="lg" mb="5" color="text.500" my="3">or</Heading>
+                    <Heading size="md" mb="5" color="text.500" my="3">or</Heading>
                 </Center>
                 <VStack>
                     <WhiteButton title="Scan NFC Tag" icon="nfc" mb="2" handler={scanNFCTag}/>
