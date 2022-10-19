@@ -35,7 +35,7 @@ export default () => {
             <Box style={styles.contentContainer}>
                 <Box style={styles.innerBox} bg={"tertiary.200"}>
                     <ScrollView>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120">
+                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
                                 <Stack w="95%">
                                     <Box mb="1">
                                         <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
@@ -53,7 +53,7 @@ export default () => {
                                     </Flex>
                                 </Stack>
                             </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120">
+                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
                             <Stack w="95%">
                                 <Box mb="1">
                                     <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
@@ -71,7 +71,7 @@ export default () => {
                                 </Flex>
                             </Stack>
                         </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120">
+                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
                             <Stack w="95%">
                                 <Box mb="1">
                                     <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
@@ -89,7 +89,7 @@ export default () => {
                                 </Flex>
                             </Stack>
                         </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120">
+                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
                             <Stack w="95%">
                                 <Box mb="1">
                                     <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
@@ -107,7 +107,7 @@ export default () => {
                                 </Flex>
                             </Stack>
                         </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120">
+                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
                             <Stack w="95%">
                                 <Box mb="1">
                                     <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
@@ -125,7 +125,7 @@ export default () => {
                                 </Flex>
                             </Stack>
                         </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120">
+                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
                             <Stack w="95%">
                                 <Box mb="1">
                                     <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
@@ -143,7 +143,7 @@ export default () => {
                                 </Flex>
                             </Stack>
                         </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120">
+                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
                             <Stack w="95%">
                                 <Box mb="1">
                                     <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
@@ -161,7 +161,7 @@ export default () => {
                                 </Flex>
                             </Stack>
                         </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120">
+                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
                             <Stack w="95%">
                                 <Box mb="1">
                                     <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
@@ -179,7 +179,7 @@ export default () => {
                                 </Flex>
                             </Stack>
                         </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120">
+                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
                             <Stack w="95%">
                                 <Box mb="1">
                                     <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
@@ -197,7 +197,7 @@ export default () => {
                                 </Flex>
                             </Stack>
                         </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120">
+                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
                             <Stack w="95%">
                                 <Box mb="1">
                                     <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
@@ -215,7 +215,7 @@ export default () => {
                                 </Flex>
                             </Stack>
                         </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120">
+                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
                             <Stack w="95%">
                                 <Box mb="1">
                                     <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
@@ -233,7 +233,7 @@ export default () => {
                                 </Flex>
                             </Stack>
                         </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120">
+                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
                             <Stack w="95%">
                                 <Box mb="1">
                                     <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
