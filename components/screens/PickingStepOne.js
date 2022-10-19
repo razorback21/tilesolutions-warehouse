@@ -1,22 +1,26 @@
 import React from "react";
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import {Box, Text, Heading, ScrollView, HStack, Stack, Icon, Flex, Spacer } from "native-base";
 import AppNavigation from "../shared/AppNavigation";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import ListItemBox from "../shared/ListItemBox";
 
 
 export default () => {
 
-    const scanNFCTag = () => {
-        console.warn('scanning NFC tag');
-    }
-
-    const scanQRCode = () => {
-        console.warn('scanning QR Code');
-    }
-
-    const orderReceived = () => {
-        console.warn('Goto order received');
+    const ItemContent = () => {
+        return (
+            <>
+                <Box mb="1">
+                    <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
+                </Box>
+                <Box mb="1">
+                    <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
+                </Box>
+                <Box>
+                    <Text fontWeight="300" fontSize="12">Order Qty : <Text fontWeight="700">83 PC</Text></Text>
+                </Box>
+            </>
+        );
     }
 
     return (
@@ -35,222 +39,12 @@ export default () => {
             <Box style={styles.contentContainer}>
                 <Box style={styles.innerBox} bg={"tertiary.200"}>
                     <ScrollView>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
-                                <Stack w="95%">
-                                    <Box mb="1">
-                                        <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
-                                    </Box>
-                                    <Box mb="1">
-                                        <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
-                                    </Box>
-                                    <Box>
-                                        <Text fontWeight="300" fontSize="12">Order Qty : <Text fontWeight="700">83 PC</Text></Text>
-                                    </Box>
-                                </Stack>
-                                <Stack h="100%" direction="row">
-                                    <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                                        <Icon size="md" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
-                                    </Flex>
-                                </Stack>
-                            </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
-                            <Stack w="95%">
-                                <Box mb="1">
-                                    <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
-                                </Box>
-                                <Box mb="1">
-                                    <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
-                                </Box>
-                                <Box>
-                                    <Text fontWeight="300" fontSize="12">Order Qty : <Text fontWeight="700">83 PC</Text></Text>
-                                </Box>
-                            </Stack>
-                            <Stack h="100%" direction="row">
-                                <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                                    <Icon size="md" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
-                                </Flex>
-                            </Stack>
-                        </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
-                            <Stack w="95%">
-                                <Box mb="1">
-                                    <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
-                                </Box>
-                                <Box mb="1">
-                                    <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
-                                </Box>
-                                <Box>
-                                    <Text fontWeight="300" fontSize="12">Order Qty : <Text fontWeight="700">83 PC</Text></Text>
-                                </Box>
-                            </Stack>
-                            <Stack h="100%" direction="row">
-                                <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                                    <Icon size="md" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
-                                </Flex>
-                            </Stack>
-                        </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
-                            <Stack w="95%">
-                                <Box mb="1">
-                                    <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
-                                </Box>
-                                <Box mb="1">
-                                    <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
-                                </Box>
-                                <Box>
-                                    <Text fontWeight="300" fontSize="12">Order Qty : <Text fontWeight="700">83 PC</Text></Text>
-                                </Box>
-                            </Stack>
-                            <Stack h="100%" direction="row">
-                                <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                                    <Icon size="md" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
-                                </Flex>
-                            </Stack>
-                        </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
-                            <Stack w="95%">
-                                <Box mb="1">
-                                    <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
-                                </Box>
-                                <Box mb="1">
-                                    <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
-                                </Box>
-                                <Box>
-                                    <Text fontWeight="300" fontSize="12">Order Qty : <Text fontWeight="700">83 PC</Text></Text>
-                                </Box>
-                            </Stack>
-                            <Stack h="100%" direction="row">
-                                <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                                    <Icon size="md" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
-                                </Flex>
-                            </Stack>
-                        </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
-                            <Stack w="95%">
-                                <Box mb="1">
-                                    <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
-                                </Box>
-                                <Box mb="1">
-                                    <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
-                                </Box>
-                                <Box>
-                                    <Text fontWeight="300" fontSize="12">Order Qty : <Text fontWeight="700">83 PC</Text></Text>
-                                </Box>
-                            </Stack>
-                            <Stack h="100%" direction="row">
-                                <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                                    <Icon size="md" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
-                                </Flex>
-                            </Stack>
-                        </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
-                            <Stack w="95%">
-                                <Box mb="1">
-                                    <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
-                                </Box>
-                                <Box mb="1">
-                                    <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
-                                </Box>
-                                <Box>
-                                    <Text fontWeight="300" fontSize="12">Order Qty : <Text fontWeight="700">83 PC</Text></Text>
-                                </Box>
-                            </Stack>
-                            <Stack h="100%" direction="row">
-                                <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                                    <Icon size="md" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
-                                </Flex>
-                            </Stack>
-                        </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
-                            <Stack w="95%">
-                                <Box mb="1">
-                                    <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
-                                </Box>
-                                <Box mb="1">
-                                    <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
-                                </Box>
-                                <Box>
-                                    <Text fontWeight="300" fontSize="12">Order Qty : <Text fontWeight="700">83 PC</Text></Text>
-                                </Box>
-                            </Stack>
-                            <Stack h="100%" direction="row">
-                                <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                                    <Icon size="md" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
-                                </Flex>
-                            </Stack>
-                        </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
-                            <Stack w="95%">
-                                <Box mb="1">
-                                    <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
-                                </Box>
-                                <Box mb="1">
-                                    <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
-                                </Box>
-                                <Box>
-                                    <Text fontWeight="300" fontSize="12">Order Qty : <Text fontWeight="700">83 PC</Text></Text>
-                                </Box>
-                            </Stack>
-                            <Stack h="100%" direction="row">
-                                <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                                    <Icon size="md" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
-                                </Flex>
-                            </Stack>
-                        </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
-                            <Stack w="95%">
-                                <Box mb="1">
-                                    <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
-                                </Box>
-                                <Box mb="1">
-                                    <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
-                                </Box>
-                                <Box>
-                                    <Text fontWeight="300" fontSize="12">Order Qty : <Text fontWeight="700">83 PC</Text></Text>
-                                </Box>
-                            </Stack>
-                            <Stack h="100%" direction="row">
-                                <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                                    <Icon size="md" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
-                                </Flex>
-                            </Stack>
-                        </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
-                            <Stack w="95%">
-                                <Box mb="1">
-                                    <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
-                                </Box>
-                                <Box mb="1">
-                                    <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
-                                </Box>
-                                <Box>
-                                    <Text fontWeight="300" fontSize="12">Order Qty : <Text fontWeight="700">83 PC</Text></Text>
-                                </Box>
-                            </Stack>
-                            <Stack h="100%" direction="row">
-                                <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                                    <Icon size="md" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
-                                </Flex>
-                            </Stack>
-                        </HStack>
-                        <HStack bg="#FFFFFF" p="4" mb="2" h="120" alignItems="center">
-                            <Stack w="95%">
-                                <Box mb="1">
-                                    <Text fontWeight="700" fontSize="12">AA.911.2424</Text>
-                                </Box>
-                                <Box mb="1">
-                                    <Text fontWeight="300" fontSize="12">La Marca Statuarietto Polished Rectified Glazed Porcelain 24" x 24"</Text>
-                                </Box>
-                                <Box>
-                                    <Text fontWeight="300" fontSize="12">Order Qty : <Text fontWeight="700">83 PC</Text></Text>
-                                </Box>
-                            </Stack>
-                            <Stack h="100%" direction="row">
-                                <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                                    <Icon size="md" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
-                                </Flex>
-                            </Stack>
-                        </HStack>
+                        <ListItemBox content={<ItemContent />}/>
+                        <ListItemBox content={<ItemContent />}/>
+                        <ListItemBox content={<ItemContent />}/>
+                        <ListItemBox content={<ItemContent />}/>
+                        <ListItemBox content={<ItemContent />}/>
+                        <ListItemBox content={<ItemContent />}/>
                     </ScrollView>
                 </Box>
             </Box>
