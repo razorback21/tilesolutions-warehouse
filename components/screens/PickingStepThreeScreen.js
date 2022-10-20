@@ -42,7 +42,7 @@ export default () => {
                         </Box>
                         <Box w="27%" py="2" justifyContent="center" alignItems="center" borderWidth="2" borderColor="text.400" bg="#D9D9D9" rounded="4">
                             <Text fontWeight="700" fontSize="24">PC</Text>
-                            <Text color="tertiary.700" fontWeight="700">OuM</Text>
+                            <Text color="tertiary.700" fontWeight="700">UoM</Text>
                         </Box>
                     </HStack>
 
