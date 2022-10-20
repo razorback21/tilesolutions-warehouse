@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
 import {Box, Text, Heading, ScrollView, HStack, Center, Input, Button, VStack} from "native-base";
-import AppNavigation from "../shared/AppNavigation";
-import ListItemBox from "../shared/ListItemBox";
-import AppStyles  from "../../AppStyles";
-import WhiteButton from "../shared/WhiteButton";
+import AppNavigation from "../../shared/AppNavigation";
+import ListItemBox from "../../shared/ListItemBox";
+import AppStyles  from "../../../AppStyles";
+import WhiteButton from "../../shared/WhiteButton";
 
 export default () => {
 

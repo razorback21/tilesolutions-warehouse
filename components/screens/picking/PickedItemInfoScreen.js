@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
 import {Box, Text, Heading, ScrollView, HStack, IconButton, Icon, Flex} from "native-base";
-import AppNavigation from "../shared/AppNavigation";
-import AppStyles  from "../../AppStyles";
+import AppNavigation from "../../shared/AppNavigation";
+import AppStyles  from "../../../AppStyles";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default () => {

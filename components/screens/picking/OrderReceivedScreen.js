@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
 import {Box, Text, Heading, ScrollView, Badge, HStack} from "native-base";
-import AppNavigation from "../shared/AppNavigation";
-import ListItemBox from "../shared/ListItemBox";
+import AppNavigation from "../../shared/AppNavigation";
+import ListItemBox from "../../shared/ListItemBox";
 
 
 export default () => {
