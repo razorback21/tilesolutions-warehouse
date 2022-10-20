@@ -7,12 +7,26 @@ import AppStyles  from "../../../AppStyles";
 
 export default () => {
 
-    const scanNFCTag = () => {
-        console.warn('scanning NFC tag');
-    }
+    const ActualPick = (props) => {
+        return (
+            <Box px="2" pt="2" pb="3" bg="#D9D9D9" mb="2" rounded="4" shadow="2">
+                    <Center>
+                        <Heading size="md" color="tertiary.700">{props.uom}</Heading>
+                    </Center>
+                    <Flex direction="row" justifyContent="space-between">
+                        <Flex pb="2" width="30%" direction="column" justifyContent="center" alignItems="center">
+                            <Text fontWeight="700" color="tertiary.500">ORDERED</Text>
+                            <Text fontWeight="700" color="tertiary.500" fontSize="24">{props.ordered}</Text>
+                        </Flex>
+                        <Flex  pb="2" width="35%" direction="column" justifyContent="center" alignItems="center">
+                            <Text fontWeight="700" color="tertiary.500">PALLET PICK</Text>
+                            <Text fontWeight="700" color="tertiary.500" fontSize="24">{props.palletPick}</Text>
+                        </Flex>
+                    </Flex>
 
-    const scanQRCode = () => {
-        console.warn('scanning QR Code');
+                    <Input size="sm" placeholder="Actual Pick" style={{textAlign:"center"}}/>
+                </Box>
+        )
     }
 
     return (
@@ -59,59 +73,9 @@ export default () => {
                         <Text fontWeight="700" fontSize="12" color="text.700">Maximum pick for this location <Text color="tertiary.700">83 PC</Text></Text>
                     </Box>
 
-                    <Box px="2" pt="2" pb="3" bg="#D9D9D9" mb="2" rounded="4" shadow="2">
-                        <Center>
-                            <Heading size="md" color="tertiary.700">SKD</Heading>
-                        </Center>
-                        <Flex direction="row" justifyContent="space-between">
-                            <Flex pb="2" width="30%" direction="column" justifyContent="center" alignItems="center">
-                                <Text fontWeight="700" color="tertiary.500">ORDERED</Text>
-                                <Text fontWeight="700" color="tertiary.500" fontSize="24">0</Text>
-                            </Flex>
-                            <Flex  pb="2" width="35%" direction="column" justifyContent="center" alignItems="center">
-                                <Text fontWeight="700" color="tertiary.500">PALLET PICK</Text>
-                                <Text fontWeight="700" color="tertiary.500" fontSize="24">0</Text>
-                            </Flex>
-                        </Flex>
-
-                        <Input size="sm" placeholder="Actual Pick" style={{textAlign:"center"}}/>
-                    </Box>
-
-                    <Box px="2" pt="2" pb="3" bg="#D9D9D9" mb="2" rounded="4" shadow="2">
-                        <Center>
-                            <Heading size="md" color="tertiary.700">BX</Heading>
-                        </Center>
-                        <Flex direction="row" justifyContent="space-between">
-                            <Flex pb="2" width="30%" direction="column" justifyContent="center" alignItems="center">
-                                <Text fontWeight="700" color="tertiary.500">ORDERED</Text>
-                                <Text fontWeight="700" color="tertiary.500" fontSize="24">20</Text>
-                            </Flex>
-                            <Flex  pb="2" width="35%" direction="column" justifyContent="center" alignItems="center">
-                                <Text fontWeight="700" color="tertiary.500">PALLET PICK</Text>
-                                <Text fontWeight="700" color="tertiary.500" fontSize="24">20</Text>
-                            </Flex>
-                        </Flex>
-
-                        <Input size="sm" placeholder="Actual Pick" style={{textAlign:"center"}}/>
-                    </Box>
-
-                    <Box px="2" pt="2" pb="3" bg="#D9D9D9" mb="2" rounded="4" shadow="2">
-                        <Center>
-                            <Heading size="md" color="tertiary.700">PC</Heading>
-                        </Center>
-                        <Flex direction="row" justifyContent="space-between">
-                            <Flex pb="2" width="30%" direction="column" justifyContent="center" alignItems="center">
-                                <Text fontWeight="700" color="tertiary.500">ORDERED</Text>
-                                <Text fontWeight="700" color="tertiary.500" fontSize="24">3</Text>
-                            </Flex>
-                            <Flex  pb="2" width="35%" direction="column" justifyContent="center" alignItems="center">
-                                <Text fontWeight="700" color="tertiary.500">PALLET PICK</Text>
-                                <Text fontWeight="700" color="tertiary.500" fontSize="24">3</Text>
-                            </Flex>
-                        </Flex>
-
-                        <Input size="sm" placeholder="Actual Pick" style={{textAlign:"center"}}/>
-                    </Box>
+                    <ActualPick uom="SKD" ordered="0" palletPick="0"/>
+                    <ActualPick uom="BX" ordered="20" palletPick="20"/>
+                    <ActualPick uom="PC" ordered="3" palletPick="3"/>
 
                     <Button mt="3">Save Pick</Button>
                 </Box>
