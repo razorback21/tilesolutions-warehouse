@@ -46,7 +46,7 @@ export default () => {
                         </Box>
                     </HStack>
 
-                    <Text fontSize="12" fontWeight="700" my="4">CONVERSTION TABLE</Text>
+                    <Text fontSize="12" fontWeight="700" my="4" color="text.500">CONVERSTION TABLE</Text>
 
                     <Box rounded="4" py="2" alignItems="center" justifyContent="center"  bg="#D9D9D9" color="muted.300" shadow="0" mb="3">
                         <Text fontWeight="300" fontSize="12">1- PC/PC</Text>
@@ -56,7 +56,7 @@ export default () => {
 
                     <Box justifyContent="center" alignItems="center" mb="3">
                         <Text fontWeight="700" color="tertiary.700" >R19.S03</Text>
-                        <Text fontWeight="700" fontSize="12" color="tertiary.500">Maximum pick for this location <Text color="tertiary.700">83 PC</Text></Text>
+                        <Text fontWeight="700" fontSize="12" color="text.500">Maximum pick for this location <Text color="tertiary.700">83 PC</Text></Text>
                     </Box>
 
                     <Box px="2" pt="2" pb="3" bg="#D9D9D9" mb="2" rounded="4" shadow="2">
