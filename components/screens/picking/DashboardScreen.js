@@ -1,0 +1,55 @@
+import React from "react";
+import { StyleSheet } from 'react-native';
+import {Box, Text, Heading, Pressable, VStack, Stack, HStack, Icon} from "native-base";
+import AppNavigation from "../../shared/AppNavigation";
+import AppStyles from "../../../AppStyles";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+
+
+export default () => {
+
+    const gotoHandler = (location) => {
+        console.warn(location)
+    }
+
+    const IconActionButton = (props) => {
+        return (
+            <Pressable onPress={props.handler} flexBasis="160" p="2" bg="muted.50" rounded="4" shadow="3" _pressed={{
+                bg: "text.100"
+            }}>
+                <Stack direction="row" >
+                    <VStack justifyContent="center">
+                        <Icon name={props.icon} as={props.as} size="lg" color="primary.600"/>
+                    </VStack>
+                    <Box ml="2">
+                        <Text color="primary.500" fontSize="11">{props.category}</Text>
+                        <Heading fontSize="14" color="primary.800">{props.title}</Heading>
+                    </Box>
+                </Stack>
+            </Pressable>
+        );
+    }
+
+    return (
+        <>
+            <AppNavigation />
+            <Box style={styles.topContainer}>
+                <Heading size="md" mb="5" color="tertiary.700">Dashboard</Heading>
+                <HStack  flexWrap="wrap" space="2" justifyContent="space-between" mb="3">
+                    <IconActionButton icon="hand-paper" as={FontAwesome5} category="Warehouse" title="Order Picking"/>
+                    <IconActionButton icon="local-shipping" as={MaterialIcons} category="Warehouse" title="Order Shipping"/>
+                </HStack>
+                <HStack flexWrap="wrap" space="2" justifyContent="space-between" mb="3">
+                    <IconActionButton icon="search" as={FontAwesome5} category="Warehouse" title="Sub-loc. Search"/>
+                    <IconActionButton icon="search" as={Ionicons} category="Warehouse" title="Inventory Opt."/>
+                </HStack>
+            </Box>
+        </>
+    )
+}
+
+const styles = StyleSheet.create({
+    ...AppStyles
+})
