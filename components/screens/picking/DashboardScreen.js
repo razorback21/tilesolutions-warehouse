@@ -16,7 +16,7 @@ export default () => {
 
     const IconActionButton = (props) => {
         return (
-            <Pressable onPress={props.handler} flexBasis="160" p="2" bg="muted.50" rounded="4" shadow="3" _pressed={{
+            <Pressable onPress={props.handler} flexBasis="48%" p="2" bg="muted.50" rounded="4" shadow="3" _pressed={{
                 bg: "white"
             }}>
                 <Stack direction="row" >
