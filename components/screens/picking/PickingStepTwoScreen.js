@@ -1,9 +1,10 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import {Box, Text, Heading, ScrollView, HStack, Center} from "native-base";
+import {Box, Text, Heading, ScrollView, HStack, Center, Fab, Icon} from "native-base";
 import AppNavigation from "../../shared/AppNavigation";
 import ListItemBox from "../../shared/ListItemBox";
 import AppStyles  from "../../../AppStyles";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default () => {
 
@@ -32,6 +33,12 @@ export default () => {
     return (
         <>
             <AppNavigation />
+            <Fab
+                placement="bottom-right"
+                colorScheme="blue"
+                size="sm"
+                icon={<Icon name="md-ellipsis-vertical" as={Ionicons} />}
+            />
             <ScrollView>
                 <Box style={styles.topContainerNoFlex}>
                     <Text color="tertiary.500" fontSize="12">STEP 2</Text>
