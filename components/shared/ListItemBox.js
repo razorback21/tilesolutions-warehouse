@@ -12,7 +12,7 @@ const ListItemBox = (props) => {
             </Stack>
             <Stack h="100%" direction="row">
                 <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                    <Icon size="md" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
+                    <Icon size="sm" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
                 </Flex>
             </Stack>
         </HStack>
