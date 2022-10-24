@@ -8,7 +8,7 @@ export default () => {
             <Icon name="warehouse" as={FontAwesome5} color="#ffffff" size="250" style={{textShadowOffset:{width: 0, height:5}, textShadowRadius:1, textShadowColor:'rgba(0, 0, 0, 0.25)'}} position="absolute" right="0" bottom="0"/>
             <Stack mt="-100">
                 <Text fontSize="13" shadow="2" style={{textShadowOffset:{width: 1, height:1}, textShadowRadius:4}} color="tertiary.600">Tile Solutions</Text>
-                <Heading size="3xl" color="primary.600" letterSpacing="md" lineHeight="50" style={{textShadowOffset:{width: 1, height:2}, textShadowRadius:1}}>Warehouse</Heading>
+                <Heading size="3xl" color="primary.600" letterSpacing="md" lineHeight="50" style={{textShadowOffset:{width: 1, height:1}, textShadowRadius:1}}>Warehouse</Heading>
             </Stack>
         </Box>
         <Box px="5" mt="40%">
