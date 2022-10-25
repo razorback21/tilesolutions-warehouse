@@ -3,12 +3,11 @@ import { Box, HStack, IconButton, Icon, Text, Menu } from 'native-base';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AppNavMoreMenu from "./AppNavMoreMenu";
 
+
 const AppNavigation = (props) => {
-    const [openDrawer, setOpenDrawer] = React.useState(false);
 
     const handleToggleDrawer = () => {
-        setOpenDrawer(!openDrawer);
-        console.warn(openDrawer);
+        props.navigation.toggleDrawer();
     }
 
     return (
