@@ -8,7 +8,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 
-export default () => {
+export default (props) => {
 
     const gotoHandler = (location) => {
         console.warn(location)
@@ -34,7 +34,7 @@ export default () => {
 
     return (
         <>
-            <AppNavigation />
+            <AppNavigation navigation={props.navigation}/>
             <Box style={styles.topContainer}>
                 <Heading size="md" mb="5" color="tertiary.700">Dashboard</Heading>
                 <HStack  flexWrap="wrap" space="2" justifyContent="space-between" mb="3">
