@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import {Box, VStack, Text, Heading, Input, Button, Center, Icon, HStack, Stack, Divider} from "native-base";
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import {Box, VStack, Heading, Input, Button, Center, Divider} from "native-base";
 import AppNavigation from "../../shared/AppNavigation";
 import WhiteButton from "../../shared/WhiteButton";
 

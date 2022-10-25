@@ -1,12 +1,13 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import {Box, Text, Heading, ScrollView, HStack, Center} from "native-base";
+import { Box, Text, Heading, ScrollView, HStack, Center, Fab, Icon, useDisclose, Actionsheet } from "native-base";
 import AppNavigation from "../../shared/AppNavigation";
 import ListItemBox from "../../shared/ListItemBox";
 import AppStyles  from "../../../AppStyles";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default () => {
-
     const ItemContent = () => {
         return (
             <>
@@ -29,9 +30,41 @@ export default () => {
         );
     }
 
+    function ActionSheet() {
+        const { isOpen, onOpen, onClose } = useDisclose();
+
+        return (
+            <Center>
+                <Fab
+                    onPress={onOpen}
+                    placement="bottom-right"
+                    colorScheme="blue"
+                    size="sm"
+                    icon={<Icon name="md-ellipsis-vertical" as={Ionicons} />}
+                />
+                <Actionsheet isOpen={isOpen} onClose={onClose}>
+                    <Actionsheet.Content>
+                        <Actionsheet.Item startIcon={<Icon as={MaterialIcons} size="6" name="qr-code-scanner" />} _pressed={{
+                            bg: "text.100"
+                        }}>
+                            Scan QR code
+                        </Actionsheet.Item>
+                        <Actionsheet.Item startIcon={<Icon as={MaterialIcons} name="nfc" size="6" />} _pressed={{
+                            bg: "text.100"
+                        }}>
+                            Scan NFC tag
+                        </Actionsheet.Item>
+                    </Actionsheet.Content>
+                </Actionsheet>
+            </Center>
+        );
+
+    }
+
     return (
         <>
             <AppNavigation />
+            <ActionSheet />
             <ScrollView>
                 <Box style={styles.topContainerNoFlex}>
                     <Text color="tertiary.500" fontSize="12">STEP 2</Text>
