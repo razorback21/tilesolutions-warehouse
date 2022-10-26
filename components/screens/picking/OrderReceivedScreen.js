@@ -36,7 +36,7 @@ export default (props) => {
             <Box style={styles.topContainer}>
                 <Heading size="md" color="tertiary.700">Picking</Heading>
 
-                <Text color="tertiary.500" fontSize="12">Order received (16)</Text>
+                <Text color="text.600" fontSize="12">Order received (16)</Text>
             </Box>
             <Box style={styles.contentContainer}>
                 <Box style={styles.innerBox} bg={"tertiary.200"}>
