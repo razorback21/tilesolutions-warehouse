@@ -5,14 +5,6 @@ const AppDrawerContent = (props) => {
 
     const navigate = props.navigation.navigate;
 
-    const goto = (routeName) => {
-        const currentRoute = props.navigation.getState().routes[0].name;
-        if(currentRoute !== routeName)
-            navigate(routeName);
-
-        console.log(currentRoute)
-    }
-
     return (
         <VStack>
             <Box h="180" bg="primary.600" justifyContent="center" justifyItems="center" pt="5" overflow="hidden">
@@ -34,7 +26,7 @@ const AppDrawerContent = (props) => {
             <VStack pt="7" >
                 <Pressable mb="2" py="1.5" pl="10" _pressed={{
                     bg: "muted.50"
-                }} onPress={() => goto('Dashboard')}>
+                }} onPress={() => navigate('Dashboard')}>
                     <HStack alignItems="center" space="3">
                         <Icon size="lg" color="muted.500"  name="home" as={MaterialIcons}/>
                         <Text color="secondary.900" fontSize="16">Dashboard</Text>
