@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
 import {Box, VStack, Heading, Input, Button, Center, Divider} from "native-base";
-import AppNavigation from "../../shared/AppNavigation";
+import AppBackNavigation from "../../shared/AppBackNavigation";
 import WhiteButton from "../../shared/WhiteButton";
 
 
@@ -22,7 +22,7 @@ export default (props) => {
 
     return (
         <>
-            <AppNavigation navigation={props.navigation}/>
+            <AppBackNavigation navigation={props.navigation}/>
             <Box style={styles.container}>
                 <VStack>
                    <Heading size="md" mb="5" color="tertiary.700">Order Picking</Heading>
