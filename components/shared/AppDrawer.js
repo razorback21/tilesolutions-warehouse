@@ -32,6 +32,52 @@ const AppDrawerContent = (props) => {
                         <Text color="secondary.900" fontSize="16">Dashboard</Text>
                     </HStack>
                 </Pressable>
+
+                <Pressable mb="2" py="1.5" pl="10" _pressed={{
+                    bg: "muted.50"
+                }} onPress={() => navigate('Picking Step One')}>
+                    <HStack alignItems="center" space="3">
+                        <Icon size="lg" color="muted.500"  name="home" as={MaterialIcons}/>
+                        <Text color="secondary.900" fontSize="16">Picking Step One</Text>
+                    </HStack>
+                </Pressable>
+
+                <Pressable mb="2" py="1.5" pl="10" _pressed={{
+                    bg: "muted.50"
+                }} onPress={() => navigate('Picking Step Two')}>
+                    <HStack alignItems="center" space="3">
+                        <Icon size="lg" color="muted.500"  name="home" as={MaterialIcons}/>
+                        <Text color="secondary.900" fontSize="16">Picking Step Two</Text>
+                    </HStack>
+                </Pressable>
+
+                <Pressable mb="2" py="1.5" pl="10" _pressed={{
+                    bg: "muted.50"
+                }} onPress={() => navigate('Picking Step Three')}>
+                    <HStack alignItems="center" space="3">
+                        <Icon size="lg" color="muted.500"  name="home" as={MaterialIcons}/>
+                        <Text color="secondary.900" fontSize="16">Picking Step Three</Text>
+                    </HStack>
+                </Pressable>
+
+                <Pressable mb="2" py="1.5" pl="10" _pressed={{
+                    bg: "muted.50"
+                }} onPress={() => navigate('Actual Picking')}>
+                    <HStack alignItems="center" space="3">
+                        <Icon size="lg" color="muted.500"  name="home" as={MaterialIcons}/>
+                        <Text color="secondary.900" fontSize="16">Actual Picking</Text>
+                    </HStack>
+                </Pressable>
+
+                <Pressable mb="2" py="1.5" pl="10" _pressed={{
+                    bg: "muted.50"
+                }} onPress={() => navigate('Picked Item Information')}>
+                    <HStack alignItems="center" space="3">
+                        <Icon size="lg" color="muted.500"  name="home" as={MaterialIcons}/>
+                        <Text color="secondary.900" fontSize="16">Picked Item Information</Text>
+                    </HStack>
+                </Pressable>
+
                 <Pressable mb="2" py="1.5" pl="10" _pressed={{
                     bg: "muted.50"
                 }}>
