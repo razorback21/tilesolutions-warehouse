@@ -17,7 +17,7 @@ export default (props) => {
     }
 
     const orderReceived = () => {
-        console.warn('Goto order received');
+        props.navigation.navigate('Order Received');
     }
 
     return (
@@ -35,11 +35,11 @@ export default (props) => {
                     <Heading size="md" mb="5" color="text.500" my="3">or</Heading>
                 </Center>
                 <VStack>
-                    <WhiteButton title="Scan NFC Tag" icon="nfc" mb="2" handler={scanNFCTag}/>
-                    <WhiteButton title="Scan QR code" icon="qr-code-scanner"handler={scanQRCode}/>
+                    <WhiteButton title="Scan NFC Tag" icon="nfc" mb="2" onPress={scanNFCTag}/>
+                    <WhiteButton title="Scan QR code" icon="qr-code-scanner"onPress={scanQRCode}/>
                 </VStack>
                 <Divider my="6"/>
-                <WhiteButton title="Order Received" icon="call-received" mb="2" handler={orderReceived}/>
+                <WhiteButton title="Order Received" icon="call-received" mb="2" onPress={orderReceived}/>
             </Box>
         </>
     )
