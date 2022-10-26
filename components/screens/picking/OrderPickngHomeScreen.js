@@ -6,7 +6,7 @@ import WhiteButton from "../../shared/WhiteButton";
 
 
 
-export default () => {
+export default (props) => {
 
     const scanNFCTag = () => {
         console.warn('scanning NFC tag');
@@ -22,7 +22,7 @@ export default () => {
 
     return (
         <>
-            <AppNavigation />
+            <AppNavigation navigation={props.navigation}/>
             <Box style={styles.container}>
                 <VStack>
                    <Heading size="md" mb="5" color="tertiary.700">Order Picking</Heading>
