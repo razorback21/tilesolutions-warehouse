@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
 import {Box, Text, Heading, ScrollView, Badge, HStack} from "native-base";
-import AppNavigation from "../../shared/AppNavigation";
 import ListItemBox from "../../shared/ListItemBox";
+import AppBackNavigation from "../../shared/AppBackNavigation";
 
 
-export default () => {
+export default (props) => {
 
     const ItemContent = () => {
         return (
@@ -32,7 +32,7 @@ export default () => {
 
     return (
         <>
-            <AppNavigation />
+            <AppBackNavigation navigation={props.navigation}/>
             <Box style={styles.topContainer}>
                 <Heading size="md" color="tertiary.700">Picking</Heading>
 
