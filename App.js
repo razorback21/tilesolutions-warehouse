@@ -13,7 +13,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import AppDrawer from "./components/shared/AppDrawer";
 
 import DashboardScreen from "./components/screens/picking/DashboardScreen";
-import OrderPickngHomeScreen from "./components/screens/picking/OrderPickngHomeScreen";
+import OrderPickingHomeScreen from "./components/screens/picking/OrderPickingHomeScreen";
 import OrderReceivedScreen from "./components/screens/picking/OrderReceivedScreen";
 
 export default function App() {
@@ -29,7 +29,7 @@ export default function App() {
                 headerShown: false,
             }} drawerContent={(props) => <AppDrawer {...props}/>}>
                 <StackNav.Screen name="Dashboard" component={DashboardScreen} />
-                <StackNav.Screen name="Order Picking" component={OrderPickngHomeScreen} />
+                <StackNav.Screen name="Order Picking" component={OrderPickingHomeScreen} />
                 <StackNav.Screen name="Order Received" component={OrderReceivedScreen} />
             </StackNav.Navigator>
         </NativeBaseProvider>
