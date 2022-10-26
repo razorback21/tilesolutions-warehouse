@@ -7,14 +7,14 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-
 export default (props) => {
-
-    const navigate = props.navigation.navigate;
+    console.log(props.navigation)
+    const navigation = props.navigation;
+    const navigate = navigation.navigate;
 
     const IconActionButton = (props) => {
         return (
-            <Pressable onPress={props.handler} flexBasis="48%" p="2" bg="muted.50" rounded="4" shadow="3" _pressed={{
+            <Pressable onPress={props.onPress} flexBasis="48%" p="2" bg="muted.50" rounded="4" shadow="3" _pressed={{
                 bg: "white"
             }}>
                 <Stack direction="row" >
