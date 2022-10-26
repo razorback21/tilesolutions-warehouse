@@ -12,18 +12,18 @@ export default (props) => {
             <>
                 <Box mb="1">
                     <HStack space="5">
-                        <Text fontWeight="700" fontSize="12">C.O. No. 000182857</Text>
+                        <Text fontWeight="700" fontSize="12" color="primary.700">C.O. No. 000182857</Text>
                         <Badge _text={{fontSize:10}}>Staff: John Doe</Badge>
                     </HStack>
                 </Box>
                 <Box mb="1">
-                    <Text fontWeight="300" fontSize="12">Customer: BEEN CONTRACTING</Text>
-                    <Text fontWeight="300" fontSize="12">Payment: BALANCE</Text>
+                    <Text fontWeight="400" fontSize="12" color="text.600">Customer: BEEN CONTRACTING</Text>
+                    <Text fontWeight="400" fontSize="12" color="text.600">Payment: BALANCE</Text>
                 </Box>
                 <Box>
                     <HStack space="7">
-                        <Text fontWeight="300" fontSize="12">Method : <Text fontWeight="700">pickup</Text></Text>
-                        <Text fontWeight="300" fontSize="12">Date: <Text fontWeight="700">Oct 6, 2022</Text></Text>
+                        <Text fontWeight="400" fontSize="12" color="text.600">Method : <Text fontWeight="400" color="text.600">pickup</Text></Text>
+                        <Text fontWeight="400" fontSize="12" color="text.600">Date: <Text fontWeight="400" color="text.600">Oct 6, 2022</Text></Text>
                     </HStack>
                 </Box>
             </>
