@@ -14,17 +14,17 @@ export default (props) => {
             <>
                 <Box mb="1">
                     <HStack space="5">
-                        <Text fontWeight="700" fontSize="12">R19.013</Text>
+                        <Text fontWeight="700" fontSize="12" color="primary.600">R19.013</Text>
                     </HStack>
                 </Box>
                 <Box mb="1">
-                    <Text fontWeight="300" fontSize="12">PalletID: 0000000000108334</Text>
-                    <Text fontWeight="300" fontSize="12">Shade: W2-074-041922</Text>
+                    <Text fontWeight="400" fontSize="12" color="text.600">PalletID: 0000000000108334</Text>
+                    <Text fontWeight="400" fontSize="12" color="text.600">Shade: W2-074-041922</Text>
                 </Box>
                 <Box>
                     <HStack space="7">
-                        <Text fontWeight="300" fontSize="12">Quantity : <Text fontWeight="700">5</Text></Text>
-                        <Text fontWeight="300" fontSize="12">Available: <Text fontWeight="700">5</Text></Text>
+                        <Text fontWeight="400" fontSize="12" color="text.600">Quantity : 5</Text>
+                        <Text fontWeight="400" fontSize="12" color="text.600">Available: 5</Text>
                     </HStack>
                 </Box>
             </>
@@ -68,7 +68,7 @@ export default (props) => {
             <ActionSheet />
             <ScrollView>
                 <Box style={styles.topContainerNoFlex}>
-                    <Text color="tertiary.500" fontSize="12">STEP 2</Text>
+                    <Text color="text.500" fontSize="12">STEP 2</Text>
                     <Heading size="md" color="tertiary.700" >Choose Pallet</Heading>
                     <Box p="4" mt="5" bg="muted.50" rounded="4" shadow="5">
                         <Text fontSize="12">
@@ -80,16 +80,16 @@ export default (props) => {
                     </Box>
 
                     <HStack justifyContent="center" space="5" mt="4">
-                        <Box w="27%" py="2" justifyContent="center" alignItems="center" borderWidth="2" borderColor="text.400" bg="#D9D9D9" rounded="4">
-                            <Text fontWeight="700" fontSize="24">83</Text>
+                        <Box w="27%" py="2" justifyContent="center" alignItems="center" borderWidth="2" borderColor="text.400" bg="text.50" rounded="4">
+                            <Text fontWeight="700" fontSize="24" color="primary.600">83</Text>
                             <Text color="tertiary.700" fontWeight="700">Ordered</Text>
                         </Box>
-                        <Box w="27%" py="2" justifyContent="center" alignItems="center" borderWidth="2" borderColor="text.400" bg="#D9D9D9" rounded="4">
-                            <Text fontWeight="700" fontSize="24">83</Text>
+                        <Box w="27%" py="2" justifyContent="center" alignItems="center" borderWidth="2" borderColor="text.400" bg="text.50" rounded="4">
+                            <Text fontWeight="700" fontSize="24" color="primary.600">83</Text>
                             <Text color="tertiary.700" fontWeight="700">Remaining</Text>
                         </Box>
-                        <Box w="27%" py="2" justifyContent="center" alignItems="center" borderWidth="2" borderColor="text.400" bg="#D9D9D9" rounded="4">
-                            <Text fontWeight="700" fontSize="24">PC</Text>
+                        <Box w="27%" py="2" justifyContent="center" alignItems="center" borderWidth="2" borderColor="text.400" bg="text.50" rounded="4">
+                            <Text fontWeight="700" fontSize="24" color="primary.600">PC</Text>
                             <Text color="tertiary.700" fontWeight="700">UoM</Text>
                         </Box>
 
