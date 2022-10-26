@@ -14,7 +14,7 @@ const AppBackNavigation = (props) => {
             <HStack bg="primary.500" px="1" pt="0" pb="1" alignItems="center">
                 <HStack alignItems="center">
                     <IconButton icon={<Icon as={MaterialIcons} name='arrow-back-ios' size='5'/>} _icon={{color: "white"}}
-                                onPress={goBack}/>
+                                onPress={!props.onPressBack? goBack : props.onPressBack}/>
 
                 </HStack>
                 <Text color="white" fontSize="16" fontWeight="bold">
