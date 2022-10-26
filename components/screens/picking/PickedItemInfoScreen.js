@@ -4,12 +4,13 @@ import {Box, Text, Heading, ScrollView, HStack, IconButton, Icon, Flex} from "na
 import AppNavigation from "../../shared/AppNavigation";
 import AppStyles  from "../../../AppStyles";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import AppBackNavigation from "../../shared/AppBackNavigation";
 
-export default () => {
+export default (props) => {
 
     return (
         <>
-            <AppNavigation />
+            <AppBackNavigation navigation={props.navigation} />
              <Box style={styles.topContainer}>
                     <Heading size="md" color="tertiary.700" >Picked Item Information</Heading>
                     <Box p="4" mt="5" bg="muted.50" rounded="4" shadow="5">

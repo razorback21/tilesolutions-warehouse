@@ -4,9 +4,10 @@ import {Box, Text, Heading, ScrollView } from "native-base";
 import AppNavigation from "../../shared/AppNavigation";
 import ListItemBox from "../../shared/ListItemBox";
 import AppStyles from "../../../AppStyles";
+import AppBackNavigation from "../../shared/AppBackNavigation";
 
 
-export default () => {
+export default (props) => {
 
     const ItemContent = () => {
         return (
@@ -26,7 +27,7 @@ export default () => {
 
     return (
         <>
-            <AppNavigation />
+            <AppBackNavigation navigation={props.navigation} />
             <Box style={styles.topContainerNoFlex}>
                 <Text color="tertiary.500" fontSize="12">STEP 1</Text>
                 <Heading size="md" color="tertiary.700">Picking order for pickup</Heading>

@@ -6,8 +6,9 @@ import ListItemBox from "../../shared/ListItemBox";
 import AppStyles  from "../../../AppStyles";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import AppBackNavigation from "../../shared/AppBackNavigation";
 
-export default () => {
+export default (props) => {
     const ItemContent = () => {
         return (
             <>
@@ -63,7 +64,7 @@ export default () => {
 
     return (
         <>
-            <AppNavigation />
+            <AppBackNavigation navigation={props.navigation} />
             <ActionSheet />
             <ScrollView>
                 <Box style={styles.topContainerNoFlex}>

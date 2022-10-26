@@ -3,9 +3,10 @@ import { StyleSheet } from 'react-native';
 import {Box, Text, Heading, ScrollView, HStack, Center, Flex, Input, Button} from "native-base";
 import AppNavigation from "../../shared/AppNavigation";
 import AppStyles  from "../../../AppStyles";
+import AppBackNavigation from "../../shared/AppBackNavigation";
 
 
-export default () => {
+export default (props) => {
 
     const ActualPick = (props) => {
         return (
@@ -31,7 +32,7 @@ export default () => {
 
     return (
         <>
-            <AppNavigation />
+            <AppBackNavigation navigation={props.navigation} />
             <ScrollView>
                 <Box style={styles.topContainer}>
                     <Text color="tertiary.500" fontSize="12">STEP 3</Text>

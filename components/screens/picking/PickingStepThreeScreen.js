@@ -5,8 +5,9 @@ import AppNavigation from "../../shared/AppNavigation";
 import ListItemBox from "../../shared/ListItemBox";
 import AppStyles  from "../../../AppStyles";
 import WhiteButton from "../../shared/WhiteButton";
+import AppBackNavigation from "../../shared/AppBackNavigation";
 
-export default () => {
+export default (props) => {
 
     const scanNFCTag = () => {
         console.warn('scanning NFC tag');
@@ -18,7 +19,7 @@ export default () => {
 
     return (
         <>
-            <AppNavigation />
+            <AppBackNavigation navigation={props.navigation} />
              <Box style={styles.topContainer}>
                     <Text color="tertiary.500" fontSize="12">STEP 3</Text>
                     <Heading size="md" color="tertiary.700" >Enter or Scan Pallet ID</Heading>
