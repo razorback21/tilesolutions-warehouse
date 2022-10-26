@@ -19,24 +19,15 @@ export default function App() {
   // extend the theme
   const theme = extendTheme(AppTheme);
 
-  const Drawer = createDrawerNavigator();
   const StackNav = createDrawerNavigator();
-
-  const DrawerNav = () => {
-      return (<Drawer.Navigator screenOptions={{
-          headerShown: false,
-      }} drawerContent={(props) => <AppDrawer {...props}/>}>
-          <Drawer.Screen name="Dashboard" component={DashboardScreen} />
-      </Drawer.Navigator>)
-  }
 
   return (
       <NavigationContainer header={false}>
         <NativeBaseProvider theme={theme}>
             <StackNav.Navigator initialRouteName="Dashboard" screenOptions={{
                 headerShown: false,
-            }} >
-                <StackNav.Screen name="Dashboard" component={DrawerNav} />
+            }} drawerContent={(props) => <AppDrawer {...props}/>}>
+                <StackNav.Screen name="Dashboard" component={DashboardScreen} />
                 <StackNav.Screen name="Order Picking" component={OrderPickngHomeScreen} />
             </StackNav.Navigator>
         </NativeBaseProvider>
