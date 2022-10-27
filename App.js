@@ -35,13 +35,13 @@ export default function App() {
                     headerShown: false,
                 }} drawerContent={(props) => <AppDrawer {...props}/>}>
                     <StackNav.Screen name="Dashboard" component={DashboardScreen} />
-                    <StackNav.Screen name="Order Picking" component={OrderPickingHomeScreen} />
-                    <StackNav.Screen name="Order Received" component={OrderReceivedScreen} />
-                    <StackNav.Screen name="Picking Step One" component={PickingStepOneScreen} />
-                    <StackNav.Screen name="Picking Step Two" component={PickingStepTwoScreen} />
-                    <StackNav.Screen name="Picking Step Three" component={PickingStepThreeScreen} />
-                    <StackNav.Screen name="Actual Picking" component={ActualPickingScreen} />
-                    <StackNav.Screen name="Picked Item Information" component={PickedItemInfoScreen} />
+                    <StackNav.Screen name="OrderPicking" component={OrderPickingHomeScreen} />
+                    <StackNav.Screen name="OrderReceived" component={OrderReceivedScreen} />
+                    <StackNav.Screen name="PickingStepOne" component={PickingStepOneScreen} />
+                    <StackNav.Screen name="PickingStepTwo" component={PickingStepTwoScreen} />
+                    <StackNav.Screen name="PickingStepThree" component={PickingStepThreeScreen} />
+                    <StackNav.Screen name="ActualPicking" component={ActualPickingScreen} />
+                    <StackNav.Screen name="PickedItemInformation" component={PickedItemInfoScreen} />
                 </StackNav.Navigator>
             </NavigationContainer>
         </NativeBaseProvider>
