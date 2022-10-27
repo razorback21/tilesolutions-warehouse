@@ -17,7 +17,7 @@ export default (props) => {
     }
 
     const orderReceived = () => {
-        props.navigation.navigate('Order Received');
+        props.navigation.navigate('OrderReceived');
     }
 
     return (
