@@ -1,5 +1,6 @@
 import { Box, Center, Heading, HStack, Icon, Pressable, Text, VStack } from "native-base";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import AppDraweMenuItem from "../navigations/AppDraweMenuItem";
 
 const AppDrawerContent = (props) => {
 
@@ -24,23 +25,8 @@ const AppDrawerContent = (props) => {
                 <Center><Text fontSize="10">Version 1.0.0</Text></Center>
             </Box>
             <VStack pt="7" >
-                <Pressable mb="2" py="1.5" pl="10" _pressed={{
-                    bg: "muted.50"
-                }} onPress={() => navigate('Dashboard')}>
-                    <HStack alignItems="center" space="3">
-                        <Icon size="lg" color="muted.500"  name="home" as={MaterialIcons}/>
-                        <Text color="secondary.900" fontSize="14">Dashboard</Text>
-                    </HStack>
-                </Pressable>
-
-                <Pressable mb="2" py="1.5" pl="10" _pressed={{
-                    bg: "muted.50"
-                }}>
-                    <HStack alignItems="center" space="3">
-                        <Icon size="lg" color="muted.500"  name="logout" as={MaterialIcons}/>
-                        <Text color="secondary.900" fontSize="14">Logout</Text>
-                    </HStack>
-                </Pressable>
+                <AppDraweMenuItem iconName="home" iconAs={MaterialIcons} name="Dashboard" onPress={() => navigate('Dashboard')}/>
+                <AppDraweMenuItem iconName="logout" iconAs={MaterialIcons} name="Logout"/>
             </VStack>
         </VStack>
     )
