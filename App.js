@@ -9,7 +9,7 @@ import {
 import AppTheme from "./AppTheme";
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppDrawer from "./components/shared/AppDrawer";
 
 import DashboardScreen from "./components/screens/picking/DashboardScreen";
@@ -26,7 +26,7 @@ export default function App() {
   // extend the theme
   const theme = extendTheme(AppTheme);
 
-  const StackNav = createDrawerNavigator();
+  const StackNav = createNativeStackNavigator();
 
   return (
         <NativeBaseProvider theme={theme}>
