@@ -14,7 +14,7 @@ import PickedItemInfoScreen from "../screens/picking/PickedItemInfoScreen";
 const DashboardStackNav= () => {
     const StackNav = createNativeStackNavigator();
     return (
-        <StackNav.Navigator initialRouteName="Dashboard" screenOptions={{
+        <StackNav.Navigator screenOptions={{
             headerShown: false,
         }} >
             <StackNav.Screen name="Dashboard" component={DashboardScreen} />
