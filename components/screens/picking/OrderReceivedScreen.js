@@ -32,7 +32,7 @@ export default (props) => {
 
     return (
         <>
-            <AppBackNavigation navigation={props.navigation} onPressBack={() => props.navigation.navigate('Order Picking')}/>
+            <AppBackNavigation navigation={props.navigation} onPressBack={() => props.navigation.navigate('OrderPicking')}/>
             <Box style={styles.topContainer}>
                 <Heading size="md" color="tertiary.700">Picking</Heading>
 
