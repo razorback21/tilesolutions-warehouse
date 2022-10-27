@@ -30,7 +30,7 @@ export default function App() {
 
   return (
         <NativeBaseProvider theme={theme}>
-            <NavigationContainer header={false}>
+            <NavigationContainer>
                 <StackNav.Navigator initialRouteName="Dashboard" screenOptions={{
                     headerShown: false,
                 }} drawerContent={(props) => <AppDrawer {...props}/>}>
