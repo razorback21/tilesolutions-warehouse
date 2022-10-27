@@ -16,8 +16,7 @@ const DashboardStackNav= () => {
     return (
         <StackNav.Navigator initialRouteName="Dashboard" screenOptions={{
             headerShown: false,
-        }} drawerContent={(props) => <AppDrawer {...props}/>}>
-
+        }} >
             <StackNav.Screen name="Dashboard" component={DashboardScreen} />
             <StackNav.Screen name="OrderPicking" component={OrderPickingHomeScreen} />
             <StackNav.Screen name="OrderReceived" component={OrderReceivedScreen} />
