@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
 import { Box, Text, Heading, ScrollView, HStack, Center, Fab, Icon, useDisclose, Actionsheet } from "native-base";
-import AppNavigation from "../../shared/AppNavigation";
 import ListItemBox from "../../shared/ListItemBox";
 import AppStyles  from "../../../AppStyles";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AppBackNavigation from "../../shared/AppBackNavigation";
+import TileInfoBox from "../../shared/TileInfoBox";
 
 export default (props) => {
     const ItemContent = () => {
@@ -80,20 +80,10 @@ export default (props) => {
                     </Box>
 
                     <HStack justifyContent="center" space="5" mt="4">
-                        <Box w="27%" py="2" justifyContent="center" alignItems="center" borderWidth="2" borderColor="text.400" bg="text.50" rounded="4">
-                            <Text fontWeight="700" fontSize="24" color="primary.600">83</Text>
-                            <Text color="tertiary.700" fontWeight="700">Ordered</Text>
-                        </Box>
-                        <Box w="27%" py="2" justifyContent="center" alignItems="center" borderWidth="2" borderColor="text.400" bg="text.50" rounded="4">
-                            <Text fontWeight="700" fontSize="24" color="primary.600">83</Text>
-                            <Text color="tertiary.700" fontWeight="700">Remaining</Text>
-                        </Box>
-                        <Box w="27%" py="2" justifyContent="center" alignItems="center" borderWidth="2" borderColor="text.400" bg="text.50" rounded="4">
-                            <Text fontWeight="700" fontSize="24" color="primary.600">PC</Text>
-                            <Text color="tertiary.700" fontWeight="700">UoM</Text>
-                        </Box>
-
-                    </HStack>
+                        <TileInfoBox title="83" subTitle="Ordered"/>
+                        <TileInfoBox title="83" subTitle="Remaining"/>
+                        <TileInfoBox title="PC" subTitle="UoM"/>
+                       </HStack>
 
                     <Center mt="4">
                         <Text fontWeight="700" color="text.700" fontSize="12">Available at below Sub-locations</Text>
