@@ -11,7 +11,7 @@ const MainDrawer = () => {
             initialRouteName="Dashboard" screenOptions={{
             headerShown: false,
         }} drawerContent={(props) => <AppDrawer {...props}/>} >
-            <Drawer.Screen name="Root" component={DashboardStackNav} />
+            <Drawer.Screen name="Dashboard" component={DashboardStackNav} />
         </Drawer.Navigator>
     )
 }
