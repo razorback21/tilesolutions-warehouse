@@ -29,24 +29,22 @@ export default function App() {
   const StackNav = createDrawerNavigator();
 
   return (
-      <NavigationContainer header={false}>
         <NativeBaseProvider theme={theme}>
-            <StackNav.Navigator initialRouteName="Dashboard" screenOptions={{
-                headerShown: false,
-            }} drawerContent={(props) => <AppDrawer {...props}/>}>
-                <StackNav.Screen name="Dashboard" component={DashboardScreen} />
-                <StackNav.Screen name="Order Picking" component={OrderPickingHomeScreen} />
-                <StackNav.Screen name="Order Received" component={OrderReceivedScreen} />
-
-
-                <StackNav.Screen name="Picking Step One" component={PickingStepOneScreen} />
-                <StackNav.Screen name="Picking Step Two" component={PickingStepTwoScreen} />
-                <StackNav.Screen name="Picking Step Three" component={PickingStepThreeScreen} />
-                <StackNav.Screen name="Actual Picking" component={ActualPickingScreen} />
-                <StackNav.Screen name="Picked Item Information" component={PickedItemInfoScreen} />
-            </StackNav.Navigator>
+            <NavigationContainer header={false}>
+                <StackNav.Navigator initialRouteName="Dashboard" screenOptions={{
+                    headerShown: false,
+                }} drawerContent={(props) => <AppDrawer {...props}/>}>
+                    <StackNav.Screen name="Dashboard" component={DashboardScreen} />
+                    <StackNav.Screen name="Order Picking" component={OrderPickingHomeScreen} />
+                    <StackNav.Screen name="Order Received" component={OrderReceivedScreen} />
+                    <StackNav.Screen name="Picking Step One" component={PickingStepOneScreen} />
+                    <StackNav.Screen name="Picking Step Two" component={PickingStepTwoScreen} />
+                    <StackNav.Screen name="Picking Step Three" component={PickingStepThreeScreen} />
+                    <StackNav.Screen name="Actual Picking" component={ActualPickingScreen} />
+                    <StackNav.Screen name="Picked Item Information" component={PickedItemInfoScreen} />
+                </StackNav.Navigator>
+            </NavigationContainer>
         </NativeBaseProvider>
-      </NavigationContainer>
   );
 }
 
