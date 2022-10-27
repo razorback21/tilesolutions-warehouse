@@ -2,12 +2,14 @@ import React from 'react';
 import { Box, HStack, IconButton, Icon, Text, Menu } from 'native-base';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AppNavMoreMenu from "./AppNavMoreMenu";
+import { useNavigation, DrawerActions  }from '@react-navigation/native';
 
 
 const AppNavigation = (props) => {
+    const navigation = useNavigation();
 
     const handleToggleDrawer = () => {
-        props.navigation.toggleDrawer();
+        navigation.dispatch(DrawerActions.toggleDrawer());
     }
 
     return (
