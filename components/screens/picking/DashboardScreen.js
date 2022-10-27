@@ -8,7 +8,6 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default (props) => {
-    console.log(props.navigation)
     const navigation = props.navigation;
     const navigate = navigation.navigate;
 
