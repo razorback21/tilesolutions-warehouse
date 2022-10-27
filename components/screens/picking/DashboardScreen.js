@@ -36,7 +36,7 @@ export default (props) => {
             <Box style={styles.topContainer}>
                 <Heading size="md" mb="5" color="tertiary.700">Dashboard</Heading>
                 <HStack  flexWrap="wrap" space="2" justifyContent="space-between" mb="3">
-                    <IconActionButton onPress={() => navigate('Order Picking')} icon="hand-paper" as={FontAwesome5} category="Warehouse" title="Order Picking"/>
+                    <IconActionButton onPress={() => navigate('OrderPicking')} icon="hand-paper" as={FontAwesome5} category="Warehouse" title="Order Picking"/>
                     <IconActionButton icon="local-shipping" as={MaterialIcons} category="Warehouse" title="Order Shipping"/>
                 </HStack>
                 <HStack flexWrap="wrap" space="2" justifyContent="space-between" mb="3">
