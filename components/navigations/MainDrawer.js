@@ -8,10 +8,10 @@ const MainDrawer = () => {
 
     return (
         <Drawer.Navigator
-            initialRouteName="Dashboard" screenOptions={{
+            initialRouteName="Main" screenOptions={{
             headerShown: false,
         }} drawerContent={(props) => <AppDrawer {...props}/>} >
-            <Drawer.Screen name="Dashboard" component={DashboardStackNav} />
+            <Drawer.Screen name="Main" component={DashboardStackNav} />
         </Drawer.Navigator>
     )
 }
