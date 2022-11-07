@@ -1,6 +1,5 @@
 import React from "react";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import AppDrawer from "../shared/AppDrawer";
 import DashboardScreen from "../screens/picking/DashboardScreen";
 import OrderPickingHomeScreen from "../screens/picking/OrderPickingHomeScreen";
 import OrderReceivedScreen from "../screens/picking/OrderReceivedScreen";
