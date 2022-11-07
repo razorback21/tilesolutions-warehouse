@@ -2,7 +2,7 @@ const AppStyles = {
     topContainer: {
         flex: 1,
         backgroundColor: "#E7E7E9",
-        paddingTop: 25,
+        paddingTop: 20,
         paddingLeft: 15,
         paddingRight: 15,
         paddingBottom: 15,
@@ -10,7 +10,7 @@ const AppStyles = {
 
     topContainerNoFlex: {
         backgroundColor: "#E7E7E9",
-        paddingTop: 25,
+        paddingTop: 20,
         paddingLeft: 15,
         paddingRight: 15,
         paddingBottom: 15
