@@ -57,7 +57,7 @@ export default (props) => {
 const styles= StyleSheet.create({
     topContainer: {
         backgroundColor: "#E7E7E9",
-        paddingTop: 35,
+        paddingTop: 25,
         paddingLeft: 15,
         paddingRight: 15,
         paddingBottom: 15

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {Box, VStack, Heading, Input, Button, Center, Divider} from "native-base";
 import AppBackNavigation from "../../shared/AppBackNavigation";
 import WhiteButton from "../../shared/WhiteButton";
-
+import AppStyles from "../../../AppStyles";
 
 
 export default (props) => {
@@ -23,7 +23,7 @@ export default (props) => {
     return (
         <>
             <AppBackNavigation navigation={props.navigation}/>
-            <Box style={styles.container}>
+            <Box style={styles.topContainer}>
                 <VStack>
                    <Heading size="md" mb="5" color="tertiary.700">Order Picking</Heading>
                 </VStack>
@@ -45,12 +45,7 @@ export default (props) => {
     )
 }
 
-const styles= StyleSheet.create({
-    container: {
-        backgroundColor: "#E7E7E9",
-        flex:1,
-        paddingTop: 35,
-        paddingLeft: 15,
-        paddingRight: 15
-    }
+const styles = StyleSheet.create({
+    ...AppStyles
 })
+
