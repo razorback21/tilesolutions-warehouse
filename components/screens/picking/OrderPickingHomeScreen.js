@@ -25,7 +25,7 @@ export default (props) => {
             <AppBackNavigation navigation={props.navigation}/>
             <Box style={styles.topContainer}>
                 <VStack>
-                   <Heading size="md" mb="5" color="tertiary.700">Order Picking</Heading>
+                   <Heading size="md" mb="4" color="tertiary.700">Order Picking</Heading>
                 </VStack>
                 <Box>
                     <Input placeholder="Enter Order Confirmation No."/>
