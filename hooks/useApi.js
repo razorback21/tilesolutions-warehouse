@@ -17,14 +17,14 @@ const useApi = () => {
     const tsQuery = (query, variables ='') => {
         return api.post(baseURL,{
             query: `query ${query}`,
-            variables: variables
+            variables: `${variables}`
         });
     }
 
     const tsMutation = (mutation, variables ='') => {
         return api.post(baseURL,{
             mutation: `mutation ${mutation}`,
-            variables: variables
+            variables: `${variables}`
         });
     }
 
