@@ -15,7 +15,6 @@ const tsApi = () => {
     });
 
     const tsQuery = (query, variables ='') => {
-        console.log(query);
         return api.post(baseURL,{
             query: `query ${query}`,
             variables: `${variables}`
