@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 const tsApi = () => {
     // Refactor. Move setting to dotenv and retrieve token from secure storage
     const baseURL = 'https://apidev.vogroup.ca/tswarehouseapi';
@@ -30,6 +29,5 @@ const tsApi = () => {
 
     return [tsQuery, tsMutation, api]
 }
-
 
 export default tsApi;
