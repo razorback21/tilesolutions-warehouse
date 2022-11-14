@@ -8,16 +8,18 @@ import {
 import AppTheme from "./AppTheme";
 import { NavigationContainer } from '@react-navigation/native';
 import MainDrawer from "./components/navigations/MainDrawer";
+import LoginScreen from "./components/screens/LoginScreen";
 
 
 export default function App() {
   // extend the theme
   const theme = extendTheme(AppTheme);
+  const [authenticated, setAuthenticated] = React.useState(false)
 
   return (
         <NativeBaseProvider theme={theme}>
             <NavigationContainer>
-                <MainDrawer />
+                {authenticated ? <MainDrawer/> : <LoginScreen/>}
             </NavigationContainer>
         </NativeBaseProvider>
   );
