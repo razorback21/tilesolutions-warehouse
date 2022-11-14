@@ -6,22 +6,25 @@ import {
 } from "native-base";
 
 import AppTheme from "./AppTheme";
-import { NavigationContainer } from '@react-navigation/native';
+import AppStore, {AppContext} from "./components/AppStore";
+import {NavigationContainer} from '@react-navigation/native';
 import MainDrawer from "./components/navigations/MainDrawer";
 import LoginScreen from "./components/screens/LoginScreen";
+
 
 
 export default function App() {
   // extend the theme
   const theme = extendTheme(AppTheme);
-  const [authenticated, setAuthenticated] = React.useState(false)
-
+  console.log(React.useContext(AppContext));
   return (
+      <AppStore>
         <NativeBaseProvider theme={theme}>
             <NavigationContainer>
-                {authenticated ? <MainDrawer/> : <LoginScreen/>}
+                {false ? <MainDrawer/> : <LoginScreen/>}
             </NavigationContainer>
         </NativeBaseProvider>
+      </AppStore>
   );
 }
 
