@@ -11,7 +11,7 @@ export default () => {
                 <Heading size="3xl" color="primary.600" letterSpacing="md" lineHeight="50" style={{textShadowOffset:{width: 1, height:1}, textShadowRadius:1}}>Warehouse</Heading>
             </Stack>
         </Box>
-        <Box px="5" mt="40%">
+        <Box px="5" mt="40%" style={styles.loginBox}>
             <Input size="sm" mb="2" placeholder="Email"/>
             <Input size="sm" mb="2" placeholder="Password" type="password"/>
             <Button>Log In</Button>
@@ -22,7 +22,13 @@ export default () => {
 const styles = StyleSheet.create({
     topContainer: {
         paddingTop: "30%",
+        height: "100%",
         backgroundColor: "#E7E7E9"
+    },
+    loginBox: {
+        position: "absolute",
+        width: "100%",
+        bottom: 40
     }
 });
 
