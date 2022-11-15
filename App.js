@@ -1,28 +1,9 @@
 import React from "react";
-import 'react-native-gesture-handler';
-import {
-    NativeBaseProvider,
-    extendTheme
-} from "native-base";
-
-import AppTheme from "./AppTheme";
-import {NavigationContainer} from '@react-navigation/native';
-import MainDrawer from "./components/navigations/MainDrawer";
-import LoginScreen from "./components/screens/LoginScreen";
-
-
+import AppProvider from "./app/AppProvider";
+import TSWhapp from "./TSWhapp";
 
 export default function App() {
-  // extend the theme
-  const theme = extendTheme(AppTheme);
-
-  return (
-        <NativeBaseProvider theme={theme}>
-            <NavigationContainer>
-                {false ? <MainDrawer/> : <LoginScreen/>}
-            </NavigationContainer>
-        </NativeBaseProvider>
-  );
+    return (<AppProvider>
+            <TSWhapp/>
+    </AppProvider>)
 }
-
-
