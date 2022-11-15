@@ -9,7 +9,7 @@ const useAuth = () => {
 
     const appLogin = (email, password) => {
         console.log(email, password);
-        //setAuthenticated(true);
+        //
         tsQuery(`
             AppLogin($Email: String!, $Password: String!) {
                 Login(Email: $Email, Password: $Password) {
@@ -24,13 +24,18 @@ const useAuth = () => {
                 "Email": "${email}",
                 "Password" : "${password}"
             }
-        `).then(res => {
-            console.log(res.data)
+        `).then(async res => {
+            setAuthenticated(true);
+            const data = res.data.data.Login;
+            await SecureStore.setItemAsync('api_token', data.token);
+        }).catch(error => {
+            appLogout();
         })
     }
 
-    const appLogout = () => {
+    const appLogout = async () => {
         setAuthenticated(false);
+        await SecureStore.deleteItemAsync('api_token');
     }
 
     return [appLogin, appLogout]
