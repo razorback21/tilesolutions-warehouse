@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
 import {Box, Text, Heading, Pressable, VStack, Stack, HStack, Icon} from "native-base";
-import AppNavigation from "../../shared/AppNavigation";
-import AppStyles from "../../../AppStyles";
+import AppNavigation from "../shared/AppNavigation";
+import AppStyles from "../../AppStyles";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";

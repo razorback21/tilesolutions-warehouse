@@ -1,6 +1,6 @@
 import React from "react";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import DashboardScreen from "../screens/picking/DashboardScreen";
+import DashboardScreen from "../screens/DashboardScreen";
 import OrderPickingHomeScreen from "../screens/picking/OrderPickingHomeScreen";
 import OrderReceivedScreen from "../screens/picking/OrderReceivedScreen";
 import PickingStepOneScreen from "../screens/picking/PickingStepOneScreen";
