@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet } from 'react-native';
 import {Box, Button, Input, VStack, Text, Heading, Icon, Stack} from 'native-base';
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -6,6 +6,16 @@ import useAuth from "../../hooks/useAuth";
 
 export default () => {
     const [appLogin] = useAuth();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const emailInputHandler = (text) => {
+        setEmail(text)
+    }
+
+    const passwordInputHandler = (text) => {
+        setPassword(text)
+    }
 
     return (<VStack style={styles.topContainer} justifyContent="space-between">
         <Box h="300" bg="red.00" justifyContent="center" alignItems="center">
@@ -16,9 +26,9 @@ export default () => {
             </Stack>
         </Box>
         <Box px="5" mt="40%" style={styles.loginBox}>
-            <Input size="sm" mb="2" placeholder="Email"/>
-            <Input size="sm" mb="2" placeholder="Password" type="password"/>
-            <Button onPress={appLogin}>Log In</Button>
+            <Input size="sm" mb="2" placeholder="Email" onChangeText={emailInputHandler}/>
+            <Input size="sm" mb="2" placeholder="Password" onChangeText={passwordInputHandler} type="password"/>
+            <Button onPress={() => appLogin(email, password)}>Log In</Button>
         </Box>
     </VStack>);
 }
