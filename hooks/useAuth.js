@@ -5,11 +5,9 @@ import * as SecureStore from 'expo-secure-store';
 
 const useAuth = () => {
     const [tsQuery] = useApi();
-    const {authenticated, setAuthenticated} = React.useContext(AppProviderContext)
+    const {setAuthenticated} = React.useContext(AppProviderContext)
 
     const appLogin = (email, password) => {
-        console.log(email, password);
-        //
         tsQuery(`
             AppLogin($Email: String!, $Password: String!) {
                 Login(Email: $Email, Password: $Password) {
