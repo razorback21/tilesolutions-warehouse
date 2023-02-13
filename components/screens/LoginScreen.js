@@ -26,8 +26,8 @@ export default () => {
             </Stack>
         </Box>
         <Box px="5" mt="40%" style={styles.loginBox}>
-            <Input size="sm" mb="2" placeholder="Email" onChangeText={emailInputHandler}/>
-            <Input size="sm" mb="2" placeholder="Password" onChangeText={passwordInputHandler} type="password"/>
+            <Input size="lg" mb="2" placeholder="Email" onChangeText={emailInputHandler}/>
+            <Input size="lg" mb="2" placeholder="Password" onChangeText={passwordInputHandler} type="password"/>
             <Button onPress={() => appLogin(email, password)}>Log In</Button>
         </Box>
     </VStack>);
