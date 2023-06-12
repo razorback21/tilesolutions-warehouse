@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet } from 'react-native';
 import {Box, Button, Input, VStack, Text, Heading, Icon, Stack} from 'native-base';
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../hooks/useAuth";
 
 export default () => {
     const [appLogin] = useAuth();
