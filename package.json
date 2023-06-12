@@ -48,5 +48,9 @@
   },
   "homepage": "https://github.com/GeekyAnts/nativebase-templates#readme",
   "author": "Aditya Jamuar",
-  "private": true
+  "private": true,
+  "overrides": {
+    "metro": "0.76.0",
+    "metro-resolver": "0.76.0"
+  }
 }
