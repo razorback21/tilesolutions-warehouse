@@ -2,14 +2,15 @@ import React from "react";
 import { StyleSheet } from 'react-native';
 import {Box, Text, Heading, Pressable, VStack, Stack, HStack, Icon} from "native-base";
 import AppNavigation from "../shared/AppNavigation";
+import { useRouter } from "expo-router";
 import AppStyles from "../../AppStyles";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default (props) => {
-    const navigation = props.navigation;
-    const navigate = navigation.navigate;
+
+    const router = useRouter();
 
     const IconActionButton = (props) => {
         return (
@@ -35,7 +36,7 @@ export default (props) => {
             <Box style={styles.topContainer}>
                 <Heading size="md" mb="3" color="tertiary.700">Dashboard</Heading>
                 <HStack  flexWrap="wrap" space="2" justifyContent="space-between" mb="3">
-                    <IconActionButton onPress={() => navigate('OrderPicking')} icon="hand-paper" as={FontAwesome5} category="Warehouse" title="Order Picking"/>
+                    <IconActionButton onPress={() => router.push('/orderpicking')} icon="hand-paper" as={FontAwesome5} category="Warehouse" title="Order Picking"/>
                     <IconActionButton icon="local-shipping" as={MaterialIcons} category="Warehouse" title="Order Shipping"/>
                 </HStack>
                 <HStack flexWrap="wrap" space="2" justifyContent="space-between" mb="3">
