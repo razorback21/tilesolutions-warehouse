@@ -1,11 +1,13 @@
 import React from 'react';
 import { Box, HStack, IconButton, Icon, Text } from 'native-base';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { useRouter } from 'expo-router';
 
 const AppBackNavigation = (props) => {
+    const router = useRouter();
 
     const goBack = () => {
-        props.navigation.goBack();
+        router.push(props.path);
     }
 
     return (
@@ -14,10 +16,10 @@ const AppBackNavigation = (props) => {
             <HStack bg="primary.500" px="1" pt="0" pb="1" alignItems="center">
                 <HStack alignItems="center">
                     <IconButton icon={<Icon as={MaterialIcons} name='arrow-back-ios' size='5'/>} _icon={{color: "white"}}
-                                onPress={!props.onPressBack? goBack : props.onPressBack}/>
+                                onPress={() => goBack()}/>
 
                 </HStack>
-                <Text color="white" fontSize="16" fontWeight="bold">
+                <Text color="white" fontSize="16" fontWeight="bold" onPress={() => goBack()}>
                     {props.title}
                 </Text>
             </HStack>
