@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppProviderContext} from "../app/AppProvider";
+import {AppProviderContext} from "../components/AppProvider";
 import useApi from "./useApi";
 import * as SecureStore from 'expo-secure-store';
 
