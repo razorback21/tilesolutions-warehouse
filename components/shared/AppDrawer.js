@@ -1,6 +1,6 @@
 import { Box, Center, Heading, HStack, Icon, Pressable, Text, VStack } from "native-base";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import AppDraweMenuItem from "../navigations/AppDraweMenuItem";
+import AppDraweMenuItem from "./AppDraweMenuItem";
 
 const AppDrawerContent = (props) => {
 
