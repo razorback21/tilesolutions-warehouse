@@ -28,7 +28,7 @@ const useApi =  () => {
         api.defaults.headers.common['Authorization'] = "Bearer " + token;
         return api.post(baseURL,{
             query: `query ${query}`,
-            variables: `${variables}`
+            variables: variables
         });
     }
 
