@@ -5,7 +5,6 @@ const ModalMessage = (props) => {
     return (
         <Modal {...props}>
             <Modal.Content>
-                <Modal.CloseButton />
                 <Modal.Header fontSize="4xl" fontWeight="bold">
                     {props.title}
                 </Modal.Header>
