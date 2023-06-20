@@ -1,10 +1,12 @@
-import { Box, Center, Heading, HStack, Icon, Pressable, Text, VStack } from "native-base";
+import { Box, Center, Heading, HStack, Text, VStack } from "native-base";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AppDraweMenuItem from "./AppDraweMenuItem";
+import useAuth from "../../hooks/useAuth";
+import {useRouter} from "expo-router";
 
 const AppDrawerContent = (props) => {
-
-    const navigate = props.navigation.navigate;
+    const router = useRouter();
+    const {appLogout} = useAuth();
 
     return (
         <VStack>
@@ -25,8 +27,8 @@ const AppDrawerContent = (props) => {
                 <Center><Text fontSize="10">Version 1.0.0</Text></Center>
             </Box>
             <VStack pt="7" >
-                <AppDraweMenuItem iconName="home" iconAs={MaterialIcons} name="Dashboard" onPress={() => navigate('Dashboard')}/>
-                <AppDraweMenuItem iconName="logout" iconAs={MaterialIcons} name="Logout"/>
+                <AppDraweMenuItem iconName="home" iconAs={MaterialIcons} name="Dashboard" onPress={() => router.push('/')}/>
+                <AppDraweMenuItem iconName="logout" iconAs={MaterialIcons} name="Logout" onPress={appLogout}/>
             </VStack>
         </VStack>
     )
