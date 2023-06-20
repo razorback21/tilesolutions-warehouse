@@ -4,7 +4,6 @@ import {Box, Button, Input, VStack, Text, Heading, Icon, Stack, useDisclose} fro
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import ModalMessage from "../shared/ModalMessage";
 import useAuth from "../../hooks/useAuth";
-import useApi from "../../hooks/useApi";
 
 export default () => {
     const [appLogin, appLogout] = useAuth();
@@ -20,13 +19,28 @@ export default () => {
         onClose
     } = useDisclose();
 
-    const [ tsQuery ] = useApi();
     const handleEmailInput = (text) => {
         setEmailValue(text);
     }
 
     const handlePasswordInput = (text) => {
         setPasswordValue(text);
+    }
+
+    const error_message_handler = (error) => {
+        const msg = error.toString();
+        if(msg.includes('401')) {
+            return {
+                title: 'Access Denied',
+                message: 'Invalid Credentials.'
+            }
+        } else {
+            const result = msg.split(':');
+            return {
+                title: 'Error',
+                message: result[1].slice(1)
+            }
+        }
     }
 
     const handleLogin = () => {
@@ -36,8 +50,10 @@ export default () => {
             onOpen();
         } else {
             appLogin(emailValue, passwordValue).catch(error => {
-                setModalTitle('Access Denied');
-                setModalMessage('Invalid credentials. Try again.')
+                const msg = error_message_handler(error);
+                setModalTitle(msg.title);
+                setModalMessage(msg.message);
+
                 onOpen();
                 appLogout();
             });
