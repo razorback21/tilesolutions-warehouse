@@ -34,7 +34,7 @@ const useAuth = () => {
         await SecureStore.deleteItemAsync('api_token');
     }
 
-    return [appLogin, appLogout]
+    return {appLogin, appLogout}
 }
 
 export default useAuth;
