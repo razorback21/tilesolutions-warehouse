@@ -7,7 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import SpinnerModal from "../shared/SpinnerLoader";
 
 export default () => {
-    const [appLogin, appLogout] = useAuth();
+    const {appLogin, appLogout} = useAuth();
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
     const [modalTitle, setModalTitle ] = useState('Message');
