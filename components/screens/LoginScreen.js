@@ -4,6 +4,7 @@ import {Box, Button, Input, VStack, Text, Heading, Icon, Stack, useDisclose} fro
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import ModalMessage from "../shared/ModalMessage";
 import useAuth from "../../hooks/useAuth";
+import SpinnerModal from "../shared/SpinnerLoader";
 
 export default () => {
     const [appLogin, appLogout] = useAuth();
@@ -11,8 +12,7 @@ export default () => {
     const [passwordValue, setPasswordValue] = useState('');
     const [modalTitle, setModalTitle ] = useState('Message');
     const [modalMessage, setModalMessage ] = useState('');
-
-
+    const [spinnerVisible, setSpinnerVisible] = useState(false);
     const {
         isOpen,
         onOpen,
@@ -49,6 +49,7 @@ export default () => {
             setModalMessage('Email and Password field is required.');
             onOpen();
         } else {
+            setSpinnerVisible(true);
             appLogin(emailValue, passwordValue).catch(error => {
                 const msg = error_message_handler(error);
                 setModalTitle(msg.title);
@@ -56,6 +57,8 @@ export default () => {
 
                 onOpen();
                 appLogout();
+            }).finally(() => {
+                setSpinnerVisible(false);
             });
         }
 
@@ -63,7 +66,9 @@ export default () => {
 
     return (
         <>
+        <SpinnerModal isOpen={spinnerVisible} size="lg" text="Logging in..."/>
         <ModalMessage isOpen={isOpen} onClose={onClose} title={modalTitle} message={modalMessage}/>
+
         <VStack style={styles.topContainer} justifyContent="space-between">
         <Box h="300" bg="red.00" justifyContent="center" alignItems="center">
             <Icon name="warehouse" as={FontAwesome5} color="#ffffff" size="250" style={{textShadowOffset:{width: 0, height:5}, textShadowRadius:1, textShadowColor:'rgba(0, 0, 0, 0.25)'}} position="absolute" right="0" bottom="0"/>
