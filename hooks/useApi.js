@@ -43,7 +43,7 @@ const useApi =  () => {
         });
     }
 
-    return [tsQuery, tsMutation, api]
+    return {tsQuery, tsMutation, axios: api}
 }
 
 export default useApi;
