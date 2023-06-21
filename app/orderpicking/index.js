@@ -19,7 +19,7 @@ export default (props) => {
     }
 
     const orderReceived = () => {
-        //props.navigation.navigate('OrderReceived');
+        router.push('/orderpicking/order_received')
     }
 
     return (
