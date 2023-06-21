@@ -22,13 +22,7 @@ export default (props) => {
                 <Box mb="1">
                     <Text fontWeight="400" fontSize="12" color="text.600">Customer: BEEN CONTRACTING</Text>
                     <Text fontWeight="400" fontSize="12" color="text.600">Payment: BALANCE</Text>
-                </Box>
-                <Box mb="1">
-                    <HStack space="4">
-                        <Text fontWeight="400" fontSize="12" color="text.600">Method : <Text fontWeight="400" color="text.600">pickup</Text></Text>
-                    </HStack>
-                </Box>
-                <Box >
+                    <Text fontWeight="400" fontSize="12" color="text.600">Method : <Text fontWeight="400" color="text.600">pickup</Text></Text>
                     <Text fontWeight="400" fontSize="12" color="text.600">DateTime: <Text fontWeight="400" color="text.600">Oct 6, 2022 - 11am to 12pm</Text></Text>
                 </Box>
             </>
