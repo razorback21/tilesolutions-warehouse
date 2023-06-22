@@ -101,7 +101,7 @@ const AppTheme = {
             variants: {
                 solid: (props) => {
                     const colorScheme = props.colorScheme
-                    console.log(colorScheme, `${props.theme.colors.primary['500']}`)
+                    //console.log(colorScheme, `${props.theme.colors.primary['500']}`)
                     return {
                         rounded: "4",
                         backgroundColor: `${props.theme.colors.primary['500']}`,
