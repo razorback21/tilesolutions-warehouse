@@ -5,16 +5,16 @@ import { useRouter } from 'expo-router';
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
 import WhiteButton from "../../components/shared/WhiteButton";
 import AppStyles from "../../AppStyles";
-
+import * as SecureStore from 'expo-secure-store';
 
 export default (props) => {
     const router = useRouter();
 
-    const scanNFCTag = () => {
-        console.warn('scanning NFC tag');
+    const scanNFCTag = async () => {
+        console.warn('scanning NFC tag', await SecureStore.getItemAsync('api-token'));
     }
 
-    const scanQRCode = () => {
+    const scanQRCode = async () => {
         console.warn('scanning QR Code');
     }
 
