@@ -27,7 +27,7 @@ const useAuth = () => {
             try {
                 await SecureStore.setItemAsync('api-token', data.token);
                 const token = await SecureStore.getItemAsync('api-token');
-                console.log("token value :", token);
+                console.log("login token value :", token);
                 if(token) {
                     setAuthenticated(true);
                 }
@@ -39,7 +39,6 @@ const useAuth = () => {
     }
 
     const appLogout = async () => {
-        setAuthenticated(false);
         try {
             await SecureStore.deleteItemAsync('api-token');
         } catch (e) {
