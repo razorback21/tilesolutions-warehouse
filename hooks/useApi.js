@@ -28,7 +28,7 @@ const useApi =  () => {
     const tsQuery = async (query, variables={}) => {
         try {
             const token = await SecureStore.getItemAsync('api-token');
-            //console.log('Saved token', token)
+            console.log('tsQuery saved token', token)
             api.defaults.headers.common['Authorization'] = "Bearer " + token;
             console.log('BaseURL : ', baseURL)
 
