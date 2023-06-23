@@ -1,18 +1,20 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import {Box, Text, Heading, ScrollView, Badge, HStack, Button} from "native-base";
+import {Box, Text, Heading, ScrollView, Badge, HStack, Button, useDisclose} from "native-base";
 import ListItemBox from "../../components/shared/ListItemBox";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
 import {useRouter} from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 import useApi from "../../hooks/useApi";
+import SpinnerModal from "../../components/shared/SpinnerLoader";
+
 
 export default (props) => {
     const router = useRouter();
     const {tsQuery} = useApi();
 
     const fetchUnpickedOrders = async () => {
-         return await tsQuery(`{
+         return tsQuery(`{
                 OrderForPicking {
                   SaleID
                   CONumber
@@ -30,53 +32,65 @@ export default (props) => {
          });
     }
 
-    const query = useQuery({
+    const unpickedOrders = useQuery({
         queryKey:['unpickedorders'],
         queryFn: fetchUnpickedOrders
     });
 
-    const ItemContent = () => {
+    const ItemContent = ({data}) => {
         return (
             <>
                 <Box mb="1">
                     <HStack space="5">
-                        <Text fontWeight="700" fontSize="12" color="primary.700">C.O. No. 000182857</Text>
-                        <Badge _text={{fontSize:10}}>Staff: John Doe</Badge>
+                        <Text fontWeight="700" fontSize="12" color="primary.700">CO No. {data.CONumber}</Text>
+                        <Badge _text={{fontSize:10, width:"auto"}} rounded="10px">{`Staff: ${data.Staff}`}</Badge>
                     </HStack>
                 </Box>
                 <Box mb="1">
-                    <Text fontWeight="400" fontSize="12" color="text.600">Customer: BEEN CONTRACTING</Text>
-                    <Text fontWeight="400" fontSize="12" color="text.600">Payment: BALANCE</Text>
-                    <Text fontWeight="400" fontSize="12" color="text.600">Method : <Text fontWeight="400" color="text.600">pickup</Text></Text>
-                    <Text fontWeight="400" fontSize="12" color="text.600">DateTime: <Text fontWeight="400" color="text.600">Oct 6, 2022 - 11am to 12pm</Text></Text>
+                    <Text fontWeight="400" fontSize="12" color="text.600">Customer: {data.Customer}</Text>
+                    <Text fontWeight="400" fontSize="12" color="text.600">Payment: {data.Payment}</Text>
+                    <Text fontWeight="400" fontSize="12" color="text.600">Method : <Text fontWeight="400" color="text.600">{data.Method}</Text></Text>
+                    <Text fontWeight="400" fontSize="12" color="text.600">DateTime: <Text fontWeight="400" color="text.600">{data.Date} - {data.Time}</Text></Text>
                 </Box>
             </>
         );
     }
 
-    return (
-        <>
+    if(unpickedOrders.error) {
+        return (<>
             <AppBackNavigation path="/orderpicking"/>
             <Box style={styles.topContainer}>
-                <Heading size="md" color="tertiary.700">Picking</Heading>
+                <Heading size="md" color="tertiary.700">Failed to retrieved data</Heading>
+            </Box>
+        </>)
+    }
 
-                <Text color="text.600" fontSize="12">Order received (16)</Text>
-            </Box>
-            <Button onPress={fetchUnpickedOrders}>Fetch</Button>
-            <Box style={styles.contentContainer}>
-                <Box style={styles.innerBox} bg={"tertiary.200"}>
-                    <ScrollView>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
-                    </ScrollView>
+    if(unpickedOrders.isFetching) {
+        return <SpinnerModal isOpen={true} size="lg"/>
+    }
+
+    if(unpickedOrders.isFetched) {
+        return (
+            <>
+                <AppBackNavigation path="/orderpicking"/>
+                <Box style={styles.topContainer}>
+                    <Heading size="md" color="tertiary.700">Picking</Heading>
+                    <Text color="text.600" fontSize="12">Order received ({unpickedOrders.data.length})</Text>
                 </Box>
-            </Box>
-        </>
-    )
+                <Box style={styles.contentContainer}>
+                    <Box style={styles.innerBox} bg={"tertiary.200"}>
+                        {
+                            unpickedOrders.data.length > 0 && unpickedOrders.data.map((item) => {
+                                return <ListItemBox key={item.SaleID} content={<ItemContent data={item}/>}/>
+                            })
+                        }
+                    </Box>
+                </Box>
+            </>
+        )
+    }
+
+
 }
 
 const styles= StyleSheet.create({
