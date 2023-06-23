@@ -1,14 +1,39 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import {Box, Text, Heading, ScrollView, Badge, HStack} from "native-base";
+import {Box, Text, Heading, ScrollView, Badge, HStack, Button} from "native-base";
 import ListItemBox from "../../components/shared/ListItemBox";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
 import {useRouter} from "expo-router";
-
+import { useQuery } from "@tanstack/react-query";
+import useApi from "../../hooks/useApi";
 
 export default (props) => {
-
     const router = useRouter();
+    const {tsQuery} = useApi();
+
+    const fetchUnpickedOrders = async () => {
+         return await tsQuery(`{
+                OrderForPicking {
+                  SaleID
+                  CONumber
+                  Staff
+                  Customer
+                  Customer
+                  Method
+                  Date
+                  Time
+                }
+            }`,
+             {}
+         ).then(res => {
+             return res.data.data.OrderForPicking;
+         });
+    }
+
+    const query = useQuery({
+        queryKey:['unpickedorders'],
+        queryFn: fetchUnpickedOrders
+    });
 
     const ItemContent = () => {
         return (
@@ -37,6 +62,7 @@ export default (props) => {
 
                 <Text color="text.600" fontSize="12">Order received (16)</Text>
             </Box>
+            <Button onPress={fetchUnpickedOrders}>Fetch</Button>
             <Box style={styles.contentContainer}>
                 <Box style={styles.innerBox} bg={"tertiary.200"}>
                     <ScrollView>
