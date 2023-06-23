@@ -8,10 +8,10 @@ import LoginScreen from "../components/screens/LoginScreen";
 import DashboardScreen from "../components/screens/DashboardScreen";
 
 export default function Index () {
-    const {authenticated} =  React.useContext(AppProviderContext);
+    const {isAuthenticated} =  React.useContext(AppProviderContext);
     const Drawer = createDrawerNavigator();
 
-    return !authenticated ? <LoginScreen /> : (
+    return !isAuthenticated ? <LoginScreen /> : (
         <Drawer.Navigator
             initialRouteName="index" screenOptions={{
             headerShown: false,
