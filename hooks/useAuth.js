@@ -23,15 +23,29 @@ const useAuth = () => {
                 Password : password
             }
         ).then(async res => {
-            setAuthenticated(true);
             const data = res.data.data.Login;
-            await SecureStore.setItemAsync('api_token', data.token);
+            try {
+                await SecureStore.setItemAsync('api-token', data.token);
+                const token = await SecureStore.getItemAsync('api-token');
+                console.log("token value :", token);
+                if(token) {
+                    setAuthenticated(true);
+                }
+            } catch (e) {
+                console.log('Login auth token save error :', e);
+            }
+
         });
     }
 
     const appLogout = async () => {
         setAuthenticated(false);
-        await SecureStore.deleteItemAsync('api_token');
+        try {
+            await SecureStore.deleteItemAsync('api-token');
+        } catch (e) {
+            console.log('logout auth token read error :', e)
+        }
+
     }
 
     return {appLogin, appLogout}
