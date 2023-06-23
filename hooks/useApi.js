@@ -26,22 +26,34 @@ const useApi =  () => {
     });
 
     const tsQuery = async (query, variables={}) => {
-        const token = await SecureStore.getItemAsync('api_key');
-        api.defaults.headers.common['Authorization'] = "Bearer " + token;
-        console.log('BaseURL : ', baseURL)
-        return api.post(baseURL,{
-            query: `query ${query}`,
-            variables
-        });
+        try {
+            const token = await SecureStore.getItemAsync('api-token');
+            //console.log('Saved token', token)
+            api.defaults.headers.common['Authorization'] = "Bearer " + token;
+            console.log('BaseURL : ', baseURL)
+
+            return api.post(baseURL,{
+                query: `query ${query}`,
+                variables
+            });
+        } catch (e) {
+            console.log('tsQuery token read error: ',e);
+        }
+
     }
 
     const tsMutation = async (mutation, variables={}) => {
-        const token = await SecureStore.getItemAsync('api_key');
-        api.defaults.headers.common['Authorization'] = "Bearer " + token;
-        return api.post(baseURL,{
-            mutation: `mutation ${mutation}`,
-            variables
-        });
+        try {
+            const token = await SecureStore.getItemAsync('api-token');
+            api.defaults.headers.common['Authorization'] = "Bearer " + token;
+            return api.post(baseURL,{
+                mutation: `mutation ${mutation}`,
+                variables
+            });
+        } catch (e) {
+            console.log('tsMutation token read error: ',e);
+        }
+
     }
 
     return {tsQuery, tsMutation, axios}
