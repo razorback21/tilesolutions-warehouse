@@ -41,9 +41,9 @@ export default (props) => {
         return (
             <>
                 <Box mb="1">
-                    <HStack space="5">
+                    <HStack justifyContent="space-between">
                         <Text fontWeight="700" fontSize="12" color="primary.700">CO No. {data.CONumber}</Text>
-                        <Badge _text={{fontSize:10, width:"auto"}} rounded="10px">{`Staff: ${data.Staff}`}</Badge>
+                        <Badge _text={{fontSize:10, color:'white'}} rounded="10px" color="white" bg="secondary.300">{`Staff: ${data.Staff}`}</Badge>
                     </HStack>
                 </Box>
                 <Box mb="1">
@@ -65,11 +65,10 @@ export default (props) => {
         </>)
     }
 
-    if(unpickedOrders.isFetching) {
+    if(unpickedOrders.status === 'loading') {
         return <SpinnerModal isOpen={true} size="lg"/>
     }
 
-    if(unpickedOrders.isFetched) {
         return (
             <>
                 <AppBackNavigation path="/orderpicking"/>
@@ -79,16 +78,18 @@ export default (props) => {
                 </Box>
                 <Box style={styles.contentContainer}>
                     <Box style={styles.innerBox} bg={"tertiary.200"}>
-                        {
-                            unpickedOrders.data.length > 0 && unpickedOrders.data.map((item) => {
-                                return <ListItemBox key={item.SaleID} content={<ItemContent data={item}/>}/>
-                            })
-                        }
+                        <ScrollView>
+                            {
+                                unpickedOrders.data.length > 0 && unpickedOrders.data.map((item) => {
+                                    return <ListItemBox key={item.SaleID} content={<ItemContent data={item}/>}/>
+                                })
+                            }
+                        </ScrollView>
                     </Box>
                 </Box>
             </>
         )
-    }
+
 
 
 }
