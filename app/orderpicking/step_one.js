@@ -7,7 +7,7 @@ import AppBackNavigation from "../../components/shared/AppBackNavigation";
 import {useQuery} from "@tanstack/react-query";
 import {useLocalSearchParams} from "expo-router";
 import useApi from "../../hooks/useApi";
-import SpinnerModal from "../../components/shared/SpinnerLoader";
+import FullScreenLoader from "../../components/shared/FullScreenLoader";
 
 
 export default (props) => {
@@ -62,7 +62,7 @@ export default (props) => {
     }
 
     if(orderItemsQuery.status === 'loading') {
-        return <SpinnerModal isOpen={true} size="lg"/>
+        return <FullScreenLoader size="lg"/>
     }
 
     return (
