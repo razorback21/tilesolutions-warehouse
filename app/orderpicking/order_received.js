@@ -81,7 +81,8 @@ export default (props) => {
                         <ScrollView>
                             {
                                 unpickedOrders.data.length > 0 && unpickedOrders.data.map((item) => {
-                                    return <ListItemBox key={item.SaleID} content={<ItemContent data={item}/>}/>
+                                    return <ListItemBox key={item.SaleID} content={<ItemContent data={item}/>}
+                                                        onPress={() => router.push({pathname:'/orderpicking/step_one', params: {co: item.CONumber}})}/>
                                 })
                             }
                         </ScrollView>
