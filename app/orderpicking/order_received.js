@@ -74,30 +74,27 @@ export default (props) => {
         return <FullScreenLoader size="lg"/>
     }
 
-        return (
-            <>
-                <AppBackNavigation path="/orderpicking"/>
-                <Box style={styles.topContainer}>
-                    <Heading size="md" color="tertiary.700">Picking</Heading>
-                    <Text color="text.600" fontSize="12">Order received ({unpickedOrders.data.length})</Text>
+    return (
+        <>
+            <AppBackNavigation path="/orderpicking"/>
+            <Box style={styles.topContainer}>
+                <Heading size="md" color="tertiary.700">Picking</Heading>
+                <Text color="text.600" fontSize="12">Order received ({unpickedOrders.data.length})</Text>
+            </Box>
+            <Box style={styles.contentContainer}>
+                <Box style={styles.innerBox} bg={"tertiary.200"}>
+                    <ScrollView>
+                        {
+                            unpickedOrders.data.length > 0 && unpickedOrders.data.map((item) => {
+                                return <ListItemBox key={item.SaleID} content={<ItemContent data={item}/>}
+                                                    onPress={() => gotoPickingStepOne(item.CONumber)}/>
+                            })
+                        }
+                    </ScrollView>
                 </Box>
-                <Box style={styles.contentContainer}>
-                    <Box style={styles.innerBox} bg={"tertiary.200"}>
-                        <ScrollView>
-                            {
-                                unpickedOrders.data.length > 0 && unpickedOrders.data.map((item) => {
-                                    return <ListItemBox key={item.SaleID} content={<ItemContent data={item}/>}
-                                                        onPress={() => gotoPickingStepOne(item.CONumber)}/>
-                                })
-                            }
-                        </ScrollView>
-                    </Box>
-                </Box>
-            </>
-        )
-
-
-
+            </Box>
+        </>
+    )
 }
 
 const styles= StyleSheet.create({
