@@ -1,6 +1,4 @@
-import {Spinner, VStack, Center, Text, Box, HStack, IconButton, Icon} from 'native-base';
-import Ionicons from "@expo/vector-icons/Ionicons";
-import AppNavMoreMenu from "./AppNavMoreMenu";
+import {Spinner, VStack, Center, Text, Box, HStack} from 'native-base';
 import React from "react";
 
 const FullScreenLoader = (props) => {
