@@ -4,7 +4,7 @@ import * as SecureStore from 'expo-secure-store';
 const useApi =  () => {
 
     // Refactor. Move setting to dotenv and retrieve token from secure storage
-    const protoDomain = `https://apidev.vogroup.ca`//`https://tall-things-deny.loca.lt`;
+    const protoDomain = `https://good-pens-spend.loca.lt`;
     const baseURL = `${protoDomain}/tswarehouseapi`;
 
     const api = axios.create({
@@ -28,7 +28,7 @@ const useApi =  () => {
     const tsQuery = async (query, variables={}) => {
         try {
             const token = await SecureStore.getItemAsync('api-token');
-            console.log('tsQuery saved token', token)
+            //console.log('tsQuery saved token', token)
             api.defaults.headers.common['Authorization'] = "Bearer " + token;
             console.log('BaseURL : ', baseURL)
 
