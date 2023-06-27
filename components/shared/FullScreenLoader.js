@@ -7,7 +7,7 @@ const FullScreenLoader = (props) => {
     return (<>
                 <Box safeAreaTop bg="primary.500"/>
                 <HStack bg="primary.500" px="1" pt="0" pb="1" justifyContent="center" alignItems="center" w="100%">
-                    <Text color="white" fontSize="16" fontWeight="bold">
+                    <Text color="white" fontSize="16" fontWeight="bold" pt="1" pb="2">
                         {props.title}
                     </Text>
                 </HStack>
