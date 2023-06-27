@@ -4,14 +4,14 @@ import {Box, Text, Heading, ScrollView, Badge, HStack, Button, useDisclose} from
 import ListItemBox from "../../components/shared/ListItemBox";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
 import {useRouter} from "expo-router";
-import { useQuery } from "@tanstack/react-query";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
 import useApi from "../../hooks/useApi";
-import SpinnerModal from "../../components/shared/SpinnerLoader";
-
+import FullScreenLoader from "../../components/shared/FullScreenLoader";
 
 export default (props) => {
     const router = useRouter();
     const {tsQuery} = useApi();
+    const queryClient = useQueryClient();
 
     const fetchUnpickedOrders = async () => {
          return tsQuery(`{
@@ -36,6 +36,11 @@ export default (props) => {
         queryKey:['unpickedorders'],
         queryFn: fetchUnpickedOrders
     });
+
+    const gotoPickingStepOne= (co_number) => {
+        queryClient.invalidateQueries({queryKey:["ordered-items", co_number]});
+        router.push({pathname:'/orderpicking/step_one', params: {co: co_number}});
+    }
 
     const ItemContent = ({data}) => {
         return (
@@ -66,7 +71,7 @@ export default (props) => {
     }
 
     if(unpickedOrders.status === 'loading') {
-        return <SpinnerModal isOpen={true} size="lg"/>
+        return <FullScreenLoader size="lg"/>
     }
 
         return (
@@ -82,7 +87,7 @@ export default (props) => {
                             {
                                 unpickedOrders.data.length > 0 && unpickedOrders.data.map((item) => {
                                     return <ListItemBox key={item.SaleID} content={<ItemContent data={item}/>}
-                                                        onPress={() => router.push({pathname:'/orderpicking/step_one', params: {co: item.CONumber}})}/>
+                                                        onPress={() => gotoPickingStepOne(item.CONumber)}/>
                                 })
                             }
                         </ScrollView>
