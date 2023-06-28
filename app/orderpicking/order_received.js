@@ -39,7 +39,7 @@ export default (props) => {
 
     const gotoPickingStepOne= async (co_number) => {
         await queryClient.invalidateQueries({queryKey:["ordered-items", co_number]});
-        router.push({pathname:'/orderpicking/step_one', params: {co: co_number}});
+        router.push({pathname:'/orderpicking/step_two', params: {co: co_number}});
     }
 
     const ItemContent = ({data}) => {
