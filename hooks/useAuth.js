@@ -41,6 +41,7 @@ const useAuth = () => {
     const appLogout = async () => {
         try {
             await SecureStore.deleteItemAsync('api-token');
+            setAuthenticated(false);
         } catch (e) {
             console.log('logout auth token read error :', e)
         }
