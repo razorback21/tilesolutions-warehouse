@@ -8,9 +8,10 @@ import {useQuery} from "@tanstack/react-query";
 import {useLocalSearchParams} from "expo-router";
 import useApi from "../../hooks/useApi";
 import FullScreenLoader from "../../components/shared/FullScreenLoader";
-
+import {useRouter} from "expo-router";
 
 export default (props) => {
+    const router = useRouter();
     const params = useLocalSearchParams();
     const {tsQuery} = useApi();
 
@@ -28,6 +29,7 @@ export default (props) => {
                             Description
                             Shade
                             Qty
+                            SalesItemID
                         }
                     }
                 }
@@ -40,10 +42,9 @@ export default (props) => {
         })
     }
 
-    const orderItemsQuery = useQuery({
-        queryKey: ["ordered-items", params.co],
-        queryFn: () => orderItems(params.co)
-    })
+    const gotoStepThree = (sales_item_id, co_number) => {
+        router.push({pathname: "/orderpicking/step_three", params: {siid: sales_item_id, co: co_number}})
+    }
 
     const ItemContent = ({data}) => {
         return (
@@ -61,6 +62,11 @@ export default (props) => {
         );
     }
 
+    const orderItemsQuery = useQuery({
+        queryKey: ["ordered-items", params.co],
+        queryFn: () => orderItems(params.co)
+    })
+
     if(orderItemsQuery.status === 'loading') {
         return <FullScreenLoader size="lg"/>
     }
@@ -72,7 +78,7 @@ export default (props) => {
                 <Text color="tertiary.500" fontSize="12">STEP 2</Text>
                 <Heading size="md" color="tertiary.700">Picking order for pickup</Heading>
 
-                <Text mt="1" fontSize="12" color="text.600">
+                <Text mt="1" fontSize="12" color="text.600" space="10">
                     For C.O: <Text fontWeight="700">{orderItemsQuery.data.CONumber}</Text> - Written by: {orderItemsQuery.data.WrittenBy}{"\n"}
                     Sold to: {orderItemsQuery.data.Customer}
                 </Text>
@@ -82,7 +88,7 @@ export default (props) => {
                     <ScrollView>
                         {
                             orderItemsQuery.isSuccess && orderItemsQuery.data.OrderItems.map((item) => {
-                               return  <ListItemBox key={item.Code} content={<ItemContent data={item}/>}/>
+                               return  <ListItemBox key={item.Code} onPress={() => gotoStepThree(item.SalesItemID, params.co)} content={<ItemContent data={item}/>}/>
                             })
                         }
                     </ScrollView>
