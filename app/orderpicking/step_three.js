@@ -7,11 +7,14 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
 import TileInfoBox from "../../components/shared/TileInfoBox";
-import {useRouter} from "expo-router";
+import {useRouter, useLocalSearchParams} from "expo-router";
 import useApi from "../../hooks/useApi";
+import {useQuery} from "@tanstack/react-query";
+import FullScreenLoader from "../../components/shared/FullScreenLoader";
 
 export default (props) => {
     const router = useRouter();
+    const params = useLocalSearchParams();
     const {tsQuery} = useApi();
 
     const ItemContent = () => {
@@ -67,9 +70,40 @@ export default (props) => {
 
     }
 
+    const fetchPickItemData = async (sales_item_id) => {
+        return await tsQuery(`
+            PickItemData($SalesItemID: Int!) {
+              PickItemData(SalesItemID: $SalesItemID) {
+                  Ordered
+                  ProductID
+                  ProductCode
+                  ProductDescription
+                  RemainingToBePick
+                  UoM
+              }
+            }
+        `,
+
+        {
+            "SalesItemID": sales_item_id
+        }).then(res => {
+            console.log(res.data.data.PickItemData);
+            return res.data.data.PickItemData
+        })
+    }
+
+    const pickItemDataQuery = useQuery({
+        queryKey: ["pick-item-data", params.siid],
+        queryFn: async() => fetchPickItemData(Number(params.siid))
+    })
+
+    if(pickItemDataQuery.status === 'loading') {
+        return <FullScreenLoader size="lg"/>
+    }
+
     return (
         <>
-            <AppBackNavigation path="/step_one" />
+            <AppBackNavigation path="/orderpicking/step_two" params={{co:params.co}}/>
             <ActionSheet />
             <ScrollView>
                 <Box style={styles.topContainerNoFlex}>
@@ -77,17 +111,17 @@ export default (props) => {
                     <Heading size="md" color="tertiary.700" >Pick from Pallet</Heading>
                     <Box p="4" mt="5" bg="muted.50" rounded="4" shadow="5">
                         <Text fontSize="12">
-                            Item Code : <Text fontWeight="700">MP.001.0150</Text>
+                            Item Code : <Text fontWeight="700">{pickItemDataQuery.data.ProductCode}</Text>
                         </Text>
                         <Text fontSize="12">
-                            Description : UltraFlex 1 Polymer Modified Grey 50 lbs
+                            Description : {pickItemDataQuery.data.ProductDescription}
                         </Text>
                     </Box>
 
                     <HStack justifyContent="center" space="5" mt="4">
-                        <TileInfoBox title="83" subTitle="Ordered"/>
-                        <TileInfoBox title="83" subTitle="Remaining"/>
-                        <TileInfoBox title="PC" subTitle="UoM"/>
+                        <TileInfoBox title={`${pickItemDataQuery.data.Ordered}`} subTitle="Ordered"/>
+                        <TileInfoBox title={`${pickItemDataQuery.data.RemainingToBePick}`} subTitle="Remaining"/>
+                        <TileInfoBox title={`${pickItemDataQuery.data.UoM}`} subTitle="UoM"/>
                     </HStack>
 
                     <Center mt="4">
@@ -96,11 +130,6 @@ export default (props) => {
                 </Box>
                 <Box style={styles.contentContainer}>
                     <Box style={styles.innerBox} bg={"tertiary.200"}>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
                         <ListItemBox content={<ItemContent />}/>
                     </Box>
                 </Box>
