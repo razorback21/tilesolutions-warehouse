@@ -8,13 +8,14 @@ import AppStyles from "../../AppStyles";
 import * as SecureStore from 'expo-secure-store';
 import useApi from "../../hooks/useApi";
 import ModalMessage from "../../components/shared/ModalMessage";
-
+import {useQueryClient} from "@tanstack/react-query";
 
 export default (props) => {
     const [CONumber, setCONumber] = React.useState(null);
     const [modalTitle, setModalTitle ] = React.useState('Message');
     const [modalMessage, setModalMessage ] = React.useState('');
     const router = useRouter();
+    const queryClient = useQueryClient();
     const {tsQuery} = useApi();
     const {
         isOpen,
@@ -62,7 +63,8 @@ export default (props) => {
         console.warn('scanning QR Code');
     }
 
-    const orderReceived = () => {
+    const gotoOrderReceived = async () => {
+        await queryClient.invalidateQueries();
         router.push('/orderpicking/order_received')
     }
 
@@ -87,7 +89,7 @@ export default (props) => {
                     <WhiteButton title="Scan QR code" icon="qr-code-scanner"onPress={scanQRCode}/>
                 </VStack>
                 <Divider my="6"/>
-                <WhiteButton title="Order Received" icon="call-received" mb="2" onPress={orderReceived}/>
+                <WhiteButton title="Order Received" icon="call-received" mb="2" onPress={gotoOrderReceived}/>
             </Box>
         </>
     )
