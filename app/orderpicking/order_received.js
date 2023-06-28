@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import {Box, Text, Heading, ScrollView, Badge, HStack, Button} from "native-base";
+import {Box, Text, Heading, ScrollView, Badge, HStack, useToast} from "native-base";
 import ListItemBox from "../../components/shared/ListItemBox";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
 import {useRouter} from "expo-router";
@@ -12,6 +12,7 @@ export default (props) => {
     const router = useRouter();
     const {tsQuery} = useApi();
     const queryClient = useQueryClient();
+    const toast = useToast();
 
     const fetchUnpickedOrders = async () => {
          return tsQuery(`{
@@ -72,6 +73,12 @@ export default (props) => {
 
     if(unpickedOrders.status === 'loading') {
         return <FullScreenLoader size="lg"/>
+    }
+
+    if(unpickedOrders.isRefetching) {
+        toast.show({
+            title: 'Fetching data in the background...'
+        });
     }
 
     return (
