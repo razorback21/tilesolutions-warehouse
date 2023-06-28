@@ -31,7 +31,7 @@
     },
     "scheme": "tswh",
     "appConfig": {
-      "apiBase" : "http://192.168.1.13",
+      "apiEndpoint" : "http://192.168.1.13/tswarehouseapi",
     }
   }
 }
