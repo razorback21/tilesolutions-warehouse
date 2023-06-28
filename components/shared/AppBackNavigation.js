@@ -7,7 +7,7 @@ const AppBackNavigation = (props) => {
     const router = useRouter();
 
     const goBack = () => {
-        router.push(props.path);
+        router.push({pathname:props.path, params: props.params});
     }
 
     return (
