@@ -45,7 +45,7 @@ export default (props) => {
         } else {
             verifyOrder(CONumber.toString()).then(valid => {
                 if(valid) {
-                    router.push({pathname: '/orderpicking/step_one', params: {oc: CONumber}});
+                    router.push({pathname: '/orderpicking/step_two', params: {oc: CONumber}});
                 } else {
                     onOpen();
                     setModalTitle('Error');
