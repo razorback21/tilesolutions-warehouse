@@ -82,7 +82,7 @@ export default (props) => {
                     <ScrollView>
                         {
                             orderItemsQuery.isSuccess && orderItemsQuery.data.OrderItems.map((item) => {
-                               return  <ListItemBox key={item.CONumber} content={<ItemContent key={item.CONumber} data={item}/>}/>
+                               return  <ListItemBox key={item.Code} content={<ItemContent data={item}/>}/>
                             })
                         }
                     </ScrollView>
