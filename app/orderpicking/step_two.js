@@ -1,110 +1,93 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import { Box, Text, Heading, ScrollView, HStack, Center, Fab, Icon, useDisclose, Actionsheet } from "native-base";
+import {Box, Text, Heading, ScrollView } from "native-base";
 import ListItemBox from "../../components/shared/ListItemBox";
-import AppStyles  from "../../AppStyles";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import AppStyles from "../../AppStyles";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
-import TileInfoBox from "../../components/shared/TileInfoBox";
-import {useRouter} from "expo-router";
+import {useQuery} from "@tanstack/react-query";
+import {useLocalSearchParams} from "expo-router";
 import useApi from "../../hooks/useApi";
+import FullScreenLoader from "../../components/shared/FullScreenLoader";
+
 
 export default (props) => {
-    const router = useRouter();
+    const params = useLocalSearchParams();
     const {tsQuery} = useApi();
 
-    const ItemContent = () => {
+    const orderItems = async (co_number)=> {
+        return await tsQuery(
+            `
+                PickingOrderedItems($CONumber: String!) {
+                    PickingOrderedItems(CONumber: $CONumber) {
+                        Status
+                        WrittenBy
+                        Customer
+                        CONumber
+                        OrderItems {
+                            Code
+                            Description
+                            Shade
+                            Qty
+                        }
+                    }
+                }
+            `,
+            {
+                CONumber: co_number
+            }
+        ).then(res => {
+            return res.data.data.PickingOrderedItems
+        })
+    }
+
+    const orderItemsQuery = useQuery({
+        queryKey: ["ordered-items", params.co],
+        queryFn: () => orderItems(params.co)
+    })
+
+    const ItemContent = ({data}) => {
         return (
             <>
                 <Box mb="1">
-                    <HStack space="5">
-                        <Text fontWeight="700" fontSize="12" color="primary.600">R19.013</Text>
-                    </HStack>
+                    <Text fontWeight="700" fontSize="12" color="primary.600">{data.Code}   <Box h="2.5" width="2.5" bg="success.500" rounded="full" mt="0.2"></Box></Text>
                 </Box>
                 <Box mb="1">
-                    <Text fontWeight="400" fontSize="12" color="text.600">PalletID: 0000000000108334</Text>
-                    <Text fontWeight="400" fontSize="12" color="text.600">Shade: W2-074-041922</Text>
+                    <Text fontWeight="400" fontSize="12" color="text.600">{data.Description}</Text>
                 </Box>
                 <Box>
-                    <HStack space="7">
-                        <Text fontWeight="400" fontSize="12" color="text.600">Quantity : 5</Text>
-                        <Text fontWeight="400" fontSize="12" color="text.600">Available: 5</Text>
-                    </HStack>
+                    <Text fontWeight="400" fontSize="12" color="text.600">Order Qty : {data.Qty}</Text>
                 </Box>
             </>
         );
     }
 
-    function ActionSheet() {
-        const { isOpen, onOpen, onClose } = useDisclose();
-
-        return (
-            <Center>
-                <Fab
-                    onPress={onOpen}
-                    placement="bottom-right"
-                    colorScheme="blue"
-                    size="sm"
-                    icon={<Icon name="md-ellipsis-vertical" as={Ionicons} />}
-                />
-                <Actionsheet isOpen={isOpen} onClose={onClose}>
-                    <Actionsheet.Content>
-                        <Actionsheet.Item startIcon={<Icon as={MaterialIcons} size="6" name="qr-code-scanner" />} _pressed={{
-                            bg: "text.100"
-                        }}>
-                            Scan QR code
-                        </Actionsheet.Item>
-                        <Actionsheet.Item startIcon={<Icon as={MaterialIcons} name="nfc" size="6" />} _pressed={{
-                            bg: "text.100"
-                        }}>
-                            Scan NFC tag
-                        </Actionsheet.Item>
-                    </Actionsheet.Content>
-                </Actionsheet>
-            </Center>
-        );
-
+    if(orderItemsQuery.status === 'loading') {
+        return <FullScreenLoader size="lg"/>
     }
 
     return (
         <>
-            <AppBackNavigation path="/step_one" />
-            <ActionSheet />
-            <ScrollView>
-                <Box style={styles.topContainerNoFlex}>
-                    <Text color="text.500" fontSize="12">STEP 2</Text>
-                    <Heading size="md" color="tertiary.700" >Choose Pallet</Heading>
-                    <Box p="4" mt="5" bg="muted.50" rounded="4" shadow="5">
-                        <Text fontSize="12">
-                            Item Code : <Text fontWeight="700">MP.001.0150</Text>
-                        </Text>
-                        <Text fontSize="12">
-                            Description : UltraFlex 1 Polymer Modified Grey 50 lbs
-                        </Text>
-                    </Box>
+            <AppBackNavigation path="/orderpicking/order_received" />
+            <Box style={styles.topContainerNoFlex}>
+                <Text color="tertiary.500" fontSize="12">STEP 2</Text>
+                <Heading size="md" color="tertiary.700">Picking order for pickup</Heading>
 
-                    <HStack justifyContent="center" space="5" mt="4">
-                        <TileInfoBox title="83" subTitle="Ordered"/>
-                        <TileInfoBox title="83" subTitle="Remaining"/>
-                        <TileInfoBox title="PC" subTitle="UoM"/>
-                    </HStack>
-
-                    <Center mt="4">
-                        <Text fontWeight="700" color="text.700" fontSize="12">Available at below Sub-locations</Text>
-                    </Center>
+                <Text mt="1" fontSize="12" color="text.600">
+                    For C.O: <Text fontWeight="700">{orderItemsQuery.data.CONumber}</Text> - Written by: {orderItemsQuery.data.WrittenBy}{"\n"}
+                    Sold to: {orderItemsQuery.data.Customer}
+                </Text>
+            </Box>
+            <Box style={styles.contentContainer}>
+                <Box style={styles.innerBox} bg={"tertiary.200"}>
+                    <ScrollView>
+                        {
+                            orderItemsQuery.isSuccess && orderItemsQuery.data.OrderItems.map((item) => {
+                               return  <ListItemBox key={item.Code} content={<ItemContent data={item}/>}/>
+                            })
+                        }
+                    </ScrollView>
                 </Box>
-                <Box style={styles.contentContainer}>
-                    <Box style={styles.innerBox} bg={"tertiary.200"}>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
-                        <ListItemBox content={<ItemContent />}/>
-                    </Box>
-                </Box>
-            </ScrollView>
+            </Box>
         </>
     )
 }
