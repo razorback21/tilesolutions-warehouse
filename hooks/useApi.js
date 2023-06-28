@@ -28,7 +28,7 @@ const useApi =  () => {
             const token = await SecureStore.getItemAsync('api-token');
             //console.log('tsQuery saved token', token)
             api.defaults.headers.common['Authorization'] = "Bearer " + token;
-            console.log('BaseURL : ', apiEndpoint)
+            console.log('tsQuery : ', apiEndpoint)
 
             return api.post(apiEndpoint,{
                 query: `query ${query}`,
@@ -44,6 +44,7 @@ const useApi =  () => {
         try {
             const token = await SecureStore.getItemAsync('api-token');
             api.defaults.headers.common['Authorization'] = "Bearer " + token;
+            console.log('tsMutation : ', apiEndpoint)
             return api.post(apiEndpoint,{
                 mutation: `mutation ${mutation}`,
                 variables
