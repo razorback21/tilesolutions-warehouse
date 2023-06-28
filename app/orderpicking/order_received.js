@@ -20,7 +20,7 @@ export default (props) => {
                   CONumber
                   Staff
                   Customer
-                  Customer
+                  Payment
                   Method
                   Date
                   Time
