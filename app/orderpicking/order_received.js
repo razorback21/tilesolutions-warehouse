@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import {Box, Text, Heading, ScrollView, Badge, HStack, Button, useDisclose} from "native-base";
+import {Box, Text, Heading, ScrollView, Badge, HStack, Button} from "native-base";
 import ListItemBox from "../../components/shared/ListItemBox";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
 import {useRouter} from "expo-router";
@@ -11,7 +11,7 @@ import FullScreenLoader from "../../components/shared/FullScreenLoader";
 export default (props) => {
     const router = useRouter();
     const {tsQuery} = useApi();
-    const queryClient = useQueryClient();
+    //const queryClient = useQueryClient();
 
     const fetchUnpickedOrders = async () => {
          return tsQuery(`{
@@ -38,7 +38,6 @@ export default (props) => {
     });
 
     const gotoPickingStepOne= (co_number) => {
-        queryClient.invalidateQueries({queryKey:["ordered-items", co_number]});
         router.push({pathname:'/orderpicking/step_one', params: {co: co_number}});
     }
 
