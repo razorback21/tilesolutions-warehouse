@@ -11,7 +11,7 @@ import FullScreenLoader from "../../components/shared/FullScreenLoader";
 export default (props) => {
     const router = useRouter();
     const {tsQuery} = useApi();
-    //const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
 
     const fetchUnpickedOrders = async () => {
          return tsQuery(`{
@@ -37,7 +37,8 @@ export default (props) => {
         queryFn: fetchUnpickedOrders
     });
 
-    const gotoPickingStepOne= (co_number) => {
+    const gotoPickingStepOne= async (co_number) => {
+        await queryClient.invalidateQueries({queryKey:["ordered-items", co_number]});
         router.push({pathname:'/orderpicking/step_one', params: {co: co_number}});
     }
 
