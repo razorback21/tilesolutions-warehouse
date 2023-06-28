@@ -2,9 +2,11 @@ import React, {useState} from 'react';
 import {AppProviderContext} from "../components/AppProvider";
 import useApi from "./useApi";
 import * as SecureStore from 'expo-secure-store';
+import {useQueryClient} from "@tanstack/react-query";
 
 const useAuth = () => {
     const {tsQuery} = useApi();
+    const queryClient = useQueryClient();
     const {setAuthenticated} = React.useContext(AppProviderContext)
 
     const appLogin = (email, password) => {
@@ -27,7 +29,6 @@ const useAuth = () => {
             try {
                 await SecureStore.setItemAsync('api-token', data.token);
                 const token = await SecureStore.getItemAsync('api-token');
-                console.log("login token value :", token);
                 if(token) {
                     setAuthenticated(true);
                 }
@@ -42,6 +43,7 @@ const useAuth = () => {
         try {
             await SecureStore.deleteItemAsync('api-token');
             setAuthenticated(false);
+            await queryClient.clear()
         } catch (e) {
             console.log('logout auth token read error :', e)
         }
