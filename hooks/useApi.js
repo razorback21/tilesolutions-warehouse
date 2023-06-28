@@ -1,14 +1,14 @@
 import axios from "axios";
 import * as SecureStore from 'expo-secure-store';
+import Constants from 'expo-constants';
 
 const useApi =  () => {
-
+    const apiBase = Constants.expoConfig.appConfig.apiBase;
     // Refactor. Move setting to dotenv and retrieve token from secure storage
-    const protoDomain = `https://good-pens-spend.loca.lt`;
-    const baseURL = `${protoDomain}/tswarehouseapi`;
+    const baseURl = `${apiBase}/tswarehouseapi`;
 
     const api = axios.create({
-        baseURl: baseURL,
+        baseURl: baseURl,
         headers: {
             'Content-Type': 'application/json',
         },
