@@ -7,12 +7,13 @@ import {useRouter} from "expo-router";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import useApi from "../../hooks/useApi";
 import FullScreenLoader from "../../components/shared/FullScreenLoader";
+import {ExpoRoot} from "expo-router";
 
 export default (props) => {
     const router = useRouter();
     const {tsQuery} = useApi();
     const queryClient = useQueryClient();
-    const toast = useToast();
+    const Toast = useToast();
 
     const fetchUnpickedOrders = async () => {
          return tsQuery(`{
@@ -75,33 +76,38 @@ export default (props) => {
         return <FullScreenLoader size="lg"/>
     }
 
-    if(unpickedOrders.isRefetching) {
-        toast.show({
-            title: 'Fetching data in the background...'
-        });
+    const OrderReceived = () => {
+        if(unpickedOrders.isRefetching) {
+            Toast.show({
+                title: 'Fetching data in the background...'
+            });
+        }
+
+        return (
+            <>
+                <AppBackNavigation path="/orderpicking"/>
+                <Box style={styles.topContainer}>
+                    <Heading size="md" color="tertiary.700">Picking</Heading>
+                    <Text color="text.600" fontSize="12">Order received ({unpickedOrders.data.length})</Text>
+                </Box>
+                <Box style={styles.contentContainer}>
+                    <Box style={styles.innerBox} bg={"tertiary.200"}>
+                        <ScrollView>
+                            {
+                                unpickedOrders.data.length > 0 && unpickedOrders.data.map((item) => {
+                                    return <ListItemBox key={item.SaleID} content={<ItemContent data={item}/>}
+                                                        onPress={() => gotoPickingStepOne(item.CONumber)}/>
+                                })
+                            }
+                        </ScrollView>
+                    </Box>
+                </Box>
+            </>
+        )
     }
 
-    return (
-        <>
-            <AppBackNavigation path="/orderpicking"/>
-            <Box style={styles.topContainer}>
-                <Heading size="md" color="tertiary.700">Picking</Heading>
-                <Text color="text.600" fontSize="12">Order received ({unpickedOrders.data.length})</Text>
-            </Box>
-            <Box style={styles.contentContainer}>
-                <Box style={styles.innerBox} bg={"tertiary.200"}>
-                    <ScrollView>
-                        {
-                            unpickedOrders.data.length > 0 && unpickedOrders.data.map((item) => {
-                                return <ListItemBox key={item.SaleID} content={<ItemContent data={item}/>}
-                                                    onPress={() => gotoPickingStepOne(item.CONumber)}/>
-                            })
-                        }
-                    </ScrollView>
-                </Box>
-            </Box>
-        </>
-    )
+    return <OrderReceived/>
+
 }
 
 const styles= StyleSheet.create({
