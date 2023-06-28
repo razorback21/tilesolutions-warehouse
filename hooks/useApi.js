@@ -3,12 +3,10 @@ import * as SecureStore from 'expo-secure-store';
 import Constants from 'expo-constants';
 
 const useApi =  () => {
-    const apiBase = Constants.expoConfig.appConfig.apiBase;
+    const apiEndpoint = Constants.expoConfig.appConfig.apiEndpoint;
     // Refactor. Move setting to dotenv and retrieve token from secure storage
-    const baseURl = `${apiBase}/tswarehouseapi`;
-
     const api = axios.create({
-        baseURl: baseURl,
+        baseURl: apiEndpoint,
         headers: {
             'Content-Type': 'application/json',
         },
@@ -30,9 +28,9 @@ const useApi =  () => {
             const token = await SecureStore.getItemAsync('api-token');
             //console.log('tsQuery saved token', token)
             api.defaults.headers.common['Authorization'] = "Bearer " + token;
-            console.log('BaseURL : ', baseURL)
+            console.log('BaseURL : ', apiEndpoint)
 
-            return api.post(baseURL,{
+            return api.post(apiEndpoint,{
                 query: `query ${query}`,
                 variables
             });
@@ -46,7 +44,7 @@ const useApi =  () => {
         try {
             const token = await SecureStore.getItemAsync('api-token');
             api.defaults.headers.common['Authorization'] = "Bearer " + token;
-            return api.post(baseURL,{
+            return api.post(apiEndpoint,{
                 mutation: `mutation ${mutation}`,
                 variables
             });
