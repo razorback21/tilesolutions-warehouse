@@ -17,22 +17,22 @@ export default (props) => {
     const params = useLocalSearchParams();
     const {tsQuery} = useApi();
 
-    const ItemContent = () => {
+    const ItemContent = ({data}) => {
         return (
             <>
                 <Box mb="1">
                     <HStack space="5">
-                        <Text fontWeight="700" fontSize="12" color="primary.600">R19.013</Text>
+                        <Text fontWeight="700" fontSize="12" color="primary.600">{data.SubLocation}</Text>
                     </HStack>
                 </Box>
                 <Box mb="1">
-                    <Text fontWeight="400" fontSize="12" color="text.600">PalletID: 0000000000108334</Text>
-                    <Text fontWeight="400" fontSize="12" color="text.600">Shade: W2-074-041922</Text>
+                    <Text fontWeight="400" fontSize="12" color="text.600">PalletID: {data.FormattedPalletID}</Text>
+                    <Text fontWeight="400" fontSize="12" color="text.600">Shade: {data.Shade}</Text>
                 </Box>
                 <Box>
                     <HStack space="7">
-                        <Text fontWeight="400" fontSize="12" color="text.600">Quantity : 5</Text>
-                        <Text fontWeight="400" fontSize="12" color="text.600">Available: 5</Text>
+                        <Text fontWeight="400" fontSize="12" color="text.600">Quantity : {data.Qty}</Text>
+                        <Text fontWeight="400" fontSize="12" color="text.600">Available: {data.Available}</Text>
                     </HStack>
                 </Box>
             </>
@@ -87,7 +87,6 @@ export default (props) => {
         {
             "SalesItemID": sales_item_id
         }).then(res => {
-            console.log(res.data.data.PickItemData);
             return res.data.data.PickItemData
         })
     }
@@ -95,6 +94,35 @@ export default (props) => {
     const pickItemDataQuery = useQuery({
         queryKey: ["pick-item-data", params.siid],
         queryFn: async() => fetchPickItemData(Number(params.siid))
+    })
+
+    const fetchSalesItemWarehousePalletInfo = async (sales_item_id) => {
+        return await tsQuery(`
+            SalesItemWarehousePalletInfo($SalesItemID: Int!) {
+                SalesItemWarehousePalletInfo(SalesItemID: $SalesItemID) {
+                    SubLocation
+                    PalletID
+                    FormattedPalletID
+                    Shade
+                    Qty
+                    Available
+                    Reserved
+                    SaleItemID
+                }
+            }
+        `,
+
+            {
+                "SalesItemID": sales_item_id
+            }).then(res => {
+            console.log(res.data);
+            return res.data.data.SalesItemWarehousePalletInfo
+        })
+    }
+
+    const itemPalletsInfoQuery = useQuery({
+        queryKey: ["item-pallets-info", params.siid],
+        queryFn: async () => fetchSalesItemWarehousePalletInfo(Number(params.siid))
     })
 
     if(pickItemDataQuery.status === 'loading') {
@@ -129,8 +157,12 @@ export default (props) => {
                     </Center>
                 </Box>
                 <Box style={styles.contentContainer}>
-                    <Box style={styles.innerBox} bg={"tertiary.200"}>
-                        <ListItemBox content={<ItemContent />}/>
+                    <Box style={styles.innerBox} bg={"tertiary.200"} >
+                        {
+                            itemPalletsInfoQuery.isSuccess && itemPalletsInfoQuery.data.map((item) => {
+                               return <ListItemBox key={item.PalletID} content={<ItemContent data={item}/>}/>
+                            })
+                        }
                     </Box>
                 </Box>
             </ScrollView>
