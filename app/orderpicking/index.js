@@ -78,7 +78,7 @@ export default (props) => {
                    <Heading size="md" mb="3" color="tertiary.700">Order Picking</Heading>
                 </VStack>
                 <Box>
-                    <Input placeholder="Enter Order Confirmation No." onChangeText={(text) => setCONumber(text)}/>
+                    <Input placeholder="CO #." onChangeText={(text) => setCONumber(text)} size="xl" fontSize="25px" textAlign="center"/>
                     <Button size="md" mt="2" onPress={viewOrderForPicking}>Submit</Button>
                 </Box>
                 <Center>
