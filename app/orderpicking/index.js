@@ -85,7 +85,7 @@ export default (props) => {
                     <Heading size="md" mb="5" color="text.500" my="3">or</Heading>
                 </Center>
                 <VStack>
-                    <WhiteButton title="Scan NFC Tag" icon="nfc" mb="2" onPress={scanNFCTag}/>
+                    {/*<WhiteButton title="Scan NFC Tag" icon="nfc" mb="2" onPress={scanNFCTag}/>*/}
                     <WhiteButton title="Scan QR code" icon="qr-code-scanner"onPress={scanQRCode}/>
                 </VStack>
                 <Divider my="6"/>
