@@ -88,7 +88,7 @@ export default (props) => {
                 <ScrollView>
                     {
                         orderItemsQuery.isSuccess && orderItemsQuery.data.OrderItems.map((item, i) => {
-                           return  <ListItemBox key={i} onPress={() => gotoStepThree(item.SalesItemID, params.co)} content={<ItemContent data={item}/>}/>
+                           return  <ListItemBox key={i} h="95" onPress={() => gotoStepThree(item.SalesItemID, params.co)} content={<ItemContent data={item}/>}/>
                         })
                     }
                 </ScrollView>
