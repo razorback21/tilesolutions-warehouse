@@ -82,17 +82,16 @@ export default (props) => {
                 <Heading size="md" color="tertiary.700">Picking</Heading>
                 <Text color="text.600" fontSize="12">Order received ({unpickedOrders.data.length})</Text>
             </Box>
-            <Box style={styles.contentContainer}>
-                <Box style={styles.innerBox} bg={"tertiary.200"}>
-                    <ScrollView>
-                        {
-                            unpickedOrders.data.length > 0 && unpickedOrders.data.map((item) => {
-                                return <ListItemBox key={item.SaleID} content={<ItemContent data={item}/>}
-                                                    onPress={() => gotoPickingStepOne(item.CONumber)}/>
-                            })
-                        }
-                    </ScrollView>
-                </Box>
+
+            <Box style={styles.mainContainer}>
+                <ScrollView>
+                    {
+                        unpickedOrders.data.length > 0 && unpickedOrders.data.map((item) => {
+                            return <ListItemBox key={item.SaleID} content={<ItemContent data={item}/>}
+                                                onPress={() => gotoPickingStepOne(item.CONumber)}/>
+                        })
+                    }
+                </ScrollView>
             </Box>
         </>
     )
@@ -107,15 +106,8 @@ const styles= StyleSheet.create({
         paddingRight: 15,
         paddingBottom: 15
     },
-    contentContainer: {
-        backgroundColor: "#FFFFFF",
-        flex:1,
-        paddingTop: 20,
-        paddingHorizontal: 10,
-        paddingBottom:10
+    mainContainer: {
+        flex: 1,
+        backgroundColor: "#E7E7E9",
     },
-    innerBox: {
-        flex:1,
-        padding:8
-    }
 })
