@@ -50,7 +50,7 @@ export default (props) => {
         return (
             <>
                 <Box mb="1">
-                    <Text fontWeight="700" fontSize="12" color="primary.600">{data.Code}   <Box h="2.5" width="2.5" bg="success.500" rounded="full" mt="0.2"></Box></Text>
+                    <Text fontWeight="700" fontSize="14" color="primary.600">{data.Code}   <Box h="3" width="3" bg="success.500" rounded="full" mt="0.2"></Box></Text>
                 </Box>
                 <Box mb="1">
                     <Text fontWeight="400" fontSize="12" color="text.600">{data.Description}</Text>
