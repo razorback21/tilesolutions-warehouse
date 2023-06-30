@@ -10,6 +10,11 @@ const AppStyles = {
         padding:15
     },
 
+    mainContainer: {
+        flex: 1,
+        backgroundColor: "#E7E7E9",
+    },
+
     contentContainer: {
         backgroundColor: "#FFFFFF",
         flex:1,
