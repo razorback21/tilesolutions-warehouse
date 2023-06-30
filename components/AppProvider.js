@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {QueryClientProvider, QueryClient } from "@tanstack/react-query";
 const AppProviderContext = React.createContext();
 const MyQueryClient = new QueryClient();
-import * as SecureStore from 'expo-secure-store';
 
 const AppProvider = (props) => {
     const [authenticated, setAuthenticated] = useState(false);
