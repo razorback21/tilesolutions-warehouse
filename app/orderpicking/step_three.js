@@ -6,11 +6,11 @@ import AppStyles  from "../../AppStyles";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
-import TileInfoBox from "../../components/shared/TileInfoBox";
 import {useRouter, useLocalSearchParams} from "expo-router";
 import useApi from "../../hooks/useApi";
 import {useQuery} from "@tanstack/react-query";
 import FullScreenLoader from "../../components/shared/FullScreenLoader";
+import PickedItemBoxes from "../../components/shared/PickedItemBoxes";
 
 export default (props) => {
     const router = useRouter();
@@ -70,32 +70,6 @@ export default (props) => {
 
     }
 
-    const fetchPickItemData = async (sales_item_id) => {
-        return await tsQuery(`
-            PickItemData($SalesItemID: Int!) {
-              PickItemData(SalesItemID: $SalesItemID) {
-                  Ordered
-                  ProductID
-                  ProductCode
-                  ProductDescription
-                  RemainingToBePick
-                  UoM
-              }
-            }
-        `,
-
-        {
-            "SalesItemID": sales_item_id
-        }).then(res => {
-            return res.data.data.PickItemData
-        })
-    }
-
-    const pickItemDataQuery = useQuery({
-        queryKey: ["pick-item-data", params.siid],
-        queryFn: async() => fetchPickItemData(Number(params.siid))
-    })
-
     const fetchSalesItemWarehousePalletInfo = async (sales_item_id) => {
         return await tsQuery(`
             SalesItemWarehousePalletInfo($SalesItemID: Int!) {
@@ -115,7 +89,6 @@ export default (props) => {
             {
                 "SalesItemID": sales_item_id
             }).then(res => {
-            console.log(res.data);
             return res.data.data.SalesItemWarehousePalletInfo
         })
     }
@@ -125,7 +98,7 @@ export default (props) => {
         queryFn: async () => fetchSalesItemWarehousePalletInfo(Number(params.siid))
     })
 
-    if(pickItemDataQuery.status === 'loading') {
+    if(itemPalletsInfoQuery.status === 'loading') {
         return <FullScreenLoader size="lg"/>
     }
 
@@ -137,20 +110,8 @@ export default (props) => {
                 <Box style={styles.topContainerNoFlex}>
                     <Text color="text.500" fontSize="12">STEP 3</Text>
                     <Heading size="md" color="tertiary.700" >Pick from Pallet</Heading>
-                    <Box p="4" mt="5" bg="muted.50" rounded="4" shadow="5">
-                        <Text fontSize="12">
-                            Item Code : <Text fontWeight="700">{pickItemDataQuery.data.ProductCode}</Text>
-                        </Text>
-                        <Text fontSize="12">
-                            Description : {pickItemDataQuery.data.ProductDescription}
-                        </Text>
-                    </Box>
 
-                    <HStack justifyContent="center" space="5" mt="4">
-                        <TileInfoBox title={`${pickItemDataQuery.data.Ordered}`} subTitle="Ordered"/>
-                        <TileInfoBox title={`${pickItemDataQuery.data.RemainingToBePick}`} subTitle="Remaining"/>
-                        <TileInfoBox title={`${pickItemDataQuery.data.UoM}`} subTitle="UoM"/>
-                    </HStack>
+                    <PickedItemBoxes />
 
                     <Center mt="4">
                         <Text fontWeight="700" color="text.700" fontSize="12">Available at below Sub-locations</Text>
