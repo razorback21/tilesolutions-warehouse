@@ -22,11 +22,11 @@ export default (props) => {
             <>
                 <Box mb="1">
                     <HStack space="5">
-                        <Text fontWeight="700" fontSize="14" color="primary.600">{data.SubLocation}</Text>
+                        <Text fontWeight="700" fontSize="14" color="primary.600">{data.SubLocation} <Text fontWeight="700" fontSize="14" color="text.600"> - {data.FormattedPalletID}</Text></Text>
                     </HStack>
                 </Box>
                 <Box mb="1">
-                    <Text fontWeight="400" fontSize="12" color="text.600">PalletID: {data.FormattedPalletID}</Text>
+
                     <Text fontWeight="400" fontSize="12" color="text.600">Shade: {data.Shade}</Text>
                 </Box>
                 <Box>
@@ -119,7 +119,7 @@ export default (props) => {
                 <ScrollView>
                 {
                     itemPalletsInfoQuery.isSuccess && itemPalletsInfoQuery.data.map((item) => {
-                       return <ListItemBox h="105" key={item.PalletID} content={<ItemContent data={item}/>}/>
+                       return <ListItemBox h="95" key={item.PalletID} content={<ItemContent data={item}/>}/>
                     })
                 }
                 </ScrollView>
