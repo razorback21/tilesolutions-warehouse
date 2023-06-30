@@ -106,27 +106,25 @@ export default (props) => {
         <>
             <AppBackNavigation path="/orderpicking/step_two" params={{co:params.co}}/>
             <ActionSheet />
-            <ScrollView>
-                <Box style={styles.topContainerNoFlex}>
-                    <Text color="text.500" fontSize="12">STEP 3</Text>
-                    <Heading size="md" color="tertiary.700" >Pick from Pallet</Heading>
+            <Box style={styles.topContainerNoFlex}>
+                <Text color="text.500" fontSize="12">STEP 3</Text>
+                <Heading size="md" color="tertiary.700" >Pick from Pallet</Heading>
+                <PickedItemBoxes />
+                <Center mt="4">
+                    <Text fontWeight="700" color="text.700" fontSize="12">Available at below Sub-locations</Text>
+                </Center>
+            </Box>
 
-                    <PickedItemBoxes />
+            <Box style={styles.mainContainer}>
+                <ScrollView>
+                {
+                    itemPalletsInfoQuery.isSuccess && itemPalletsInfoQuery.data.map((item) => {
+                       return <ListItemBox marginBottom="1" key={item.PalletID} content={<ItemContent data={item}/>}/>
+                    })
+                }
+                </ScrollView>
+            </Box>
 
-                    <Center mt="4">
-                        <Text fontWeight="700" color="text.700" fontSize="12">Available at below Sub-locations</Text>
-                    </Center>
-                </Box>
-                <Box style={styles.contentContainer}>
-                    <Box style={styles.innerBox} bg={"tertiary.200"} >
-                        {
-                            itemPalletsInfoQuery.isSuccess && itemPalletsInfoQuery.data.map((item) => {
-                               return <ListItemBox key={item.PalletID} content={<ItemContent data={item}/>}/>
-                            })
-                        }
-                    </Box>
-                </Box>
-            </ScrollView>
         </>
     )
 }
