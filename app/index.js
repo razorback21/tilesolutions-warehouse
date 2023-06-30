@@ -13,7 +13,7 @@ export default  function Index () {
 
     return !authenticated ? <LoginScreen /> : (
         <Drawer.Navigator
-            initialRouteName="index" screenOptions={{
+            initialRouteName="dashboard" screenOptions={{
             headerShown: false,
         }} drawerContent={(props) => <AppDrawer {...props}/>} >
             <Drawer.Screen name="DashboardScreen" component={DashboardScreen} />
