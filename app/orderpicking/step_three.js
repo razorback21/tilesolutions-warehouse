@@ -119,7 +119,7 @@ export default (props) => {
                 <ScrollView>
                 {
                     itemPalletsInfoQuery.isSuccess && itemPalletsInfoQuery.data.map((item) => {
-                       return <ListItemBox marginBottom="1" key={item.PalletID} content={<ItemContent data={item}/>}/>
+                       return <ListItemBox h="105" key={item.PalletID} content={<ItemContent data={item}/>}/>
                     })
                 }
                 </ScrollView>
