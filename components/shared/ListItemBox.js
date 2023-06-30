@@ -5,7 +5,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 const ListItemBox = (props) => {
     return <Pressable _pressed={{
         bg: "text.50"
-    }} bg="#FFFFFF"  mb={props.marginBottom} onPress={props.onPress} rounded="5" mx="2">
+    }} bg="#FFFFFF"  mb={props.marginBottom} onPress={props.onPress} rounded="5" mx="3">
         <HStack p="4" h={props.h} alignItems="center">
             <Stack w="95%">
                 {props.content}
