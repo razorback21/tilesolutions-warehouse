@@ -83,16 +83,15 @@ export default (props) => {
                     Sold to: {orderItemsQuery.data.Customer}
                 </Text>
             </Box>
-            <Box style={styles.contentContainer}>
-                <Box style={styles.innerBox} bg={"tertiary.200"}>
-                    <ScrollView>
-                        {
-                            orderItemsQuery.isSuccess && orderItemsQuery.data.OrderItems.map((item) => {
-                               return  <ListItemBox key={item.Code} onPress={() => gotoStepThree(item.SalesItemID, params.co)} content={<ItemContent data={item}/>}/>
-                            })
-                        }
-                    </ScrollView>
-                </Box>
+
+            <Box style={styles.mainContainer} >
+                <ScrollView>
+                    {
+                        orderItemsQuery.isSuccess && orderItemsQuery.data.OrderItems.map((item) => {
+                           return  <ListItemBox key={item.Code} onPress={() => gotoStepThree(item.SalesItemID, params.co)} content={<ItemContent data={item}/>}/>
+                        })
+                    }
+                </ScrollView>
             </Box>
         </>
     )
