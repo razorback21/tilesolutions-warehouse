@@ -22,7 +22,7 @@ export default (props) => {
             <>
                 <Box mb="1">
                     <HStack space="5">
-                        <Text fontWeight="700" fontSize="12" color="primary.600">{data.SubLocation}</Text>
+                        <Text fontWeight="700" fontSize="14" color="primary.600">{data.SubLocation}</Text>
                     </HStack>
                 </Box>
                 <Box mb="1">
