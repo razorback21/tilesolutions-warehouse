@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
 import {Box, VStack, Heading, Input, Button, Center, Divider, useDisclose} from "native-base";
-import { useRouter } from 'expo-router';
+import { useRouter, Stack as RouterStack } from 'expo-router';
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
 import WhiteButton from "../../components/shared/WhiteButton";
 import AppStyles from "../../AppStyles";
@@ -70,9 +70,10 @@ export default (props) => {
 
     return (
         <>
+            <RouterStack.Screen/>
             <ModalMessage isOpen={isOpen} onClose={onClose} title={modalTitle} message={modalMessage}/>
 
-            <AppBackNavigation path="/"/>
+            <AppBackNavigation path="."/>
             <Box style={styles.topContainer}>
                 <VStack>
                    <Heading size="md" mb="3" color="tertiary.700">Order Picking</Heading>
