@@ -11,6 +11,7 @@ import useApi from "../../hooks/useApi";
 import {useQuery} from "@tanstack/react-query";
 import FullScreenLoader from "../../components/shared/FullScreenLoader";
 import PickedItemBoxes from "../../components/shared/PickedItemBoxes";
+import {fetchPickItemData} from "../../queries/orderpicking_queries";
 
 export default (props) => {
     const router = useRouter();
@@ -23,9 +24,14 @@ export default (props) => {
             subLocation: item.SubLocation,
             prid: item.PurchaseReceivedID,
             pallet: item.FormattedPalletID,
-            co: params.co // required by step 2
+            co: params.co
         }})
     }
+
+    const pickItemDataQuery = useQuery({
+        queryKey: ["pick-item-data", params.siid],
+        queryFn: async() => await fetchPickItemData(Number(params.siid))
+    })
 
     const ItemContent = ({data}) => {
         return (
@@ -120,7 +126,7 @@ export default (props) => {
             <Box style={styles.topContainerNoFlex}>
                 <Text color="text.500" fontSize="12">STEP 3</Text>
                 <Heading size="md" color="tertiary.700" >Pick from Pallet</Heading>
-                <PickedItemBoxes />
+                {pickItemDataQuery.isSuccess && <PickedItemBoxes data={pickItemDataQuery.data}/>}
                 <Center mt="4">
                     <Text fontWeight="700" color="text.700" fontSize="12">Available at below Sub-locations</Text>
                 </Center>
