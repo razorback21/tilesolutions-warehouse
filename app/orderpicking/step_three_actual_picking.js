@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import {Box, Text, Heading, ScrollView, HStack, Center, Flex, Input, Button} from "native-base";
 import AppStyles  from "../../AppStyles";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
-import TileInfoBox from "../../components/shared/TileInfoBox";
 import PickedItemBoxes from "../../components/shared/PickedItemBoxes";
 import {useRouter, useLocalSearchParams} from "expo-router";
 
@@ -36,12 +35,12 @@ export default (props) => {
 
     return (
         <>
-            <AppBackNavigation c={true} />
+            <AppBackNavigation goback={true} title={`CO_${params.co}`}/>
             <ScrollView>
                 <Box style={styles.topContainer}>
                     <Text color="tertiary.500" fontSize="12">STEP 3</Text>
                     <Heading size="md" color="tertiary.700" >Actual Picking</Heading>
-                    <Text color="tertiary.500" fontSize="12">Sub-location {params.subLocation}</Text>
+                    <Text color="tertiary.500" fontSize="12">Sub-location {params.subLocation} - {params.pallet}</Text>
 
                     <PickedItemBoxes />
 
