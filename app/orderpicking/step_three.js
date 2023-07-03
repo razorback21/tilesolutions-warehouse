@@ -17,6 +17,15 @@ export default (props) => {
     const params = useLocalSearchParams();
     const {tsQuery} = useApi();
 
+    const gotoActualPicking = (item) => {
+        router.push({pathname: "/orderpicking/step_three_actual_picking", params: {
+            siid: item.SaleItemID,
+            subLocation: item.SubLocation,
+            prid: item.PurchaseReceivedID,
+            co: params.co // required by step 2
+        }})
+    }
+
     const ItemContent = ({data}) => {
         return (
             <>
@@ -82,6 +91,7 @@ export default (props) => {
                     Available
                     Reserved
                     SaleItemID
+                    PurchaseReceivedID
                 }
             }
         `,
@@ -104,7 +114,7 @@ export default (props) => {
 
     return (
         <>
-            <AppBackNavigation path="/orderpicking/step_two" params={{co:params.co}}/>
+            <AppBackNavigation path="/orderpicking/step_two" params={{co:params.co}} title={`CO_${params.co}`}/>
             <ActionSheet />
             <Box style={styles.topContainerNoFlex}>
                 <Text color="text.500" fontSize="12">STEP 3</Text>
@@ -119,7 +129,7 @@ export default (props) => {
                 <ScrollView>
                 {
                     itemPalletsInfoQuery.isSuccess && itemPalletsInfoQuery.data.map((item) => {
-                       return <ListItemBox h="95" key={item.PalletID} content={<ItemContent data={item}/>}/>
+                       return <ListItemBox h="95" key={item.PalletID} onPress={() => gotoActualPicking(item)} content={<ItemContent data={item}/>}/>
                     })
                 }
                 </ScrollView>
