@@ -24,7 +24,8 @@ export default (props) => {
             subLocation: item.SubLocation,
             prid: item.PurchaseReceivedID,
             pallet: item.FormattedPalletID,
-            co: params.co
+            co: params.co,
+            availablePickableItems: item.Available
         }})
     }
 
@@ -128,7 +129,17 @@ export default (props) => {
                 <Heading size="md" color="tertiary.700" >Pick from Pallet</Heading>
                 {pickItemDataQuery.isSuccess && <PickedItemBoxes data={pickItemDataQuery.data}/>}
                 <Center mt="4">
-                    <Text fontWeight="700" color="text.700" fontSize="12">Available at below Sub-locations</Text>
+                    {
+                        itemPalletsInfoQuery.isSuccess && (
+                            itemPalletsInfoQuery.data.length ? (
+                                <Text fontWeight="700" color="text.700" fontSize="12">Available at below Sub-locations</Text>
+                            ) : (
+                                <Text fontWeight="700" color="text.700" fontSize="12">No available stocks</Text>
+                            )
+                        )
+
+                    }
+
                 </Center>
             </Box>
 
