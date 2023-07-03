@@ -73,7 +73,7 @@ export default (props) => {
 
     return (
         <>
-            <AppBackNavigation path="/orderpicking/order_received" />
+            <AppBackNavigation path="/orderpicking/order_received" title={`CO_${params.co}`}/>
             <Box style={styles.topContainerNoFlex}>
                 <Text color="tertiary.500" fontSize="12">STEP 2</Text>
                 <Heading size="md" color="tertiary.700">Picking order for pickup</Heading>
