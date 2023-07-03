@@ -19,7 +19,7 @@ const AppBackNavigation = (props) => {
     return (
         <>
             <Box safeAreaTop bg="primary.500"/>
-            <HStack bg="primary.500" px="1" pt="0" pb="1" alignItems="center" justifyContent="space-between">
+            <HStack bg="primary.500" px="1" pt="0" pb="1" alignItems="center" justifyContent="space-around">
                 <HStack alignItems="center" style={{flexBasis: "10%"}}>
                     <IconButton icon={<Icon as={MaterialIcons} name='arrow-back-ios' size='5'/>} _icon={{color: "white"}}
                                 onPress={navigationHandler}/>
@@ -28,7 +28,7 @@ const AppBackNavigation = (props) => {
                     </Text>
                 </HStack>
                 <Text color="white" fontSize="16" fontWeight="bold" style={{flexBasis:"50%"}} textAlign="center">
-                    CO 00000001234
+                    {props.title}
                 </Text>
                 <HStack style={{flexBasis: "10%"}}>
                     {/* additional icon buttons here  */}
@@ -40,7 +40,7 @@ const AppBackNavigation = (props) => {
 }
 AppBackNavigation.defaultProps = {
     backButtonLabel: 'Back',
-    title: ""
+    title: " "
 }
 
 export default AppBackNavigation;
