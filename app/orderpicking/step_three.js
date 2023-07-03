@@ -22,6 +22,7 @@ export default (props) => {
             siid: item.SaleItemID,
             subLocation: item.SubLocation,
             prid: item.PurchaseReceivedID,
+            pallet: item.FormattedPalletID,
             co: params.co // required by step 2
         }})
     }
