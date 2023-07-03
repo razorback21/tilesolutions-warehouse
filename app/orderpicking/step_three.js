@@ -134,7 +134,7 @@ export default (props) => {
                             itemPalletsInfoQuery.data.length ? (
                                 <Text fontWeight="700" color="text.700" fontSize="12">Available at below Sub-locations</Text>
                             ) : (
-                                <Text fontWeight="700" color="text.700" fontSize="12">No available stocks</Text>
+                                 <Text fontWeight="700" color="text.50" fontSize="14" textAlign="center" padding="10px" bg="blueGray.600" width="100%" rounded="5">No available stocks</Text>
                             )
                         )
 
