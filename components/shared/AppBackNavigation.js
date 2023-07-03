@@ -6,28 +6,41 @@ import { useRouter } from 'expo-router';
 const AppBackNavigation = (props) => {
     const router = useRouter();
 
-    const goBack = () => {
-        router.push({pathname:props.path, params: props.params});
+    const navigationHandler = () => {
+        if(props.goback) {
+            router.back();
+        } else if(props.route){
+            router.push(props.route);
+        } else {
+            router.push({pathname: props.path, params: props.params});
+        }
     }
 
     return (
         <>
             <Box safeAreaTop bg="primary.500"/>
-            <HStack bg="primary.500" px="1" pt="0" pb="1" alignItems="center">
-                <HStack alignItems="center">
+            <HStack bg="primary.500" px="1" pt="0" pb="1" alignItems="center" justifyContent="space-between">
+                <HStack alignItems="center" style={{flexBasis: "10%"}}>
                     <IconButton icon={<Icon as={MaterialIcons} name='arrow-back-ios' size='5'/>} _icon={{color: "white"}}
-                                onPress={() => goBack()}/>
-
+                                onPress={navigationHandler}/>
+                    <Text color="white" fontSize="16" fontWeight="bold" onPress={navigationHandler}>
+                        {props.backButtonLabel}
+                    </Text>
                 </HStack>
-                <Text color="white" fontSize="16" fontWeight="bold" onPress={() => goBack()}>
-                    {props.title}
+                <Text color="white" fontSize="16" fontWeight="bold" style={{flexBasis:"50%"}} textAlign="center">
+                    CO 00000001234
                 </Text>
+                <HStack style={{flexBasis: "10%"}}>
+                    {/* additional icon buttons here  */}
+                </HStack>
+
             </HStack>
         </>
     )
 }
 AppBackNavigation.defaultProps = {
-    title: 'Back'
+    backButtonLabel: 'Back',
+    title: ""
 }
 
 export default AppBackNavigation;
