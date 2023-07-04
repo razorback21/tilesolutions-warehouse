@@ -41,6 +41,26 @@ export default (props) => {
         queryFn: async () => await fetchConversionListQuery(Number(params.prid))
     })
 
+    const fetchPickFormConversionList = (sale_item_id, purchase_received_id) => {
+        return tsQuery(`
+            PickFormConversionList($SalesItemID: Int!, $PurchaseReceivedID: Int!) {
+                PickFormConversionList(SalesItemID: $SalesItemID, PurchaseReceivedID: $PurchaseReceivedID) {
+                    UoM
+                    Ordered
+                    PalletPick
+                }
+            }
+        `, {
+            SalesItemID: sale_item_id,
+            PurchaseReceivedID: purchase_received_id
+        }).then(res => res.data.data.PickFormConversionList);
+    }
+
+    const pickFormConversionListQuery = useQuery({
+        queryKey: ["pick-form-conversion-list", Number(params.siid), Number(params.prid)],
+        queryFn: async () => await fetchPickFormConversionList(Number(params.siid), Number(params.prid))
+    })
+
     const ActualPick = (props) => {
         return (
             <Box px="2" pt="2" pb="3" bg="text.50" mb="2" rounded="4" shadow="2">
@@ -89,8 +109,8 @@ export default (props) => {
                     </Box>
 
                     {
-                        conversionListQuery.isSuccess && conversionListQuery.data.map(res => {
-                            return <ActualPick key={res.Symbol} uom={res.Symbol} ordered="0" palletPick="0"/>
+                        pickFormConversionListQuery.isSuccess && pickFormConversionListQuery.data.map(res => {
+                            return <ActualPick key={res.UoM} uom={res.UoM} ordered={res.Ordered} palletPick={res.PalletPick}/>
                         })
                     }
                     <Button mt="3">Save Pick</Button>
