@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import {Box, Text, Heading, ScrollView, HStack, Center, Flex, Input, Button} from "native-base";
+import {Box, Text, Heading, ScrollView, Center, Flex, Input, Button} from "native-base";
 import AppStyles  from "../../AppStyles";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
 import PickedItemBoxes from "../../components/shared/PickedItemBoxes";
