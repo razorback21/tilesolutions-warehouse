@@ -78,7 +78,7 @@ export default (props) => {
                     </Flex>
                 </Flex>
 
-                <Input size="sm" placeholder="Actual Pick" style={{textAlign:"center"}}/>
+                <Input size="xl" placeholder="Actual Pick" style={{textAlign:"center"}} />
             </Box>
         )
     }
@@ -113,7 +113,7 @@ export default (props) => {
                             return <ActualPick key={res.UoM} uom={res.UoM} ordered={res.Ordered} palletPick={res.PalletPick}/>
                         })
                     }
-                    <Button mt="3">Save Pick</Button>
+                    <Button mt="3" disabled={pickFormConversionListQuery.isLoading || pickFormConversionListQuery.isError}>Save Pick</Button>
                 </Box>
             </ScrollView>
         </>
