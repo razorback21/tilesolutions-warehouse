@@ -71,13 +71,16 @@ export default (props) => {
     }
 
     const ActualPick = (props) => {
-        const [pickData, setPickData ]= React.useState(null);
 
         const pickDataHandler = (text) => {
             if(text.length) {
-                const data = `${props.subLocation}|${props.pallet}||${text}|${props.uom}`;
+                const data = {
+                    SubLocation: props.subLocation,
+                    Pallet: props.pallet,
+                    Qty: text,
+                    UoM: props.uom
+                }
                 const dataKey = `${props.uom}`;
-                setPickData(data);
                 setSavePickPayload((prevState) => {
                     const copy = [];
                     prevState.forEach((val, i) => {
@@ -90,6 +93,7 @@ export default (props) => {
                 })
             }
         }
+
         return (
             <Box px="2" pt="2" pb="3" bg="text.50" mb="2" rounded="4" shadow="2">
                 <Center>
