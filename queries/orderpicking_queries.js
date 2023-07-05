@@ -3,7 +3,7 @@ import useApi from "../hooks/useApi";
 
 const {tsQuery} = useApi();
 
-export const fetchPickItemData =  (sales_item_id) => {
+export const fetchPickItemData = (sales_item_id) => {
     return tsQuery(`
             PickItemData($SalesItemID: Int!) {
               PickItemData(SalesItemID: $SalesItemID) {
