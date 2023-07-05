@@ -31,7 +31,6 @@ export default (props) => {
             {
                 CONumber: co_number
             }).then(res => {
-                console.log(res.data)
                 return res.data.data.VerifyOrderForPicking;
             })
     }
@@ -49,7 +48,7 @@ export default (props) => {
                 } else {
                     onOpen();
                     setModalTitle('Error');
-                    setModalMessage('OC number is not valid. Try again.')
+                    setModalMessage('CO number is not valid. Try again.')
                 }
             });
         }
