@@ -15,8 +15,12 @@ export default (props) => {
     const params = useLocalSearchParams();
     const {tsQuery} = useApi();
 
-    const orderItems = async (co_number)=> {
-        return await tsQuery(
+    const gotoStepThree = (sales_item_id, co_number) => {
+        router.push({pathname: "/orderpicking/step_three", params: {siid: sales_item_id, co: co_number}})
+    }
+
+    const fetchOrderItems = (co_number)=> {
+        return tsQuery(
             `
                 PickingOrderedItems($CONumber: String!) {
                     PickingOrderedItems(CONumber: $CONumber) {
@@ -38,12 +42,18 @@ export default (props) => {
                 CONumber: co_number
             }
         ).then(res => {
+            console.warn('ORDER ITEMS', res.data);
             return res.data.data.PickingOrderedItems
         })
     }
 
-    const gotoStepThree = (sales_item_id, co_number) => {
-        router.push({pathname: "/orderpicking/step_three", params: {siid: sales_item_id, co: co_number}})
+    const orderItemsQuery = useQuery({
+        queryKey: ["ordered-items", params.co],
+        queryFn: async () => await fetchOrderItems(params.co)
+    })
+
+    if(orderItemsQuery.status === 'loading') {
+        return <FullScreenLoader size="lg"/>
     }
 
     const ItemContent = ({data}) => {
@@ -60,15 +70,6 @@ export default (props) => {
                 </Box>
             </>
         );
-    }
-
-    const orderItemsQuery = useQuery({
-        queryKey: ["ordered-items", params.co],
-        queryFn: () => orderItems(params.co)
-    })
-
-    if(orderItemsQuery.status === 'loading') {
-        return <FullScreenLoader size="lg"/>
     }
 
     return (
