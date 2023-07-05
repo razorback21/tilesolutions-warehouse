@@ -25,7 +25,6 @@ export default (props) => {
             prid: item.PurchaseReceivedID,
             pallet: item.FormattedPalletID,
             co: params.co,
-            availablePickableItems: item.Available
         }})
     }
 
