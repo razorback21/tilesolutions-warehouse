@@ -42,7 +42,6 @@ export default (props) => {
                 CONumber: co_number
             }
         ).then(res => {
-            console.warn('ORDER ITEMS', res.data);
             return res.data.data.PickingOrderedItems
         })
     }
