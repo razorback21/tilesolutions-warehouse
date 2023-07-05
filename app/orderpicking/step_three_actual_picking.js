@@ -105,7 +105,7 @@ export default (props) => {
                      </Box>
 
                     <Box justifyContent="center" alignItems="center" mb="3">
-                        <Text fontWeight="700" fontSize="12" color="text.700">Maximum pick for this location <Text color="tertiary.700">{params.availablePickableItems} {pickItemDataQuery.data.UoM}</Text></Text>
+                        <Text fontWeight="700" fontSize="12" color="text.700">Maximum pick for this location <Text color="tertiary.700">{pickItemDataQuery.data.RemainingToBePick} {pickItemDataQuery.data.UoM}</Text></Text>
                     </Box>
 
                     {
