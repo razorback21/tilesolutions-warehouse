@@ -87,8 +87,8 @@ export default (props) => {
 
     }
 
-    const fetchSalesItemWarehousePalletInfo = async (sales_item_id) => {
-        return await tsQuery(`
+    const fetchSalesItemWarehousePalletInfo = (sales_item_id) => {
+        return tsQuery(`
             SalesItemWarehousePalletInfo($SalesItemID: Int!) {
                 SalesItemWarehousePalletInfo(SalesItemID: $SalesItemID) {
                     SubLocation
@@ -103,17 +103,16 @@ export default (props) => {
                 }
             }
         `,
-
-            {
-                "SalesItemID": sales_item_id
-            }).then(res => {
+{
+           "SalesItemID": sales_item_id
+        }).then(res => {
             return res.data.data.SalesItemWarehousePalletInfo
         })
     }
 
     const itemPalletsInfoQuery = useQuery({
         queryKey: ["item-pallets-info", params.siid],
-        queryFn: async () => fetchSalesItemWarehousePalletInfo(Number(params.siid))
+        queryFn: async () => await fetchSalesItemWarehousePalletInfo(Number(params.siid))
     })
 
     if(itemPalletsInfoQuery.status === 'loading') {
