@@ -14,6 +14,11 @@ export default (props) => {
     const router = useRouter();
     const params = useLocalSearchParams();
     const {tsQuery} = useApi();
+    const [savePickPayload, setSavePickPayload] = React.useState([])
+
+    React.useEffect(() => {
+        console.log(savePickPayload);
+    }, [savePickPayload])
 
     const pickItemDataQuery = useQuery({
         queryKey: ["pick-item-data", params.siid],
@@ -61,7 +66,30 @@ export default (props) => {
         queryFn: async () => await fetchPickFormConversionList(Number(params.siid), Number(params.prid))
     })
 
+    const savePick = () => {
+
+    }
+
     const ActualPick = (props) => {
+        const [pickData, setPickData ]= React.useState(null);
+
+        const pickDataHandler = (text) => {
+            if(text.length) {
+                const data = `${props.subLocation}|${props.pallet}||${text}|${props.uom}`;
+                const dataKey = `${props.uom}`;
+                setPickData(data);
+                setSavePickPayload((prevState) => {
+                    const copy = [];
+                    prevState.forEach((val, i) => {
+                        if(!prevState[i][dataKey]) {
+                            copy.push(val)
+                        }
+                    })
+                    return [...copy, {[dataKey]: data}];
+
+                })
+            }
+        }
         return (
             <Box px="2" pt="2" pb="3" bg="text.50" mb="2" rounded="4" shadow="2">
                 <Center>
@@ -78,7 +106,7 @@ export default (props) => {
                     </Flex>
                 </Flex>
 
-                <Input size="xl" placeholder="Actual Pick" style={{textAlign:"center"}} />
+                <Input size="xl" placeholder="Actual Pick" style={{textAlign:"center"}} onChangeText={pickDataHandler}/>
             </Box>
         )
     }
@@ -105,15 +133,23 @@ export default (props) => {
                      </Box>
 
                     <Box justifyContent="center" alignItems="center" mb="3">
-                        <Text fontWeight="700" fontSize="12" color="text.700">Maximum pick for this location <Text color="tertiary.700">{pickItemDataQuery.data.RemainingToBePick} {pickItemDataQuery.data.UoM}</Text></Text>
+                        <Text fontWeight="700" fontSize="12" color="text.700">Maximum pick for this location <Text color="tertiary.700">{params.maxAllowedPick} {pickItemDataQuery.data.UoM}</Text></Text>
                     </Box>
 
                     {
                         pickFormConversionListQuery.isSuccess && pickFormConversionListQuery.data.map(res => {
-                            return <ActualPick key={res.UoM} uom={res.UoM} ordered={res.Ordered} palletPick={res.PalletPick}/>
+                            return <ActualPick
+                                key={res.UoM}
+                                uom={res.UoM}
+                                ordered={res.Ordered}
+                                palletPick={res.PalletPick}
+                                setSavePickPayload={setSavePickPayload}
+                                subLocation={params.subLocation}
+                                pallet={params.pallet}
+                            />
                         })
                     }
-                    <Button mt="3" disabled={pickFormConversionListQuery.isLoading || pickFormConversionListQuery.isError}>Save Pick</Button>
+                    <Button mt="3" disabled={pickFormConversionListQuery.isLoading || pickFormConversionListQuery.isError} onPress={savePick}>Save Pick</Button>
                 </Box>
             </ScrollView>
         </>
