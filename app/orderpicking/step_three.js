@@ -25,6 +25,7 @@ export default (props) => {
             prid: item.PurchaseReceivedID,
             pallet: item.FormattedPalletID,
             co: params.co,
+            maxAllowedPick: item.MaxAllowedPick,
         }})
     }
 
@@ -49,6 +50,7 @@ export default (props) => {
                     <HStack space="7">
                         <Text fontWeight="400" fontSize="12" color="text.600">Quantity : {data.Qty}</Text>
                         <Text fontWeight="400" fontSize="12" color="text.600">Available: {data.Available}</Text>
+                        <Text fontWeight="400" fontSize="12" color="text.600">Max. Pick: {data.MaxAllowedPick} {pickItemDataQuery.data.UoM}</Text>
                     </HStack>
                 </Box>
             </>
@@ -99,6 +101,7 @@ export default (props) => {
                     Reserved
                     SaleItemID
                     PurchaseReceivedID
+                    MaxAllowedPick
                 }
             }
         `,
@@ -124,7 +127,7 @@ export default (props) => {
             <ActionSheet />
             <Box style={styles.topContainerNoFlex}>
                 <Text color="text.500" fontSize="12">STEP 3</Text>
-                <Heading size="md" color="tertiary.700" >Pick from Pallet</Heading>
+                <Heading size="md" color="tertiary.700" >Select Pallet</Heading>
                 {pickItemDataQuery.isSuccess && <PickedItemBoxes data={pickItemDataQuery.data}/>}
                 <Center mt="4">
                     {
