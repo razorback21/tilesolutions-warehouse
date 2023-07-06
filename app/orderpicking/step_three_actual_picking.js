@@ -24,6 +24,8 @@ export default (props) => {
 
 
     React.useEffect(() => {
+        const savedPickQty = pickItemDataQuery.data.Ordered - pickItemDataQuery.data.RemainingToBePick;
+        console.log('Saved Pick Qty : ', pickItemDataQuery.data.Ordered - pickItemDataQuery.data.RemainingToBePick)
         console.log('savePickPayload : ', savePickPayload);
     }, [savePickPayload]);
 
@@ -79,11 +81,13 @@ export default (props) => {
             const dataKey = `${props.uom}`;
 
             if(text.length) {
+                const conversion = conversionListQuery.data.find(({Symbol}) => Symbol == props.uom);
                 const data = {
                     SubLocation: props.subLocation,
                     Pallet: props.pallet,
                     Qty: text,
-                    UoM: props.uom
+                    UoM: props.uom,
+                    QtyInOrderedUoM: (parseInt(conversion.Qty) * parseInt(text))
                 }
 
                 setSavePickPayload((prevState) => {
