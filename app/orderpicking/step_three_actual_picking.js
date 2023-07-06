@@ -16,10 +16,6 @@ export default (props) => {
     const {tsQuery} = useApi();
     const [savePickPayload, setSavePickPayload] = React.useState([])
 
-    React.useEffect(() => {
-        console.log(savePickPayload);
-    }, [savePickPayload])
-
     const pickItemDataQuery = useQuery({
         queryKey: ["pick-item-data", params.siid],
         queryFn: async() => await fetchPickItemData(Number(params.siid))
@@ -58,7 +54,9 @@ export default (props) => {
         `, {
             SalesItemID: sale_item_id,
             PurchaseReceivedID: purchase_received_id
-        }).then(res => res.data.data.PickFormConversionList);
+        }).then(res => {
+            return res.data.data.PickFormConversionList
+        });
     }
 
     const pickFormConversionListQuery = useQuery({
@@ -67,20 +65,20 @@ export default (props) => {
     })
 
     const savePick = () => {
-
+        console.log('savePickPayload', savePickPayload);
     }
 
     const ActualPick = (props) => {
-
         const pickDataHandler = (text) => {
             if(text.length) {
+                const dataKey = `${props.uom}`;
                 const data = {
                     SubLocation: props.subLocation,
                     Pallet: props.pallet,
                     Qty: text,
                     UoM: props.uom
                 }
-                const dataKey = `${props.uom}`;
+
                 setSavePickPayload((prevState) => {
                     const copy = [];
                     prevState.forEach((val, i) => {
@@ -88,8 +86,7 @@ export default (props) => {
                             copy.push(val)
                         }
                     })
-                    return [...copy, {[dataKey]: data}];
-
+                    return [...copy, {[dataKey]: data}]; r
                 })
             }
         }
@@ -114,6 +111,11 @@ export default (props) => {
             </Box>
         )
     }
+
+    const ActualPickMemoized = React.useCallback((props) => {
+        return ActualPick(props);
+    },[]);
+
 
     return (
         <>
@@ -142,12 +144,11 @@ export default (props) => {
 
                     {
                         pickFormConversionListQuery.isSuccess && pickFormConversionListQuery.data.map(res => {
-                            return <ActualPick
+                            return <ActualPickMemoized
                                 key={res.UoM}
                                 uom={res.UoM}
                                 ordered={res.Ordered}
                                 palletPick={res.PalletPick}
-                                setSavePickPayload={setSavePickPayload}
                                 subLocation={params.subLocation}
                                 pallet={params.pallet}
                             />
