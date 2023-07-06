@@ -38,7 +38,7 @@ export default (props) => {
         refetchInterval: 1000 * 60 * 2
     });
 
-    const gotoPickingStepOne= async (co_number) => {
+    const gotoPickingStepTwo= async (co_number) => {
         await queryClient.invalidateQueries({queryKey:["ordered-items", co_number]});
         router.push({pathname:'/orderpicking/step_two', params: {co: co_number}});
     }
@@ -88,7 +88,7 @@ export default (props) => {
                     {
                         unpickedOrders.data.length > 0 && unpickedOrders.data.map((item) => {
                             return <ListItemBox key={item.SaleID} content={<ItemContent data={item}/>}
-                                                onPress={() => gotoPickingStepOne(item.CONumber)}/>
+                                                onPress={() => gotoPickingStepTwo(item.CONumber)}/>
                         })
                     }
                 </ScrollView>
