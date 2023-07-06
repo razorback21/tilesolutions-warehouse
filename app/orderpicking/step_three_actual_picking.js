@@ -26,17 +26,18 @@ export default (props) => {
     React.useEffect(() => {
         // picking live validation
         const savedPickQty = Number(pickItemDataQuery.data.Ordered - pickItemDataQuery.data.RemainingToBePick);
+
         let currentPickData = 0;
         savePickPayload.forEach((v, i) => {
-            //console.log('currentPickData',v,i, v[i]);
+            currentPickData += v.QtyInOrderedUoM;
         })
-        //console.log('currentPickData',currentPickData);
+
         if((currentPickData + savedPickQty) > pickItemDataQuery.data.Ordered) {
             Toast.show({
-                description: `Overpicking (${currentPickData + savedPickQty}). Please check your input.`
+                description: `Overpicking. Your have picked ${currentPickData + savedPickQty} ${pickItemDataQuery.data.UoM}. Please check your input.`
             });
         }
-        console.log('savePickPayload',savePickPayload);
+        console.log('savePickPayload', savePickPayload);
     }, [savePickPayload]);
 
     const fetchConversionListQuery = (purchase_received_id) => {
