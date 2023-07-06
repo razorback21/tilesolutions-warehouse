@@ -134,14 +134,15 @@ export default (props) => {
         if(savePickMutation.isSuccess && savePickMutation.data.Status) {
             onClose();
             Toast.show({
-                title: "Data saved.",
+                title: "Data saved. Redirecting to order picking step two",
                 status: "success",
                 placement: "top"
             })
 
-            // Invalidate queries and redirect to step 2
+            //todo: redirect to step 2
             pickItemDataQuery.invalidateQueries({queryKey: ["pick-item-data"]})
-            pickFormConversionListQuery.invalidateQueries({queryKey:["pick-form-conversion-list"]})
+            pickFormConversionListQuery.invalidateQueries({queryKey:["pick-form-conversion-list"]});
+            router.replace({pathname:'/orderpicking/step_two', params: {co: params.co}});
         }
 
         if(savePickMutation.isSuccess && !savePickMutation.data.Status) {
