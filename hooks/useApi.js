@@ -44,9 +44,11 @@ const useApi =  () => {
         try {
             const token = await SecureStore.getItemAsync('api-token');
             api.defaults.headers.common['Authorization'] = "Bearer " + token;
-            console.log('tsMutation : ', apiEndpoint)
+            console.log('tsMutation : ', apiEndpoint);
+            console.log('mutation : ', mutation);
+            console.log('variables : ', variables);
             return api.post(apiEndpoint,{
-                mutation: `mutation ${mutation}`,
+                query: `mutation ${mutation}`,
                 variables
             });
         } catch (e) {
