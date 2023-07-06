@@ -154,7 +154,7 @@ export default (props) => {
             })
         }
 
-    }, [savePickMutation.isFetched]);
+    }, [savePickMutation.isLoading]); // it does work is loading. investigate why it's not working with isFetched
 
     const ActualPick = (props) => {
         const pickDataHandler = (text) => {
