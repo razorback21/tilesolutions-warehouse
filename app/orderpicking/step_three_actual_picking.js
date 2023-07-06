@@ -1,27 +1,27 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import {Box, Text, Heading, ScrollView, Center, Flex, Input, Button, Toast} from "native-base";
+import {Box, Text, Heading, ScrollView, Center, Flex, Input, Button, Toast, useDisclose} from "native-base";
 import AppStyles  from "../../AppStyles";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
 import PickedItemBoxes from "../../components/shared/PickedItemBoxes";
 import {useRouter, useLocalSearchParams} from "expo-router";
-import {useQuery} from "@tanstack/react-query";
+import {useMutation, useQuery} from "@tanstack/react-query";
 import useApi from "../../hooks/useApi";
 import {fetchPickItemData} from "../../queries/orderpicking_queries";
+import SpinnerModal from "../../components/shared/SpinnerLoader";
 
 
 export default (props) => {
     const router = useRouter();
     const params = useLocalSearchParams();
-    const {tsQuery} = useApi();
+    const {tsQuery, tsMutation} = useApi();
     const [savePickPayload, setSavePickPayload] = React.useState([])
-    //const [savePickQty, setSavePickQty] = React.useState(0);
+    const { onOpen, isOpen, onClose} = useDisclose(false)
 
     const pickItemDataQuery = useQuery({
         queryKey: ["pick-item-data", params.siid],
         queryFn: async() => await fetchPickItemData(Number(params.siid))
     })
-
 
     React.useEffect(() => {
         // picking live validation
@@ -42,7 +42,6 @@ export default (props) => {
     }, [savePickPayload]);
 
     const fetchConversionListQuery = (purchase_received_id) => {
-        console.log('PRID', purchase_received_id)
         return tsQuery(`
             PurchaseReceivedConversionList($PurchaseReceivedID: Int!) {
                 PurchaseReceivedConversionList(PurchaseReceivedID: $PurchaseReceivedID) {
@@ -84,15 +83,83 @@ export default (props) => {
         queryFn: async () => await fetchPickFormConversionList(Number(params.siid), Number(params.prid))
     })
 
-    const savePick = () => {
-        console.log('savePickPayload', savePickPayload);
+    const savePickMutationFn = (sales_item_id, pick_data) => {
+        return tsMutation(`
+            SavePickedItems($SalesItemID: Int!, $PickData: String!) {
+                SavePickedItems(SalesItemID: $SalesItemID, PickData: $PickData){
+                    Status
+                    Message
+                }
+            }
+        `,{
+            SalesItemID: sales_item_id,
+            PickData: pick_data
+        }).then(res => {
+            console.log('SavePickedItems result : ',res.data);
+            return res.data.data.SavePickedItems;
+        });
     }
+
+    const savePickMutation = useMutation({
+        mutationFn: async (params) => {
+            return await savePickMutationFn(Number(params.SalesItemID), params.PickData);
+        }
+    })
+
+    const savePick = () => {
+        //console.log('savePickPayload', savePickPayload);
+        if(!savePickPayload.length) {
+            Toast.show({
+                placement: "top",
+                status: "error",
+                title: "Pick data is empty."
+            })
+        } else {
+            savePickMutation.mutate({SalesItemID: Number(params.siid), PickData: JSON.stringify(savePickPayload)});
+        }
+    }
+
+    React.useEffect(() => {
+        if(savePickMutation.isLoading) {
+            onOpen();
+        }
+
+        if(savePickMutation.isError) {
+            onClose();
+            Toast.show({
+                title: "Error saving data.Please try again."
+            })
+        }
+
+        if(savePickMutation.isSuccess && savePickMutation.data.Status) {
+            onClose();
+            Toast.show({
+                title: "Data saved.",
+                status: "success",
+                placement: "top"
+            })
+
+            // Invalidate queries and redirect to step 2
+            pickItemDataQuery.invalidateQueries({queryKey: ["pick-item-data"]})
+            pickFormConversionListQuery.invalidateQueries({queryKey:["pick-form-conversion-list"]})
+        }
+
+        if(savePickMutation.isSuccess && !savePickMutation.data.Status) {
+            onClose();
+            Toast.show({
+                status: "error",
+                description: savePickMutation.data.Message,
+                placement: "top"
+            })
+        }
+
+    }, [savePickMutation.isFetched]);
 
     const ActualPick = (props) => {
         const pickDataHandler = (text) => {
             const dataKey = `${props.uom}`;
 
-            if(text.length && conversionListQuery.isSuccess) {
+            if(text.length && conversionListQuery.isFetched) {
                 const conversion = conversionListQuery.data.find(({Symbol}) => Symbol == props.uom);
                 const data = {
                     SubLocation: props.subLocation,
@@ -153,6 +220,7 @@ export default (props) => {
     return (
         <>
             <AppBackNavigation goback={true} title={`CO_${params.co}`}/>
+            <SpinnerModal text="Saving Data..." size="lg" isOpen={isOpen}/>
             <ScrollView>
                 <Box style={styles.topContainer}>
                     <Text color="tertiary.500" fontSize="12">STEP 3</Text>
@@ -187,7 +255,7 @@ export default (props) => {
                             />
                         })
                     }
-                    <Button mt="3" disabled={pickFormConversionListQuery.isLoading || pickFormConversionListQuery.isError} onPress={savePick}>Save Pick</Button>
+                    <Button mt="3" disabled={pickFormConversionListQuery.isLoading || pickFormConversionListQuery.isError || savePickMutation.isLoading} onPress={savePick}>Save Pick</Button>
                 </Box>
             </ScrollView>
         </>
