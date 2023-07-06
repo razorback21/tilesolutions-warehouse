@@ -33,6 +33,7 @@ export default (props) => {
         })
 
         if((currentPickData + savedPickQty) > pickItemDataQuery.data.Ordered) {
+            Toast.closeAll();
             Toast.show({
                 description: `Overpicking. Your have picked ${currentPickData + savedPickQty} ${pickItemDataQuery.data.UoM}. Please check your input.`
             });
