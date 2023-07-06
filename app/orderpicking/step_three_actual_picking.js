@@ -15,11 +15,17 @@ export default (props) => {
     const params = useLocalSearchParams();
     const {tsQuery} = useApi();
     const [savePickPayload, setSavePickPayload] = React.useState([])
+    //const [savePickQty, setSavePickQty] = React.useState(0);
 
     const pickItemDataQuery = useQuery({
         queryKey: ["pick-item-data", params.siid],
         queryFn: async() => await fetchPickItemData(Number(params.siid))
     })
+
+
+    React.useEffect(() => {
+        console.log('savePickPayload : ', savePickPayload);
+    }, [savePickPayload]);
 
     const fetchConversionListQuery = (purchase_received_id) => {
         console.log('PRID', purchase_received_id)
@@ -70,8 +76,9 @@ export default (props) => {
 
     const ActualPick = (props) => {
         const pickDataHandler = (text) => {
+            const dataKey = `${props.uom}`;
+
             if(text.length) {
-                const dataKey = `${props.uom}`;
                 const data = {
                     SubLocation: props.subLocation,
                     Pallet: props.pallet,
@@ -86,7 +93,18 @@ export default (props) => {
                             copy.push(val)
                         }
                     })
-                    return [...copy, {[dataKey]: data}]; r
+                    return [...copy, {[dataKey]: data}];
+                })
+            } else {
+                // Remove payload from state
+                setSavePickPayload((prevState) => {
+                    const copy = [];
+                    prevState.forEach((val, i) => {
+                        if(!prevState[i][dataKey]) {
+                            copy.push(val)
+                        }
+                    })
+                    return [...copy];
                 })
             }
         }
