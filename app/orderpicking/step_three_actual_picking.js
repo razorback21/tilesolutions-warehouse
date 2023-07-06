@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import {Box, Text, Heading, ScrollView, Center, Flex, Input, Button} from "native-base";
+import {Box, Text, Heading, ScrollView, Center, Flex, Input, Button, Toast} from "native-base";
 import AppStyles  from "../../AppStyles";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
 import PickedItemBoxes from "../../components/shared/PickedItemBoxes";
@@ -24,9 +24,19 @@ export default (props) => {
 
 
     React.useEffect(() => {
-        const savedPickQty = pickItemDataQuery.data.Ordered - pickItemDataQuery.data.RemainingToBePick;
-        console.log('Saved Pick Qty : ', pickItemDataQuery.data.Ordered - pickItemDataQuery.data.RemainingToBePick)
-        console.log('savePickPayload : ', savePickPayload);
+        // picking live validation
+        const savedPickQty = Number(pickItemDataQuery.data.Ordered - pickItemDataQuery.data.RemainingToBePick);
+        let currentPickData = 0;
+        savePickPayload.forEach((v, i) => {
+            //console.log('currentPickData',v,i, v[i]);
+        })
+        //console.log('currentPickData',currentPickData);
+        if((currentPickData + savedPickQty) > pickItemDataQuery.data.Ordered) {
+            Toast.show({
+                description: `Overpicking (${currentPickData + savedPickQty}). Please check your input.`
+            });
+        }
+        console.log('savePickPayload',savePickPayload);
     }, [savePickPayload]);
 
     const fetchConversionListQuery = (purchase_received_id) => {
@@ -80,31 +90,30 @@ export default (props) => {
         const pickDataHandler = (text) => {
             const dataKey = `${props.uom}`;
 
-            if(text.length) {
+            if(text.length && conversionListQuery.isSuccess) {
                 const conversion = conversionListQuery.data.find(({Symbol}) => Symbol == props.uom);
                 const data = {
                     SubLocation: props.subLocation,
                     Pallet: props.pallet,
                     Qty: text,
                     UoM: props.uom,
-                    QtyInOrderedUoM: (parseInt(conversion.Qty) * parseInt(text))
+                    QtyInOrderedUoM: (conversion.Qty * parseInt(text))
                 }
 
                 setSavePickPayload((prevState) => {
                     const copy = [];
-                    prevState.forEach((val, i) => {
-                        if(!prevState[i][dataKey]) {
+                    prevState.forEach((val) => {
+                        if(val.UoM != dataKey) {
                             copy.push(val)
                         }
                     })
-                    return [...copy, {[dataKey]: data}];
+                    return [...copy, data];
                 })
             } else {
-                // Remove payload from state
                 setSavePickPayload((prevState) => {
                     const copy = [];
                     prevState.forEach((val, i) => {
-                        if(!prevState[i][dataKey]) {
+                        if(val.UoM != dataKey) {
                             copy.push(val)
                         }
                     })
