@@ -11,7 +11,7 @@ import ModalMessage from "../../components/shared/ModalMessage";
 import {useQueryClient} from "@tanstack/react-query";
 
 export default (props) => {
-    const [CONumber, setCONumber] = React.useState(null);
+    const [CONumber, setCONumber] = React.useState('0000203539');
     const [modalTitle, setModalTitle ] = React.useState('Message');
     const [modalMessage, setModalMessage ] = React.useState('');
     const router = useRouter();
@@ -78,7 +78,7 @@ export default (props) => {
                    <Heading size="md" mb="3" color="tertiary.700">Order Picking</Heading>
                 </VStack>
                 <Box>
-                    <Input placeholder="CO #." onChangeText={(text) => setCONumber(text)} size="xl" fontSize="25px" textAlign="center"/>
+                    <Input placeholder="CO #." onChangeText={(text) => setCONumber(text)} defaultValue={CONumber} size="xl" fontSize="25px" textAlign="center"/>
                     <Button size="md" mt="2" onPress={viewOrderForPicking}>Submit</Button>
                 </Box>
                 <Center>
