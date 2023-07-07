@@ -154,16 +154,18 @@ export default (props) => {
                 {pickItemDataQuery.isSuccess && <PickedItemBoxes data={pickItemDataQuery.data}/>}
                 <Center mt="4">
                     {
-                        itemPalletsInfoQuery.isSuccess && (
+                        (pickItemDataQuery.data.RemainingToBePick && itemPalletsInfoQuery.isSuccess) ? (
                             itemPalletsInfoQuery.data.length ? (
                                 <Text fontWeight="700" color="text.700" fontSize="12">Available at below Sub-locations</Text>
                             ) : (
                                  <Text fontWeight="700" color="text.50" fontSize="14" textAlign="center" padding="10px" bg="blueGray.600" width="100%" rounded="5">No available stocks</Text>
                             )
-                        )
-
+                        ) : null
                     }
 
+                    {
+                        !pickItemDataQuery.data.RemainingToBePick && <Text fontWeight="700" color="text.700" fontSize="12">Picking for this sales item has been completed.</Text>
+                    }
                 </Center>
             </Box>
 
