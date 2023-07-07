@@ -1,6 +1,19 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import { Box, Text, Heading, ScrollView, HStack, Center, Fab, Icon, useDisclose, Actionsheet } from "native-base";
+import {
+    Box,
+    Text,
+    Heading,
+    ScrollView,
+    HStack,
+    Center,
+    Fab,
+    Icon,
+    useDisclose,
+    Actionsheet,
+    Toast,
+    useToast
+} from "native-base";
 import ListItemBox from "../../components/shared/ListItemBox";
 import AppStyles  from "../../AppStyles";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -17,8 +30,18 @@ export default (props) => {
     const router = useRouter();
     const params = useLocalSearchParams();
     const {tsQuery} = useApi();
+    const toast = useToast();
 
     const gotoActualPicking = (item) => {
+        console.log("REAMING TO BE PICK : ", pickItemDataQuery.data.RemainingToBePick)
+        if(!pickItemDataQuery.data.RemainingToBePick) {
+            toast.show({
+                title: "Picking is already completed.",
+                placement: "top",
+                status: "info"
+            })
+        }
+
         router.push({pathname: "/orderpicking/step_three_actual_picking", params: {
             siid: item.SaleItemID,
             subLocation: item.SubLocation,
