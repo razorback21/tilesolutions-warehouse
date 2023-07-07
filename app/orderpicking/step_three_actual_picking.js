@@ -16,7 +16,7 @@ export default (props) => {
     const params = useLocalSearchParams();
     const {tsQuery, tsMutation} = useApi();
     const [savePickPayload, setSavePickPayload] = React.useState([])
-    const { onOpen, isOpen, onClose} = useDisclose(false)
+    const { onOpen, isOpen, onClose} = useDisclose(false);
 
     const pickItemDataQuery = useQuery({
         queryKey: ["pick-item-data", params.siid],
@@ -35,7 +35,7 @@ export default (props) => {
         if((currentPickData + savedPickQty) > pickItemDataQuery.data.Ordered) {
             Toast.closeAll();
             Toast.show({
-                description: `Overpicking. Your have picked ${currentPickData + savedPickQty} ${pickItemDataQuery.data.UoM}. Please check your input.`
+                description: `Overpicking (${currentPickData + savedPickQty} ${pickItemDataQuery.data.UoM}). Please check your input.`
             });
         }
         console.log('savePickPayload', savePickPayload);
@@ -107,7 +107,7 @@ export default (props) => {
     })
 
     const savePick = () => {
-        //console.log('savePickPayload', savePickPayload);
+        console.log('savePickPayload', savePickPayload);
         if(!savePickPayload.length) {
             Toast.show({
                 placement: "top",
@@ -140,8 +140,9 @@ export default (props) => {
             })
 
             //todo: redirect to step 2
-            pickItemDataQuery.invalidateQueries({queryKey: ["pick-item-data"]})
-            pickFormConversionListQuery.invalidateQueries({queryKey:["pick-form-conversion-list"]});
+            //pickItemDataQuery.invalidateQueries({queryKey:["pick-item-data"]})
+            //pickFormConversionListQuery.invalidateQueries({queryKey:["pick-form-conversion-list"]});
+            console.log('PARAMS CO : ', params.co);
             router.replace({pathname:'/orderpicking/step_two', params: {co: params.co}});
         }
 
@@ -160,14 +161,15 @@ export default (props) => {
         const pickDataHandler = (text) => {
             const dataKey = `${props.uom}`;
 
-            if(text.length && conversionListQuery.isFetched) {
-                const conversion = conversionListQuery.data.find(({Symbol}) => Symbol == props.uom);
+            if(text.length) {
+                console.log('CONVERISON LIST FIND : ', conversionListQuery.data);
+                const conversion = conversionListQuery.data?.find(({Symbol}) => Symbol == props.uom);
                 const data = {
                     SubLocation: props.subLocation,
                     Pallet: props.pallet,
                     Qty: text,
                     UoM: props.uom,
-                    QtyInOrderedUoM: (conversion.Qty * parseInt(text))
+                    QtyInOrderedUoM: (conversion?.Qty * parseInt(text))
                 }
 
                 setSavePickPayload((prevState) => {
