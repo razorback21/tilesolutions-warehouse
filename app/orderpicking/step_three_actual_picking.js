@@ -41,7 +41,7 @@ export default (props) => {
         console.log('savePickPayload', savePickPayload);
     }, [savePickPayload]);
 
-    const fetchConversionListQuery = (purchase_received_id) => {
+    const fetchConversionListQuery = async (purchase_received_id) => {
         return tsQuery(`
             PurchaseReceivedConversionList($PurchaseReceivedID: Int!) {
                 PurchaseReceivedConversionList(PurchaseReceivedID: $PurchaseReceivedID) {
@@ -58,7 +58,7 @@ export default (props) => {
 
     const conversionListQuery = useQuery({
         queryKey: ["conversion-list", params.prid],
-        queryFn: async () => await fetchConversionListQuery(Number(params.prid))
+        queryFn: async () => fetchConversionListQuery(Number(params.prid))
     })
 
     const fetchPickFormConversionList = (sale_item_id, purchase_received_id) => {
