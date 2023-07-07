@@ -58,7 +58,7 @@ export default (props) => {
 
     const conversionListQuery = useQuery({
         queryKey: ["conversion-list", params.prid],
-        queryFn: async () => fetchConversionListQuery(Number(params.prid))
+        queryFn: () => fetchConversionListQuery(Number(params.prid))
     })
 
     const fetchPickFormConversionList = (sale_item_id, purchase_received_id) => {
@@ -163,7 +163,7 @@ export default (props) => {
 
             if(text.length) {
                 console.log('CONVERISON LIST FIND : ', conversionListQuery.data);
-                const conversion = conversionListQuery.data?.find(({Symbol}) => Symbol == props.uom);
+                const conversion = conversionListQuery.isSuccess && conversionListQuery.data?.find(({Symbol}) => Symbol == props.uom);
                 const data = {
                     SubLocation: props.subLocation,
                     Pallet: props.pallet,
