@@ -40,16 +40,16 @@ export default (props) => {
                 placement: "top",
                 status: "info"
             })
+        } else {
+            router.push({pathname: "/orderpicking/step_three_actual_picking", params: {
+                    siid: item.SaleItemID,
+                    subLocation: item.SubLocation,
+                    prid: item.PurchaseReceivedID,
+                    pallet: item.FormattedPalletID,
+                    co: params.co,
+                    maxAllowedPick: item.MaxAllowedPick,
+                }})
         }
-
-        router.push({pathname: "/orderpicking/step_three_actual_picking", params: {
-            siid: item.SaleItemID,
-            subLocation: item.SubLocation,
-            prid: item.PurchaseReceivedID,
-            pallet: item.FormattedPalletID,
-            co: params.co,
-            maxAllowedPick: item.MaxAllowedPick,
-        }})
     }
 
     const pickItemDataQuery = useQuery({
