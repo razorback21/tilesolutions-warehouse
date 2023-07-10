@@ -25,14 +25,14 @@ export default (props) => {
 
     React.useEffect(() => {
         // picking live validation
-        const savedPickQty = Number(pickItemDataQuery.data.Ordered - pickItemDataQuery.data.RemainingToBePick);
+        const savedPickQty = Number(pickItemDataQuery.data?.Ordered - pickItemDataQuery.data?.RemainingToBePick);
 
         let currentPickData = 0;
         savePickPayload.forEach((v, i) => {
             currentPickData += v.QtyInOrderedUoM;
         })
 
-        if((currentPickData + savedPickQty) > pickItemDataQuery.data.Ordered) {
+        if((currentPickData + savedPickQty) > pickItemDataQuery.data?.Ordered) {
             Toast.closeAll();
             Toast.show({
                 description: `Overpicking (${currentPickData + savedPickQty} ${pickItemDataQuery.data.UoM}). Please check your input.`
@@ -159,7 +159,7 @@ export default (props) => {
 
             if(text.length) {
                 console.log('CONVERISON LIST FIND : ', conversionListQuery.data);
-                const conversion = conversionListQuery.isSuccess && conversionListQuery.data?.find(({Symbol}) => Symbol == props.uom);
+                const conversion = conversionListQuery.data?.find(({Symbol}) => Symbol == props.uom);
                 const data = {
                     SubLocation: props.subLocation,
                     Pallet: props.pallet,
@@ -216,7 +216,9 @@ export default (props) => {
     },[]);
 
 
-    return (
+    return conversionListQuery.isSuccess
+        && pickFormConversionListQuery.isSuccess
+        && pickItemDataQuery.isSuccess && (
         <>
             <AppBackNavigation goback={true} title={`CO_${params.co}`}/>
             <SpinnerModal text="Saving Data..." size="lg" isOpen={isOpen}/>
@@ -232,7 +234,7 @@ export default (props) => {
 
                     <Box rounded="4" py="2" alignItems="center" justifyContent="center"  bg="text.50" color="text.500" shadow="4" mb="3">
                         {
-                            conversionListQuery.isSuccess && conversionListQuery.data.map(res => {
+                            conversionListQuery.data.map(res => {
                                 return <Text fontWeight="400" fontSize="12" key={res.Symbol}>{res.Qty}- {pickItemDataQuery.data.UoM}/{res.Symbol}</Text>
                             })
                         }
@@ -243,7 +245,7 @@ export default (props) => {
                     </Box>
 
                     {
-                        pickFormConversionListQuery.isSuccess && pickFormConversionListQuery.data.map(res => {
+                         pickFormConversionListQuery.data.map(res => {
                             return <ActualPickMemoized
                                 key={res.UoM}
                                 uom={res.UoM}
