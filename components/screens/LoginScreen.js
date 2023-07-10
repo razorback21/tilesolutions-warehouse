@@ -8,8 +8,8 @@ import SpinnerModal from "../shared/SpinnerLoader";
 
 export default () => {
     const {appLogin, appLogout} = useAuth();
-    const [emailValue, setEmailValue] = useState('');
-    const [passwordValue, setPasswordValue] = useState('');
+    const [emailValue, setEmailValue] = useState('razorback21@gmail.com');
+    const [passwordValue, setPasswordValue] = useState('dev@qwerty');
     const [modalTitle, setModalTitle ] = useState('Message');
     const [modalMessage, setModalMessage ] = useState('');
     const [spinnerVisible, setSpinnerVisible] = useState(false);
@@ -78,8 +78,8 @@ export default () => {
             </Stack>
         </Box>
         <Box px="5" mt="40%" style={styles.loginBox}>
-            <Input size="lg" mb="2" placeholder="Email" onChangeText={handleEmailInput} />
-            <Input size="lg" mb="2" placeholder="Password" type="password" onChangeText={handlePasswordInput}/>
+            <Input size="lg" mb="2" placeholder="Email" onChangeText={handleEmailInput} defaultValue={emailValue}/>
+            <Input size="lg" mb="2" placeholder="Password" type="password" onChangeText={handlePasswordInput} defaultValue={passwordValue}/>
             <Button onPress={handleLogin}>Log In</Button>
         </Box>
     </VStack>
