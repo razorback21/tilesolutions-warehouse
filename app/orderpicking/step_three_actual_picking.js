@@ -23,25 +23,7 @@ export default (props) => {
         queryFn: async() => await fetchPickItemData(Number(params.siid))
     })
 
-    React.useEffect(() => {
-        // picking live validation
-        const savedPickQty = Number(pickItemDataQuery.data?.Ordered - pickItemDataQuery.data?.RemainingToBePick);
-
-        let currentPickData = 0;
-        savePickPayload.forEach((v, i) => {
-            currentPickData += v.QtyInOrderedUoM;
-        })
-
-        if((currentPickData + savedPickQty) > pickItemDataQuery.data?.Ordered) {
-            Toast.closeAll();
-            Toast.show({
-                description: `Overpicking (${currentPickData + savedPickQty} ${pickItemDataQuery.data.UoM}). Please check your input.`
-            });
-        }
-        console.log('savePickPayload', savePickPayload);
-    }, [savePickPayload]);
-
-    const fetchConversionListQuery = async (purchase_received_id) => {
+    const fetchConversionListQuery = (purchase_received_id) => {
         return tsQuery(`
             PurchaseReceivedConversionList($PurchaseReceivedID: Int!) {
                 PurchaseReceivedConversionList(PurchaseReceivedID: $PurchaseReceivedID) {
@@ -57,9 +39,36 @@ export default (props) => {
     }
 
     const conversionListQuery = useQuery({
-        queryKey: ["conversion-list", params.prid],
-        queryFn: () => fetchConversionListQuery(Number(params.prid))
+        queryKey: ["conversion-list", Number(params.prid)],
+        queryFn: async () => await fetchConversionListQuery(Number(params.prid))
     })
+
+    React.useEffect(() => {
+        // picking live validation
+        const savedPickQty = Number(pickItemDataQuery.data?.Ordered - pickItemDataQuery.data?.RemainingToBePick);
+
+        let savePickdataCopy = [];
+        savePickPayload.forEach((v, i) => {
+            const conversion = conversionListQuery.data.find((props) => props.Symbol === v.UoM);
+            v.Qty = parseInt(v.Qty)
+            v.QtyInOrderedUoM = conversion.Qty * v.Qty
+            savePickdataCopy.push(v);
+        })
+
+        let currentPickData = 0;
+        savePickdataCopy.forEach((v, i) => {
+            currentPickData += v.QtyInOrderedUoM;
+        })
+
+        if((currentPickData + savedPickQty) > pickItemDataQuery.data?.Ordered) {
+            Toast.closeAll();
+            Toast.show({
+                description: `Overpicking. Ordered ${pickItemDataQuery.data?.Ordered} ${pickItemDataQuery.data.UoM} - Picked ${currentPickData + savedPickQty} ${pickItemDataQuery.data.UoM}. Please check your input.`
+            });
+        }
+    }, [savePickPayload, conversionListQuery.isSuccess]);
+
+
 
     const fetchPickFormConversionList = (sale_item_id, purchase_received_id) => {
         return tsQuery(`
@@ -158,14 +167,11 @@ export default (props) => {
             const dataKey = `${props.uom}`;
 
             if(text.length) {
-                console.log('CONVERISON LIST FIND : ', conversionListQuery.data);
-                const conversion = conversionListQuery.data?.find(({Symbol}) => Symbol == props.uom);
                 const data = {
                     SubLocation: props.subLocation,
                     Pallet: props.pallet,
                     Qty: text,
                     UoM: props.uom,
-                    QtyInOrderedUoM: (conversion?.Qty * parseInt(text))
                 }
 
                 setSavePickPayload((prevState) => {
