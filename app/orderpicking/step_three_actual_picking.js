@@ -139,10 +139,6 @@ export default (props) => {
                 placement: "top"
             })
 
-            //todo: redirect to step 2
-            //pickItemDataQuery.invalidateQueries({queryKey:["pick-item-data"]})
-            //pickFormConversionListQuery.invalidateQueries({queryKey:["pick-form-conversion-list"]});
-            console.log('PARAMS CO : ', params.co);
             router.replace({pathname:'/orderpicking/step_two', params: {co: params.co}});
         }
 
@@ -210,7 +206,7 @@ export default (props) => {
                     </Flex>
                 </Flex>
 
-                <Input size="xl" placeholder="Actual Pick" style={{textAlign:"center"}} onChangeText={pickDataHandler}/>
+                <Input size="xl" placeholder="Actual Pick" style={{textAlign:"center"}} onChangeText={pickDataHandler} type="number"/>
             </Box>
         )
     }
