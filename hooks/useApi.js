@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
 
 const useApi =  () => {
@@ -25,8 +26,8 @@ const useApi =  () => {
 
     const tsQuery = async (query, variables={}) => {
         try {
-            const token = await SecureStore.getItemAsync('api-token');
-            //console.log('tsQuery saved token', token)
+            //const token = await SecureStore.getItemAsync('api-token');
+            const token = await AsyncStorage.getItem('api-token')
             api.defaults.headers.common['Authorization'] = "Bearer " + token;
             console.log('tsQuery : ', apiEndpoint)
 
@@ -42,7 +43,8 @@ const useApi =  () => {
 
     const tsMutation = async (mutation, variables={}) => {
         try {
-            const token = await SecureStore.getItemAsync('api-token');
+            //const token = await SecureStore.getItemAsync('api-token');
+            const token = await AsyncStorage.getItem('api-token')
             api.defaults.headers.common['Authorization'] = "Bearer " + token;
             console.log('tsMutation : ', apiEndpoint);
             console.log('mutation : ', mutation);

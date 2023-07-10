@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {AppProviderContext} from "../components/AppProvider";
 import useApi from "./useApi";
-import * as SecureStore from 'expo-secure-store';
+//import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useQueryClient} from "@tanstack/react-query";
 
 const useAuth = () => {
@@ -27,8 +28,10 @@ const useAuth = () => {
         ).then(async res => {
             const data = res.data.data.Login;
             try {
-                await SecureStore.setItemAsync('api-token', data.token);
-                const token = await SecureStore.getItemAsync('api-token');
+                //await SecureStore.setItemAsync('api-token', data.token);
+                //const token = await SecureStore.getItemAsync('api-token');
+                await AsyncStorage.setItem('api-token', data.token);
+                const token = await AsyncStorage.getItem('api-token');
                 if(token) {
                     setAuthenticated(true);
                 }
@@ -41,13 +44,13 @@ const useAuth = () => {
 
     const appLogout = async () => {
         try {
-            await SecureStore.deleteItemAsync('api-token');
+            //await SecureStore.deleteItemAsync('api-token');
+            await AsyncStorage.removeItem('api-token')
             setAuthenticated(false);
             await queryClient.clear()
         } catch (e) {
             console.log('logout auth token read error :', e)
         }
-
     }
 
     return {appLogin, appLogout}
