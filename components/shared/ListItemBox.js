@@ -7,21 +7,31 @@ const ListItemBox = (props) => {
         bg: "text.50"
     }} bg="#FFFFFF"  mb={props.marginBottom} onPress={props.onPress} rounded="5" mx="3" shadow="2">
         <HStack p="4" h={props.h} alignItems="center">
-            <Stack w="95%">
+            <Stack w={props.showRightIcon ? "95%" : "100%"}>
                 {props.content}
             </Stack>
-            <Stack h="100%" direction="row">
-                <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
-                    <Icon size="sm" as={MaterialIcons} name="arrow-forward-ios" color="primary.600"/>
-                </Flex>
-            </Stack>
+            {
+                props.showRightIcon && (
+                    <Pressable onPress={props.onPressRightIcon}>
+                        <Stack h="100%" direction="row">
+                            <Flex h="100%" direction="column" alignItems="center" justifyContent="center">
+                                <Icon size={props.rightIconSize} as={MaterialIcons} name={props.rightIcon} color="primary.600"/>
+                            </Flex>
+                        </Stack>
+                    </Pressable>
+                )
+            }
+
         </HStack>
     </Pressable>
 }
 
 ListItemBox.defaultProps = {
     h: 120,
-    marginBottom: 2
+    marginBottom: 2,
+    rightIcon: "arrow-forward-ios",
+    rightIconSize: "sm",
+    showRightIcon: true
 }
 
 export default ListItemBox;
