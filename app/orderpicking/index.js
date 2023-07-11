@@ -5,7 +5,6 @@ import { useRouter, Stack as RouterStack } from 'expo-router';
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
 import WhiteButton from "../../components/shared/WhiteButton";
 import AppStyles from "../../AppStyles";
-import * as SecureStore from 'expo-secure-store';
 import useApi from "../../hooks/useApi";
 import ModalMessage from "../../components/shared/ModalMessage";
 import {useQueryClient} from "@tanstack/react-query";
@@ -55,7 +54,7 @@ export default (props) => {
     }
 
     const scanNFCTag = async () => {
-        console.warn('scanning NFC tag', await SecureStore.getItemAsync('api-token'));
+        //console.warn('scanning NFC tag', await SecureStore.getItemAsync('api-token'));
     }
 
     const scanQRCode = async () => {
