@@ -6,7 +6,7 @@ const ListItemBox = (props) => {
     return <Pressable _pressed={{
         bg: "text.50"
     }} bg="#FFFFFF"  mb={props.marginBottom} onPress={props.onPress} rounded="5" mx="3" shadow="2">
-        <HStack p="4" h={props.h} alignItems="center">
+        <HStack px="4" py="2.5" alignItems="center">
             <Stack w={props.showRightIcon ? "95%" : "100%"}>
                 {props.content}
             </Stack>
@@ -27,7 +27,6 @@ const ListItemBox = (props) => {
 }
 
 ListItemBox.defaultProps = {
-    h: 120,
     marginBottom: 2,
     rightIcon: "arrow-forward-ios",
     rightIconSize: "sm",
