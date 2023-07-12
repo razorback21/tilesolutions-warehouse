@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import {Box, Text, Heading, ScrollView } from "native-base";
+import {Box, Text, Heading, ScrollView, Center, Actionsheet, useDisclose } from "native-base";
 import ListItemBox from "../../components/shared/ListItemBox";
 import AppStyles from "../../AppStyles";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
@@ -14,6 +14,11 @@ export default (props) => {
     const router = useRouter();
     const params = useLocalSearchParams();
     const {tsQuery} = useApi();
+    const {
+        isOpen,
+        onOpen,
+        onClose
+    } = useDisclose();
 
     const gotoStepThree = (sales_item_id, co_number) => {
         router.push({pathname: "/orderpicking/step_three", params: {siid: sales_item_id, co: co_number}})
@@ -34,6 +39,25 @@ export default (props) => {
                             Shade
                             Qty
                             SalesItemID
+                            PickedItemsCount
+                            HasReleasedItems
+                            ReleasedItems {
+                                ID
+                                Qty
+                                ReleasedBy
+                                ReleaseDate
+                            }
+                            HasPickedItems
+                            PickedItems {
+                                ID
+                                Status
+                                Qty
+                                UoM
+                                Warehouse
+                                PickedBy
+                                PickDate
+                                SalesItemID
+                            }
                         }
                     }
                 }
@@ -55,7 +79,7 @@ export default (props) => {
         return <FullScreenLoader size="lg"/>
     }
 
-    const ItemContent = ({data}) => {
+    const OrderItemContent = ({data}) => {
         return (
             <>
                 <Box mb="1">
@@ -71,9 +95,33 @@ export default (props) => {
         );
     }
 
+    const ReleasedItemInfoContent = ({data}) => {
+        return (
+            <>
+                <Box mb="1">
+                    <Text fontWeight="400" fontSize="12" color="text.600">Release Qty : 10 PC</Text>
+                </Box>
+                <Box>
+                    <Text fontWeight="400" fontSize="12" color="text.600">Released By Hoa on Jun 23, 2023 9:15 AM</Text>
+                </Box>
+            </>
+        );
+    }
+
+    const ActionSheet = (props) => {
+        return <Center>
+            <Actionsheet isOpen={isOpen} onClose={onClose}>
+                <Actionsheet.Content>
+                    <Actionsheet.Item>Picked Information</Actionsheet.Item>
+                    <Actionsheet.Item>Released Information</Actionsheet.Item>
+                </Actionsheet.Content>
+            </Actionsheet>
+        </Center>;
+    }
+
     return (
         <>
-            <AppBackNavigation path="/orderpicking/order_received" title={`CO_${params.co}`}/>
+            <AppBackNavigation goback={true} title={`CO_${params.co}`}/>
             <Box style={styles.topContainerNoFlex}>
                 <Text color="tertiary.500" fontSize="12">STEP 2</Text>
                 <Heading size="md" color="tertiary.700">Picking order for pickup</Heading>
@@ -88,11 +136,20 @@ export default (props) => {
                 <ScrollView>
                     {
                         orderItemsQuery.isSuccess && orderItemsQuery.data.OrderItems.map((item, i) => {
-                           return  <ListItemBox key={i} h="95" onPress={() => gotoStepThree(item.SalesItemID, params.co)} content={<ItemContent data={item}/>}/>
+                            return item.HasReleasedItems || item.HasPickedItems
+                                ? <ListItemBox key={i}
+                                               onPress={() => gotoStepThree(item.SalesItemID, params.co)}
+                                               content={<OrderItemContent data={item}/>}
+                                               rightIcon="more-vert"
+                                               rightIconSize="md"
+                                               onPressRightIcon={() => onOpen()}
+                                />
+                                : <ListItemBox key={i} onPress={() => gotoStepThree(item.SalesItemID, params.co)} content={<OrderItemContent data={item}/>}/>
                         })
                     }
                 </ScrollView>
             </Box>
+            <ActionSheet />
         </>
     )
 }
