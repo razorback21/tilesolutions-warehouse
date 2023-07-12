@@ -11,7 +11,7 @@ const AppNavMoreMenu = () => {
 
     return (<Box w="5%" alignItems="center">
                 <Menu on w="150" defaultIsOpen={false} trigger={triggerProps => {
-                       return <IconButton {...triggerProps} icon={<Icon as={Ionicons} name='md-ellipsis-vertical' size='5'/>}
+                       return <IconButton marginRight="5px" {...triggerProps} icon={<Icon as={Ionicons} name='md-ellipsis-vertical' size='5'/>}
                                          _icon={{color: "white"}}/>;
                 }}>
                     <Menu.Item onPress={handleLogout}>Log out</Menu.Item>
