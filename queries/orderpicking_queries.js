@@ -13,6 +13,7 @@ export const fetchPickItemData = (sales_item_id) => {
                   ProductDescription
                   RemainingToBePick
                   UoM
+                  HasPickedItems
               }
             }
         `,
