@@ -93,17 +93,17 @@ export default (props) => {
                 />
                 <Actionsheet isOpen={isOpen} onClose={onClose}>
                     <Actionsheet.Content>
-                        <Actionsheet.Item startIcon={<Icon as={MaterialIcons} size="6" name="qr-code-scanner" />} _pressed={{
+                        <Actionsheet.Item disabled={!pickItemDataQuery.data.RemainingToBePick} startIcon={<Icon as={MaterialIcons} size="6" name="qr-code-scanner" />} _pressed={{
                             bg: "text.100"
                         }}>
                             Scan QR code
                         </Actionsheet.Item>
-                        <Actionsheet.Item startIcon={<Icon as={MaterialIcons} name="nfc" size="6" />} _pressed={{
+                        <Actionsheet.Item disabled={!pickItemDataQuery.data.RemainingToBePick} startIcon={<Icon as={MaterialIcons} name="nfc" size="6" />} _pressed={{
                             bg: "text.100"
                         }}>
                             Scan NFC tag
                         </Actionsheet.Item>
-                        <Actionsheet.Item startIcon={<Icon as={MaterialIcons} name="info" size="6" />} _pressed={{
+                        <Actionsheet.Item  startIcon={<Icon as={MaterialIcons} name="info" size="6" />} _pressed={{
                             bg: "text.100"
                         }} disabled={!pickItemDataQuery.data.HasPickedItems}
                            onPress={() => router.push({pathname:'/orderpicking/picked_items', params: {siid: params.siid, co: params.co}}) }
