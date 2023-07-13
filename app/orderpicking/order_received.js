@@ -49,7 +49,7 @@ export default (props) => {
                 <Box mb="1">
                     <HStack justifyContent="space-between">
                         <Text fontWeight="700" fontSize="12" color="primary.700">CO No. {data.CONumber}</Text>
-                        <Badge _text={{fontSize:10, color:'white'}} rounded="10px" color="white" bg="secondary.300">{`Staff: ${data.Staff}`}</Badge>
+                        <Badge _text={{fontSize:10, color:'white'}} rounded="10px" color="white" bg="text.500">{`Staff: ${data.Staff}`}</Badge>
                     </HStack>
                 </Box>
                 <Box mb="1">
