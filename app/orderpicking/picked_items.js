@@ -68,7 +68,7 @@ export default (props) => {
 
     return (
         <>
-            <AppBackNavigation path="/orderpicking/step_two" params={{co:params.co}} title={`CO_${params.co}`}/>
+            <AppBackNavigation goback={true} title={`CO_${params.co}`}/>
             <Box style={styles.topContainerNoFlex}>
                 <Heading size="md" color="tertiary.700" >Picked Items</Heading>
                 {pickItemDataQuery.isSuccess && <PickedItemBoxes data={pickItemDataQuery.data}/>}
