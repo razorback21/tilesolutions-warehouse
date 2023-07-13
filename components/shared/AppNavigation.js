@@ -15,18 +15,14 @@ const AppNavigation = (props) => {
     return (
         <>
             <Box safeAreaTop bg="primary.500"/>
-            <HStack bg="primary.500" px="1" pt="1" pb="1" justifyContent="space-between" w="100%">
-                <HStack alignItems="center" marginRight="auto">
+            <HStack bg="primary.500" px="1" pt="0" pb="1" justifyContent="space-between" w="100%">
+                <HStack alignItems="center" justifyContent="space-between" w="100%">
                     <IconButton icon={<Icon as={Ionicons} name='md-menu' size='5'/>} _icon={{color: "white"}}
                                 onPress={handleToggleDrawer}/>
-                </HStack>
-                <HStack>
-                    <Text color="white" fontSize="16" fontWeight="bold" pt="2" marginRight="-5px">
+                    <Text color="white" fontSize="16" fontWeight="bold" pt="2" marginLeft="auto" marginRight="auto">
                         {props.title}
                     </Text>
-                </HStack>
-                <HStack alignItems="center" marginLeft="auto" >
-                   <AppNavMoreMenu/>
+                    <AppNavMoreMenu/>
                 </HStack>
             </HStack>
         </>
