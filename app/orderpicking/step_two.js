@@ -42,6 +42,8 @@ export default (props) => {
                             SalesItemID
                             HasReleasedItems
                             HasPickedItems
+                            Status
+                            StatusColor
                         }
                     }
                 }
@@ -65,9 +67,9 @@ export default (props) => {
 
     const OrderItemContent = ({data}) => {
         return (
-            <>
+            <Box>
                 <Box mb="1">
-                    <Text fontWeight="700" fontSize="14" color="primary.600">{data.Code}   <Box h="3" width="3" bg="success.500" rounded="full" mt="0.2"></Box></Text>
+                    <Text fontWeight="700" fontSize="14" color="primary.600">{data.Code}</Text>
                 </Box>
                 <Box mb="1">
                     <Text fontWeight="400" fontSize="12" color="text.600">{data.Description}</Text>
@@ -75,7 +77,7 @@ export default (props) => {
                 <Box>
                     <Text fontWeight="400" fontSize="12" color="text.600">Order Qty : {data.Qty}</Text>
                 </Box>
-            </>
+            </Box>
         );
     }
 
@@ -111,7 +113,9 @@ export default (props) => {
                         orderItemsQuery.isSuccess && orderItemsQuery.data.OrderItems.map((item, i) => {
                             return item.HasReleasedItems || item.HasPickedItems
                                 ? <ListItemBox key={i}
-                                               onPress={() => gotoStepThree(item.SalesItemID, params.co)}
+                                               onPress={() => {
+                                                   gotoStepThree(item.SalesItemID, params.co)}
+                                               }
                                                content={<OrderItemContent data={item}/>}
                                                rightIcon="more-vert"
                                                rightIconSize="md"
@@ -120,6 +124,7 @@ export default (props) => {
                                                        onOpen();
                                                    }
                                                }
+                                               statusColor={item.StatusColor}
                                 />
                                 : <ListItemBox key={i} onPress={() => gotoStepThree(item.SalesItemID, params.co)} content={<OrderItemContent data={item}/>}/>
                         })
