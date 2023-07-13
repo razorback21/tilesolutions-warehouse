@@ -79,18 +79,7 @@ export default (props) => {
         );
     }
 
-    const ReleasedItemInfoContent = ({data}) => {
-        return (
-            <>
-                <Box mb="1">
-                    <Text fontWeight="400" fontSize="12" color="text.600">Release Qty : 10 PC</Text>
-                </Box>
-                <Box>
-                    <Text fontWeight="400" fontSize="12" color="text.600">Released By Hoa on Jun 23, 2023 9:15 AM</Text>
-                </Box>
-            </>
-        );
-    }
+
 
     const ActionSheet = (props) => {
         return <Center>
