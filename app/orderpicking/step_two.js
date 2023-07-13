@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
-import {Box, Text, Heading, ScrollView, Center, Actionsheet, useDisclose, VStack, Divider} from "native-base";
+import {Box, Text, Heading, ScrollView, Center, Actionsheet, useDisclose } from "native-base";
 import ListItemBox from "../../components/shared/ListItemBox";
 import AppStyles from "../../AppStyles";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
@@ -85,15 +85,6 @@ export default (props) => {
         return <Center>
             <Actionsheet isOpen={isOpen} onClose={onClose}>
                 <Actionsheet.Content>
-                    <VStack width="100%" px="5"  mb="2">
-                        <Box mb="1">
-                            <Text fontWeight="700" fontSize="14" color="primary.600">{selectedItem.Code}</Text>
-                        </Box>
-                        <Box mb="1">
-                            <Text fontWeight="400" fontSize="12" color="text.600">{selectedItem.Description}</Text>
-                        </Box>
-                    </VStack>
-                    <Divider />
                     <Actionsheet.Item onPress={() => router.push({pathname:'/orderpicking/picked_items', params: {siid:selectedItem.SalesItemID, co:params.co}})} disabled={!selectedItem.HasPickedItems}>Picked Information</Actionsheet.Item>
                     <Actionsheet.Item onPress={() => router.push({pathname:'/orderpicking/released_items', params: {siid:selectedItem.SalesItemID,co:params.co}})} disabled={!selectedItem.HasReleasedItems}>Released Information</Actionsheet.Item>
                 </Actionsheet.Content>
