@@ -82,7 +82,6 @@ export default (props) => {
 
     function ActionSheet() {
         const { isOpen, onOpen, onClose } = useDisclose();
-
         return (
             <Center>
                 <Fab
@@ -103,6 +102,13 @@ export default (props) => {
                             bg: "text.100"
                         }}>
                             Scan NFC tag
+                        </Actionsheet.Item>
+                        <Actionsheet.Item startIcon={<Icon as={MaterialIcons} name="info" size="6" />} _pressed={{
+                            bg: "text.100"
+                        }} disabled={!pickItemDataQuery.data.HasPickedItems}
+                           onPress={() => router.push({pathname:'/orderpicking/picked_items', params: {siid: params.siid, co: params.co}}) }
+                        >
+                            Picked Items
                         </Actionsheet.Item>
                     </Actionsheet.Content>
                 </Actionsheet>
@@ -172,10 +178,11 @@ export default (props) => {
             <Box style={styles.mainContainer}>
                 <ScrollView>
                 {
-                    itemPalletsInfoQuery.isSuccess && itemPalletsInfoQuery.data.map((item) => {
-                       return <ListItemBox h="95" key={item.PalletID} onPress={() => gotoActualPicking(item)} content={<ItemContent data={item}/>}/>
-                    })
-                }
+                    (pickItemDataQuery.data.RemainingToBePick && itemPalletsInfoQuery.isSuccess)
+                    ? itemPalletsInfoQuery.data.map((item) => {
+                        return <ListItemBox h="95" key={item.PalletID} onPress={() => gotoActualPicking(item)} content={<ItemContent data={item}/>}/>
+                    }) : null
+               }
                 </ScrollView>
             </Box>
 
