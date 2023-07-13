@@ -28,6 +28,7 @@ export default (props) => {
                     Status
                     Qty
                     UoM
+                    SubLocation
                     Warehouse
                     PickedBy
                     PickDate
@@ -53,7 +54,7 @@ export default (props) => {
                     <Text fontWeight="400" fontSize="12" color="text.600">Picked Qty : {data.Qty} {data.UoM}</Text>
                 </Box>
                 <Box>
-                    <Text fontWeight="400" fontSize="12" color="text.600">Location : {data.Warehouse}, DOOR 1 </Text>
+                    <Text fontWeight="400" fontSize="12" color="text.600">Location : {data.Warehouse}, {data.SubLocation} </Text>
                 </Box>
                 <Box>
                     <Text fontWeight="400" fontSize="12" color="text.600">Picked By : {data.PickedBy}</Text>
