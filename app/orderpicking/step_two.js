@@ -19,7 +19,7 @@ export default (props) => {
         onOpen,
         onClose
     } = useDisclose();
-    const [selectedItemID, setSelectedItemID] = React.useState();
+    const [selectedItem, setSelectedItem] = React.useState({});
 
     const gotoStepThree = (sales_item_id, co_number) => {
         router.push({pathname: "/orderpicking/step_three", params: {siid: sales_item_id, co: co_number}})
@@ -85,8 +85,8 @@ export default (props) => {
         return <Center>
             <Actionsheet isOpen={isOpen} onClose={onClose}>
                 <Actionsheet.Content>
-                    <Actionsheet.Item onPress={() => router.push({pathname:'/orderpicking/picked_items', params: {siid:selectedItemID, co:params.co}})}>Picked Information</Actionsheet.Item>
-                    <Actionsheet.Item onPress={() => router.push({pathname:'/orderpicking/released_items', params: {siid:selectedItemID,co:params.co}})}>Released Information</Actionsheet.Item>
+                    <Actionsheet.Item onPress={() => router.push({pathname:'/orderpicking/picked_items', params: {siid:selectedItem.SalesItemID, co:params.co}})} disabled={!selectedItem.HasPickedItems}>Picked Information</Actionsheet.Item>
+                    <Actionsheet.Item onPress={() => router.push({pathname:'/orderpicking/released_items', params: {siid:selectedItem.SalesItemID,co:params.co}})} disabled={!selectedItem.HasReleasedItems}>Released Information</Actionsheet.Item>
                 </Actionsheet.Content>
             </Actionsheet>
         </Center>;
@@ -116,8 +116,8 @@ export default (props) => {
                                                rightIcon="more-vert"
                                                rightIconSize="md"
                                                onPressRightIcon={() => {
-                                                       setSelectedItemID(item.SalesItemID)
-                                                       onOpen()
+                                                       setSelectedItem(item)
+                                                       onOpen();
                                                    }
                                                }
                                 />
