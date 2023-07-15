@@ -71,7 +71,7 @@ export default (props) => {
             <RouterStack.Screen/>
             <ModalMessage isOpen={isOpen} onClose={onClose} title={modalTitle} message={modalMessage}/>
 
-            <AppBackNavigation path="."/>
+            <AppBackNavigation route="/"/>
             <Box style={styles.topContainer}>
                 <VStack>
                    <Heading size="md" mb="3" color="tertiary.700">Order Picking</Heading>
