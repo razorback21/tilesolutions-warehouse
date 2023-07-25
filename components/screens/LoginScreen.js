@@ -8,6 +8,8 @@ import SpinnerModal from "../shared/SpinnerLoader";
 
 export default () => {
     const {appLogin, appLogout} = useAuth();
+    const [emailValue, setEmailValue] = useState('razorback21@gmail.com');
+    const [passwordValue, setPasswordValue] = useState('dev@qwerty');
     const [modalTitle, setModalTitle ] = useState('Message');
     const [modalMessage, setModalMessage ] = useState('');
     const [spinnerVisible, setSpinnerVisible] = useState(false);
@@ -16,8 +18,14 @@ export default () => {
         onOpen,
         onClose
     } = useDisclose();
-    const emailRef = useRef('razorback21@gmail.com');
-    const passwordRef = useRef('dev@qwerty');
+
+    const handleEmailInput = (text) => {
+        setEmailValue(text);
+    }
+
+    const handlePasswordInput = (text) => {
+        setPasswordValue(text);
+    }
 
     const error_message_handler = (error) => {
         const msg = error.toString();
@@ -36,16 +44,13 @@ export default () => {
     }
 
     const handleLogin = () => {
-        let email = emailRef.current.value;
-        let password = passwordRef.current.value;
-
-        if(!email.length || !password.length) {
+        if(!emailValue.length || !passwordValue.length) {
             setModalTitle('Error');
             setModalMessage('Email and Password field is required.');
             onOpen();
         } else {
             setSpinnerVisible(true);
-            appLogin(email, password).catch(error => {
+            appLogin(emailValue, passwordValue).catch(error => {
                 const msg = error_message_handler(error);
                 setModalTitle(msg.title);
                 setModalMessage(msg.message);
@@ -73,8 +78,8 @@ export default () => {
             </Stack>
         </Box>
         <Box px="5" mt="40%" style={styles.loginBox}>
-            <Input size="lg" mb="2" placeholder="Email" ref={emailRef}/>
-            <Input size="lg" mb="2" placeholder="Password" type="password" ref={passwordRef}/>
+            <Input size="lg" mb="2" placeholder="Email" onChangeText={handleEmailInput} defaultValue={emailValue}/>
+            <Input size="lg" mb="2" placeholder="Password" type="password" onChangeText={handlePasswordInput} defaultValue={passwordValue}/>
             <Button onPress={handleLogin}>Log In</Button>
         </Box>
     </VStack>
