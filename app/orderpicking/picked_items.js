@@ -25,6 +25,7 @@ export default (props) => {
             PickedItems($SalesItemID: Int!) {
                 PickedItems(SalesItemID: $SalesItemID) {
                     ID
+                    PickLabel
                     Status
                     Qty
                     UoM
@@ -51,7 +52,7 @@ export default (props) => {
         return (
             <>
                 <Box>
-                    <Text fontWeight="400" fontSize="12" color="text.600">Picked Qty : {data.Qty} {data.UoM}</Text>
+                    <Text fontWeight="400" fontSize="12" color="text.600">{data.PickLabel} Qty : {data.Qty} {data.UoM}</Text>
                 </Box>
                 <Box>
                     <Text fontWeight="400" fontSize="12" color="text.600">Location : {data.Warehouse}, {data.SubLocation} </Text>
@@ -86,7 +87,15 @@ export default (props) => {
                 <ScrollView>
                     {
                         pickedItemsQuery.isSuccess && pickedItemsQuery.data.map((item, i) => {
-                            return <ListItemBox key={item.ID} showRightIcon={false} content={<PickedItemsContent data={item}/>}/>
+                            return <ListItemBox
+                                key={item.ID}
+                                rightIcon="edit"
+                                rightIconSize="md"
+                                onPressRightIcon={() => {
+                                    alert('asas')
+                                }
+                                }
+                                content={<PickedItemsContent data={item}/>}/>
                         })
                     }
                 </ScrollView>
