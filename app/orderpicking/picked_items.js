@@ -34,6 +34,7 @@ export default (props) => {
                     PickedBy
                     PickDate
                     SalesItemID
+                    StatusColor
                 }
             }
         `, {
@@ -93,8 +94,8 @@ export default (props) => {
                                 rightIconSize="md"
                                 onPressRightIcon={() => {
                                     alert('asas')
-                                }
-                                }
+                                }}
+                                statusColor={item.StatusColor}
                                 content={<PickedItemsContent data={item}/>}/>
                         })
                     }
