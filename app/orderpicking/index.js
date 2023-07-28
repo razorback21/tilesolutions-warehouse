@@ -10,7 +10,7 @@ import ModalMessage from "../../components/shared/ModalMessage";
 import {useQueryClient} from "@tanstack/react-query";
 
 export default (props) => {
-    const [CONumber, setCONumber] = React.useState('0000203539');
+    const [CONumber, setCONumber] = React.useState('0000204982'); //0000203539
     const [modalTitle, setModalTitle ] = React.useState('Message');
     const [modalMessage, setModalMessage ] = React.useState('');
     const router = useRouter();
