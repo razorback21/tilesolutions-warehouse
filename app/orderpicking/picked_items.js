@@ -1,7 +1,7 @@
 import {StyleSheet} from "react-native";
 import AppStyles from "../../AppStyles";
 import AppBackNavigation from "../../components/shared/AppBackNavigation";
-import {Box, Center, Heading, ScrollView, Text} from "native-base";
+import {Box, Center, Heading, ScrollView, Text, Modal, Button, Divider, Input, InputGroup, InputLeftAddon} from "native-base";
 import PickedItemBoxes from "../../components/shared/PickedItemBoxes";
 import ListItemBox from "../../components/shared/ListItemBox";
 import React from "react";
@@ -11,9 +11,12 @@ import {useQuery} from "@tanstack/react-query";
 import {fetchPickItemData} from "../../queries/orderpicking_queries";
 
 export default (props) => {
+    const selectedItem = React.useRef({});
+    const [showModal, setShowModal] = React.useState(false);
     const router = useRouter();
     const params = useLocalSearchParams();
     const {tsQuery} = useApi();
+
 
     const pickItemDataQuery = useQuery({
         queryKey: ["pick-item-data", params.siid],
@@ -68,9 +71,45 @@ export default (props) => {
         );
     }
 
+    const editPallet = (item) => {
+        selectedItem.current = item;
+        setShowModal(true)
+    }
+
+    const ItemModal = () => {
+        return <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+            <Modal.Content maxWidth="400px">
+                <Modal.Body>
+                    <PickedItemsContent data={selectedItem.current} />
+                    <Divider my="2" />
+                    <InputGroup w={{
+                        base: "100%",
+                        md: "285"
+                    }} justifyContent="center">
+                        <InputLeftAddon children={"Pallet #"} />
+                        <Input w={{
+                            base: "70%",
+                            sm: "100%"
+                        }} />
+                    </InputGroup>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button.Group space={2}>
+                        <Button onPress={() => {
+                            setShowModal(false);
+                        }}>
+                            Save
+                        </Button>
+                    </Button.Group>
+                </Modal.Footer>
+            </Modal.Content>
+        </Modal>
+    }
+
     return (
         <>
             <AppBackNavigation goback={true} title={`CO_${params.co}`}/>
+            <ItemModal />
             <Box style={styles.topContainerNoFlex}>
                 <Heading size="md" color="tertiary.700" >Picked Items</Heading>
                 {pickItemDataQuery.isSuccess && <PickedItemBoxes data={pickItemDataQuery.data}/>}
@@ -93,7 +132,7 @@ export default (props) => {
                                 rightIcon="edit"
                                 rightIconSize="md"
                                 onPressRightIcon={() => {
-                                    alert('asas')
+                                    editPallet(item)
                                 }}
                                 statusColor={item.StatusColor}
                                 content={<PickedItemsContent data={item}/>}/>
@@ -107,5 +146,8 @@ export default (props) => {
 }
 
 const styles = StyleSheet.create({
-    ...AppStyles
+    ...AppStyles,
+    modalDivider: {
+        margin: "10px 0px"
+    }
 })
