@@ -7,7 +7,7 @@ import ListItemBox from "../../components/shared/ListItemBox";
 import React from "react";
 import {useLocalSearchParams, useRouter} from "expo-router";
 import useApi from "../../hooks/useApi";
-import {useQuery} from "@tanstack/react-query";
+import {useQuery, useMutation, useQueryClient} from "@tanstack/react-query";
 import {fetchPickItemData} from "../../queries/orderpicking_queries";
 
 export default (props) => {
@@ -15,7 +15,9 @@ export default (props) => {
     const [showModal, setShowModal] = React.useState(false);
     const router = useRouter();
     const params = useLocalSearchParams();
-    const {tsQuery} = useApi();
+    const queryClient = useQueryClient();
+
+    const {tsQuery, tsMutation} = useApi();
 
 
     const pickItemDataQuery = useQuery({
@@ -28,6 +30,7 @@ export default (props) => {
             PickedItems($SalesItemID: Int!) {
                 PickedItems(SalesItemID: $SalesItemID) {
                     ID
+                    PalletNo
                     PickLabel
                     Status
                     Qty
@@ -67,36 +70,82 @@ export default (props) => {
                 <Box>
                     <Text fontWeight="400" fontSize="12" color="text.600">Pick date : {data.PickDate}</Text>
                 </Box>
+
+                {
+                    data.PalletNo && <Box>
+                        <Text fontWeight="400" fontSize="12" color="text.600">Pallet # : {data.PalletNo}</Text>
+                    </Box>
+                }
+
             </>
         );
     }
+
+    const savePickPalletNo = (sales_item_picked_id, pallet_no) => {
+        return tsMutation(`
+                            SavePickPalletNo($SalesItemPickedID:Int!, $PalletNo: String!) {
+                                SavePickPalletNo(SalesItemPickedID: $SalesItemPickedID, PalletNo: $PalletNo) {
+                                    Status
+                                    Message
+                                }
+                            }
+                   `,
+            {
+                SalesItemPickedID: Number(sales_item_picked_id),
+                PalletNo: pallet_no
+            }).then(res => {
+            return res.data.data.SavePickPalletNo;
+        });
+    }
+
+    const pickItemDataMutation = useMutation({
+        mutationFn: async (params) => {
+            return await savePickPalletNo(params.SalesItemPickedID, params.PalletNo)
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["picked-items", params.siid]
+            });
+        },
+        onSettled: (data) => {
+            selectedItem.current = {};
+            setShowModal(false);
+        }
+    })
 
     const editPallet = (item) => {
         selectedItem.current = item;
         setShowModal(true)
     }
 
-    const ItemModal = () => {
-        return <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+    const ItemModal = ({item}) => {
+        const [palletNo, setPalletNo] = React.useState(item.PalletNo ?? '');
+        const inputRef = React.useRef(null);
+        return <Modal isOpen={showModal} onClose={() => showModal && setShowModal(false)}>
             <Modal.Content maxWidth="400px">
                 <Modal.Body>
-                    <PickedItemsContent data={selectedItem.current} />
+                    <PickedItemsContent data={item} />
                     <Divider my="2" />
                     <InputGroup w={{
                         base: "100%",
                         md: "285"
                     }} justifyContent="center">
                         <InputLeftAddon children={"Pallet #"} />
-                        <Input w={{
+                        <Input ref={inputRef} w={{
                             base: "70%",
                             sm: "100%"
-                        }} />
+                        }} onChangeText={(text) => setPalletNo(text)}/>
                     </InputGroup>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button.Group space={2}>
                         <Button onPress={() => {
-                            setShowModal(false);
+                            console.log("LEN", palletNo.trim().length)
+                            if(!palletNo.trim().length) {
+                                inputRef.current.focus();
+                                return false;
+                            }
+                            pickItemDataMutation.mutate({SalesItemPickedID: Number(item.ID), PalletNo: palletNo})
                         }}>
                             Save
                         </Button>
@@ -106,10 +155,24 @@ export default (props) => {
         </Modal>
     }
 
+    const MemoizedListItemBox = React.useCallback(({item}) => {
+        return <ListItemBox
+                key={item.ID}
+                rightIcon="edit"
+                rightIconSize="md"
+                onPressRightIcon={() => {
+                    editPallet(item)
+                }}
+                statusColor={item.StatusColor}
+                content={<PickedItemsContent data={item}/>}
+            />
+        }
+    );
+
     return (
         <>
             <AppBackNavigation goback={true} title={`CO_${params.co}`}/>
-            <ItemModal />
+            <ItemModal item={selectedItem.current}/>
             <Box style={styles.topContainerNoFlex}>
                 <Heading size="md" color="tertiary.700" >Picked Items</Heading>
                 {pickItemDataQuery.isSuccess && <PickedItemBoxes data={pickItemDataQuery.data}/>}
@@ -127,15 +190,7 @@ export default (props) => {
                 <ScrollView>
                     {
                         pickedItemsQuery.isSuccess && pickedItemsQuery.data.map((item, i) => {
-                            return <ListItemBox
-                                key={item.ID}
-                                rightIcon="edit"
-                                rightIconSize="md"
-                                onPressRightIcon={() => {
-                                    editPallet(item)
-                                }}
-                                statusColor={item.StatusColor}
-                                content={<PickedItemsContent data={item}/>}/>
+                            return <MemoizedListItemBox item={item} key={i}/>
                         })
                     }
                 </ScrollView>
