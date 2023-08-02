@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Text, IconButton, Icon } from "native-base"
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import BarcodeMask from 'react-native-barcode-mask';
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { useRouter } from 'expo-router';
 
 export default function(props) {
+    const router = useRouter();
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
 
@@ -20,6 +25,11 @@ export default function(props) {
         props.codeHandler(data);
     };
 
+    const closeScanner = () => {
+        setScanned(false);
+        router.back();
+    }
+
     if (hasPermission === null) {
         return <View style={styles.container}><Text>Requesting for camera permission</Text></View>;
     }
@@ -29,19 +39,32 @@ export default function(props) {
 
     return (
         <View style={styles.container}>
-            <BarCodeScanner
-                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                style={StyleSheet.absoluteFillObject}
-            />
-            {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+            <Text style={styles.title}>Scan Order Confirmation</Text>
+            <View style={{height:600, marginTop:10}}>
+                <BarCodeScanner
+                    onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                    style={[StyleSheet.absoluteFillObject]}
+                />
+                <BarcodeMask />
+            </View>
+            <View>
+                <IconButton onPress={closeScanner} icon={<Icon as={FontAwesome5} name="times-circle" size="4xl"/>} borderRadius="full" _icon={{color:"#fff"}}/>
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container : {
+        backgroundColor:"#000",
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+        color: "#fff",
+        flexDirection:"column",
+        justifyContent: "center"
+    },
+    title: {
+        fontSize: 18,
+        color: "#ffffff",
+        textAlign: "center",
     }
 })
