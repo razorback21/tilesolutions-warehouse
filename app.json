@@ -25,13 +25,21 @@
         "backgroundColor": "#FFFFFF"
       }
     },
+    "plugins": [
+      [
+        "expo-barcode-scanner",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
+        }
+      ]
+    ],
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
     "scheme": "tswh",
     "appConfig": {
-      "apiEndpoint" : "http://192.168.1.13/tswarehouseapi",
+      "apiEndpoint" : "http://192.168.1.99/tswarehouseapi"
     }
   }
 }
