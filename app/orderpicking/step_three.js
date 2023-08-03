@@ -93,7 +93,9 @@ export default (props) => {
                 />
                 <Actionsheet isOpen={isOpen} onClose={onClose}>
                     <Actionsheet.Content>
-                        <Actionsheet.Item disabled={!pickItemDataQuery.data.RemainingToBePick} startIcon={<Icon as={MaterialIcons} size="6" name="qr-code-scanner" />} _pressed={{
+                        <Actionsheet.Item disabled={!pickItemDataQuery.data.RemainingToBePick} startIcon={<Icon as={MaterialIcons} size="6" name="qr-code-scanner" />}
+                                          onPress={() => router.push({pathname: '/orderpicking/scanner_palletno', params: {co:params.co, siid:params.siid}})}
+                                          _pressed={{
                             bg: "text.100"
                         }}>
                             Scan QR code
