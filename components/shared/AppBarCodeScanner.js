@@ -9,7 +9,7 @@ import { useRouter } from 'expo-router';
 const AppBarCodeScanner = (props) => {
     const router = useRouter();
     const [hasPermission, setHasPermission] = useState(null);
-    const [scanned, setScanned] = useState(false);
+    const [scanned, setScanned] = useState(props.forceReset);
 
     useEffect(() => {
         const getBarCodeScannerPermissions = async () => {
@@ -20,9 +20,15 @@ const AppBarCodeScanner = (props) => {
         getBarCodeScannerPermissions();
     }, []);
 
+    let count = 0;
     const handleBarCodeScanned = ({ type, data }) => {
         setScanned(true);
-        props.codeHandler(data);
+        console.log('SCANNED DATA : ', data);
+        (async () => {
+            props.codeHandler(data);
+        })().then(() => {
+            setScanned(false);
+        })
     };
 
     const closeScanner = () => {
@@ -38,6 +44,7 @@ const AppBarCodeScanner = (props) => {
     if (hasPermission === null) {
         return <View style={styles.container}><Text>Requesting for camera permission</Text></View>;
     }
+
     if (hasPermission === false) {
         return <View style={styles.container}><Text>No access to camera</Text></View>;
     }
@@ -78,5 +85,6 @@ const styles = StyleSheet.create({
 
 AppBarCodeScanner.defaultProps = {
     'scannerName' : 'Scan',
-    'onClose' : false
+    'onClose' : false,
+    'forceReset' : false
 }
