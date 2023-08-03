@@ -54,7 +54,7 @@ const AppBarCodeScanner = (props) => {
             <VStack>
                 <Center>
                     <Text color="#ffffff" fontSize={21} mb={1}>{props.scannerName}</Text>
-                    {props.caption !== '' && <Text color="white" fontSize={14}>{props.caption}</Text>}
+                    {props.caption !== '' && <Text color="text.400" fontSize={14} textAlign="center">{props.caption}</Text>}
                 </Center>
             </VStack>
             <View style={{height:600, marginTop:10}}>
