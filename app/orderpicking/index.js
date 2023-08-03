@@ -58,7 +58,7 @@ export default (props) => {
     }
 
     const scanQRCode = async () => {
-        console.warn('scanning QR Code');
+        router.push('/orderpicking/scanner_orderconfirmation');
     }
 
     const gotoOrderReceived = async () => {
