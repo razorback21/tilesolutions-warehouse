@@ -9,7 +9,7 @@ import { useRouter } from 'expo-router';
 const AppBarCodeScanner = (props) => {
     const router = useRouter();
     const [hasPermission, setHasPermission] = useState(null);
-    const [scanned, setScanned] = useState(props.forceReset);
+    const [scanned, setScanned] = useState(false);
 
     useEffect(() => {
         const getBarCodeScannerPermissions = async () => {
@@ -85,6 +85,5 @@ const styles = StyleSheet.create({
 
 AppBarCodeScanner.defaultProps = {
     'scannerName' : 'Scan',
-    'onClose' : false,
-    'forceReset' : false
+    'onClose' : false
 }
