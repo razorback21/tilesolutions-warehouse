@@ -6,5 +6,5 @@ export default (props) => {
         alert(`Bar code with data ${data} has been scanned!`);
     };
 
-    return  <AppBarCodeScanner codeHandler={codeHandler}/>
+    return  <AppBarCodeScanner scannerName="Scan Order Confirmation" codeHandler={codeHandler}/>
 }
