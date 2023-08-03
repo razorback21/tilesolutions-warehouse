@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, IconButton, Icon } from "native-base"
+import { Text, IconButton, Icon, VStack, Center } from "native-base"
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import BarcodeMask from 'react-native-barcode-mask';
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -51,7 +51,12 @@ const AppBarCodeScanner = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{props.scannerName}</Text>
+            <VStack>
+                <Center>
+                    <Text color="#ffffff" fontSize={21} mb={1}>{props.scannerName}</Text>
+                    {props.caption !== '' && <Text color="white" fontSize={14}>{props.caption}</Text>}
+                </Center>
+            </VStack>
             <View style={{height:600, marginTop:10}}>
                 <BarCodeScanner
                     onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -75,15 +80,11 @@ const styles = StyleSheet.create({
         color: "#fff",
         flexDirection:"column",
         justifyContent: "center"
-    },
-    title: {
-        fontSize: 18,
-        color: "#ffffff",
-        textAlign: "center",
     }
 })
 
 AppBarCodeScanner.defaultProps = {
     'scannerName' : 'Scan',
-    'onClose' : false
+    'onClose' : false,
+    'caption': ''
 }
