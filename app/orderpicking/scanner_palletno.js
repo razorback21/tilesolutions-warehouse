@@ -86,10 +86,8 @@ export default (props) => {
             onOpen();
             setModalTitle('Error');
             setModalMessage("Invalid pallet")
-            setResetScanner(true);
             return false;
         }
-
         gotoActualPicking(pallet[0]);
     };
 
