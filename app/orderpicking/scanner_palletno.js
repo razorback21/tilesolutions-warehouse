@@ -93,6 +93,6 @@ export default (props) => {
 
     return  (<>
         <ModalMessage isOpen={isOpen} onClose={onClose} title={modalTitle} message={modalMessage}/>
-        <AppBarCodeScanner scannerName="Scan Pallet#" codeHandler={codeHandler} />
+        <AppBarCodeScanner scannerName="Scan Pallet" caption={`${pickItemDataQuery.data.ProductCode+' - '+pickItemDataQuery.data.ProductDescription}`} codeHandler={codeHandler} />
     </>)
 }
