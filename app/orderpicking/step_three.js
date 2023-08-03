@@ -150,6 +150,11 @@ export default (props) => {
         return <FullScreenLoader size="lg"/>
     }
 
+    // Redirect to pick items if picking is already done
+    if(itemPalletsInfoQuery.isFetched && !pickItemDataQuery.data.RemainingToBePick) {
+         router.replace({pathname:'/orderpicking/picked_items', params:{co:params.co, siid:params.siid}})
+    }
+
     return (
         <>
             <AppBackNavigation path="/orderpicking/step_two" params={{co:params.co}} title={`CO_${params.co}`}/>
