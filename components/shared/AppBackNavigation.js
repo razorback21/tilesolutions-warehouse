@@ -14,6 +14,10 @@ const AppBackNavigation = (props) => {
         } else {
             router.push({pathname: props.path, params: props.params});
         }
+
+        if(props.navigateHandler) {
+            props.navigateHandler();
+        }
     }
 
     return (
@@ -40,7 +44,8 @@ const AppBackNavigation = (props) => {
 }
 AppBackNavigation.defaultProps = {
     backButtonLabel: 'Back',
-    title: " "
+    title: " ",
+    navigateHandler: false
 }
 
 export default AppBackNavigation;
