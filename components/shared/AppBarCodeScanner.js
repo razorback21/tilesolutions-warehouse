@@ -30,6 +30,11 @@ const AppBarCodeScanner = (props) => {
         router.back();
     }
 
+    const closeHandler = () => {
+        setScanned(false);
+        props.onClose();
+    }
+
     if (hasPermission === null) {
         return <View style={styles.container}><Text>Requesting for camera permission</Text></View>;
     }
@@ -48,7 +53,7 @@ const AppBarCodeScanner = (props) => {
                 <BarcodeMask />
             </View>
             <View>
-                <IconButton onPress={!props.onClose ? closeScanner : props.onClose} icon={<Icon as={FontAwesome5} name="times-circle" size="4xl"/>} borderRadius="full" _icon={{color:"#fff"}}/>
+                <IconButton onPress={!props.onClose ? closeScanner : closeHandler} icon={<Icon as={FontAwesome5} name="times-circle" size="4xl"/>} borderRadius="full" _icon={{color:"#fff"}}/>
             </View>
         </View>
     );
