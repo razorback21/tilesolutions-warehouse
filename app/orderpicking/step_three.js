@@ -129,7 +129,7 @@ export default (props) => {
     }
 
     // Redirect to pick items if picking is already done
-    if(itemPalletsInfoQuery.isFetched && !pickItemDataQuery.data.RemainingToBePick) {
+    if(itemPalletsInfoQuery.isSuccess && !pickItemDataQuery.data.RemainingToBePick) {
          router.replace({pathname:'/orderpicking/picked_items', params:{co:params.co, siid:params.siid}})
     }
 
