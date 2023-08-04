@@ -15,7 +15,7 @@ const useNFC =  () => {
         }
     }
 
-    const readTag = async () => {
+    const scanTag = async () => {
         reading = true;
         try {
             await NfcManager.requestTechnology(NfcTech.Ndef);
@@ -50,7 +50,9 @@ const useNFC =  () => {
         initialize,
         started,
         deviceSupport,
-        stopScan
+        scanTag,
+        stopScan,
+        reading
     }
 }
 
