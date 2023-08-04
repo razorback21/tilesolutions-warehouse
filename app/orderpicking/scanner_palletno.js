@@ -5,7 +5,7 @@ import {useDisclose} from "native-base";
 import useApi from "../../hooks/useApi";
 import {useLocalSearchParams, useRouter} from 'expo-router';
 import {useQuery} from "@tanstack/react-query";
-import {fetchPickItemData} from "../../queries/orderpicking_queries";
+import {fetchPickItemData, fetchSalesItemWarehousePalletInfo} from "../../queries/orderpicking_queries";
 
 export default (props) => {
     const [modalTitle, setModalTitle ] = React.useState('Message');
@@ -39,30 +39,6 @@ export default (props) => {
         queryKey: ["pick-item-data", params.siid],
         queryFn: async() => await fetchPickItemData(Number(params.siid))
     })
-
-    const fetchSalesItemWarehousePalletInfo = (sales_item_id) => {
-        return tsQuery(`
-            SalesItemWarehousePalletInfo($SalesItemID: Int!) {
-                SalesItemWarehousePalletInfo(SalesItemID: $SalesItemID) {
-                    SubLocation
-                    PalletID
-                    FormattedPalletID
-                    Shade
-                    Qty
-                    Available
-                    Reserved
-                    SaleItemID
-                    PurchaseReceivedID
-                    MaxAllowedPick
-                }
-            }
-        `,
-            {
-                "SalesItemID": sales_item_id
-            }).then(res => {
-            return res.data.data.SalesItemWarehousePalletInfo
-        })
-    }
 
     const itemPalletsInfoQuery = useQuery({
         queryKey: ["item-pallets-info", params.siid],
