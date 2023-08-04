@@ -25,3 +25,27 @@ export const fetchPickItemData = (sales_item_id) => {
     })
 }
 
+export const fetchSalesItemWarehousePalletInfo = (sales_item_id) => {
+    return tsQuery(`
+            SalesItemWarehousePalletInfo($SalesItemID: Int!) {
+                SalesItemWarehousePalletInfo(SalesItemID: $SalesItemID) {
+                    SubLocation
+                    PalletID
+                    FormattedPalletID
+                    Shade
+                    Qty
+                    Available
+                    Reserved
+                    SaleItemID
+                    PurchaseReceivedID
+                    MaxAllowedPick
+                }
+            }
+        `,
+        {
+            "SalesItemID": sales_item_id
+        }).then(res => {
+        return res.data.data.SalesItemWarehousePalletInfo
+    })
+}
+
