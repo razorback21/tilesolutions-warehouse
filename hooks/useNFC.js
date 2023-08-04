@@ -42,6 +42,8 @@ const useNFC =  () => {
     const stopScan = () => {
         if(started) {
             NfcManager.cancelTechnologyRequest();
+            started = false;
+            reading = false;
         }
     }
 
