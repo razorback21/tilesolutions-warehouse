@@ -25,11 +25,9 @@ const useApi =  () => {
 
     const tsQuery = async (query, variables={}) => {
         try {
-            //const token = await SecureStore.getItemAsync('api-token');
             const token = await AsyncStorage.getItem('api-token')
             api.defaults.headers.common['Authorization'] = "Bearer " + token;
             console.log('tsQuery : ', apiEndpoint)
-
             return api.post(apiEndpoint,{
                 query: `query ${query}`,
                 variables
@@ -42,12 +40,9 @@ const useApi =  () => {
 
     const tsMutation = async (mutation, variables={}) => {
         try {
-            //const token = await SecureStore.getItemAsync('api-token');
             const token = await AsyncStorage.getItem('api-token')
             api.defaults.headers.common['Authorization'] = "Bearer " + token;
             console.log('tsMutation : ', apiEndpoint);
-            console.log('mutation : ', mutation);
-            console.log('variables : ', variables);
             return api.post(apiEndpoint,{
                 query: `mutation ${mutation}`,
                 variables
