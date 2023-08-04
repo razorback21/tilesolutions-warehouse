@@ -46,10 +46,10 @@ const useNFC =  () => {
     }
 
     return {
+        NfcManager,
+        initialize,
         started,
         deviceSupport,
-        initialize,
-        NfcManager,
         stopScan
     }
 }
