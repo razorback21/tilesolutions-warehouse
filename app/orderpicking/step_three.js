@@ -24,7 +24,7 @@ import useApi from "../../hooks/useApi";
 import {useQuery} from "@tanstack/react-query";
 import FullScreenLoader from "../../components/shared/FullScreenLoader";
 import PickedItemBoxes from "../../components/shared/PickedItemBoxes";
-import {fetchPickItemData} from "../../queries/orderpicking_queries";
+import {fetchPickItemData, fetchSalesItemWarehousePalletInfo} from "../../queries/orderpicking_queries";
 
 export default (props) => {
     const router = useRouter();
@@ -117,30 +117,6 @@ export default (props) => {
             </Center>
         );
 
-    }
-
-    const fetchSalesItemWarehousePalletInfo = (sales_item_id) => {
-        return tsQuery(`
-            SalesItemWarehousePalletInfo($SalesItemID: Int!) {
-                SalesItemWarehousePalletInfo(SalesItemID: $SalesItemID) {
-                    SubLocation
-                    PalletID
-                    FormattedPalletID
-                    Shade
-                    Qty
-                    Available
-                    Reserved
-                    SaleItemID
-                    PurchaseReceivedID
-                    MaxAllowedPick
-                }
-            }
-        `,
-{
-           "SalesItemID": sales_item_id
-        }).then(res => {
-            return res.data.data.SalesItemWarehousePalletInfo
-        })
     }
 
     const itemPalletsInfoQuery = useQuery({
