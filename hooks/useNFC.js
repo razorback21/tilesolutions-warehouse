@@ -4,7 +4,7 @@ import NfcManager, {NfcEvents, NfcTech,  Ndef } from 'react-native-nfc-manager';
 const useNFC =  () => {
     let started = false;
     let deviceSupport = false;
-    let reading = false;
+    let scanning = false;
     let data = null;
 
     const initialize = async () => {
@@ -16,7 +16,7 @@ const useNFC =  () => {
     }
 
     const scanTag = async () => {
-        reading = true;
+        scanning = true;
         try {
             await NfcManager.requestTechnology(NfcTech.Ndef);
             const tag = await NfcManager.getTag();
@@ -32,18 +32,18 @@ const useNFC =  () => {
                 }
 
             }).catch((err) => console.warn('error getting tag: ', err));
-        }catch (ex) {
+        } catch (ex) {
             console.log('NFC Error!', ex);
-        } finally {
+        } /*finally {
             stopScan();
-        }
+        }*/
     }
 
     const stopScan = () => {
         if(started) {
             NfcManager.cancelTechnologyRequest();
             started = false;
-            reading = false;
+            scanning = false;
         }
     }
 
@@ -54,7 +54,7 @@ const useNFC =  () => {
         deviceSupport,
         scanTag,
         stopScan,
-        reading
+        scanning
     }
 }
 
