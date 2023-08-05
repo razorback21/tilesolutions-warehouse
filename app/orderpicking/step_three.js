@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text as RNText, View} from 'react-native';
 import {
     Box,
     Text,
@@ -11,8 +11,9 @@ import {
     Icon,
     useDisclose,
     Actionsheet,
-    Toast,
-    useToast
+    useToast,
+    Modal,
+    Button
 } from "native-base";
 import ListItemBox from "../../components/shared/ListItemBox";
 import AppStyles  from "../../AppStyles";
@@ -25,12 +26,17 @@ import {useQuery} from "@tanstack/react-query";
 import FullScreenLoader from "../../components/shared/FullScreenLoader";
 import PickedItemBoxes from "../../components/shared/PickedItemBoxes";
 import {fetchPickItemData, fetchSalesItemWarehousePalletInfo} from "../../queries/orderpicking_queries";
+import useNFC from "../../hooks/useNFC";
 
 export default (props) => {
     const router = useRouter();
     const params = useLocalSearchParams();
     const {tsQuery} = useApi();
     const toast = useToast();
+    const NFC = useNFC();
+    const nfcModalRef = React.useRef(null);
+    const [isOpenNfcModal, setIsOpenNfcModal] =  React.useState(false)
+
 
     const gotoActualPicking = (item) => {
         console.log("REAMING TO BE PICK : ", pickItemDataQuery.data.RemainingToBePick)
@@ -57,6 +63,52 @@ export default (props) => {
         queryFn: async() => await fetchPickItemData(Number(params.siid))
     })
 
+    const nfcScan = async () => {
+        await NFC.initialize();
+
+        if(!NFC.scanning) {
+            const scan = await NFC.scanTag();
+
+            scan.then(() => {
+                if(!NFC.isDeviceSupported) {
+                    alert('Your device does not support NFC');
+                    return false
+                }
+
+                if(NFC.scanning) {
+                    setIsOpenNfcModal(true);
+                } else {
+                    setIsOpenNfcModal(false);
+                }
+            })
+        }
+
+    }
+
+    const nfcStopScan = () => {
+        NFC.stopScan();
+        setIsOpenNfcModal(false);
+    }
+
+
+    const NfcModal = () => {
+        return  <Center>
+            <Modal isOpen={isOpenNfcModal} >
+                <Modal.Content maxWidth="400px">
+                    <Modal.Body bg="#fff" rounded={10}>
+                        <Center>
+                            <Icon as={MaterialIcons} name="nfc" size="10" color="green.400"/>
+                            <Text fontWeight={600} fontSize={14}>Place your device near NFC tag</Text>
+                            <Button style={{width:"100%",marginTop:10}} onPress={nfcStopScan}>Cancel</Button>
+                        </Center>
+                    </Modal.Body>
+                </Modal.Content>
+
+            </Modal>
+        </Center>
+    };
+
+
     const ItemContent = ({data}) => {
         return (
             <>
@@ -66,7 +118,6 @@ export default (props) => {
                     </HStack>
                 </Box>
                 <Box mb="1">
-
                     <Text fontWeight="400" fontSize="12" color="text.600">Shade: {data.Shade}</Text>
                 </Box>
                 <Box>
@@ -100,7 +151,9 @@ export default (props) => {
                         }}>
                             Scan QR code
                         </Actionsheet.Item>
-                        <Actionsheet.Item disabled={!pickItemDataQuery.data.RemainingToBePick} startIcon={<Icon as={MaterialIcons} name="nfc" size="6" />} _pressed={{
+                        <Actionsheet.Item startIcon={<Icon as={MaterialIcons} name="nfc" size="6" />}
+                                          onPress={nfcScan}
+                                          _pressed={{
                             bg: "text.100"
                         }}>
                             Scan NFC tag
@@ -137,6 +190,7 @@ export default (props) => {
         <>
             <AppBackNavigation path="/orderpicking/step_two" params={{co:params.co}} title={`CO_${params.co}`}/>
             <ActionSheet />
+
             <Box style={styles.topContainerNoFlex}>
                 <Text color="text.500" fontSize="12">STEP 3</Text>
                 <Heading size="md" color="tertiary.700" >Select Pallet</Heading>
@@ -158,7 +212,9 @@ export default (props) => {
                 </Center>
             </Box>
 
-            <Box style={styles.mainContainer}>
+
+            <View style={styles.mainContainer}>
+                <NfcModal/>
                 <ScrollView>
                 {
                     (pickItemDataQuery.data.RemainingToBePick && itemPalletsInfoQuery.isSuccess)
@@ -167,8 +223,7 @@ export default (props) => {
                     }) : null
                }
                 </ScrollView>
-            </Box>
-
+            </View>
         </>
     )
 }
