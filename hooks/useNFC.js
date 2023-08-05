@@ -25,7 +25,7 @@ const useNFC =  () => {
                 let payload = tag.ndefMessage[0].payload;
                 try {
                     if (Ndef.isType(tag.ndefMessage[0], Ndef.TNF_WELL_KNOWN, Ndef.RTD_TEXT)) {
-                        data = Ndef.text.decodePayload(payload)
+                        setData(Ndef.text.decodePayload(payload));
                     }
                 } catch (e) {
                     console.log(e);
@@ -54,7 +54,8 @@ const useNFC =  () => {
         isDeviceSupported,
         scanTag,
         stopScan,
-        scanning
+        scanning,
+        data
     }
 }
 
