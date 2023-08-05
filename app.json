@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "tswhapp",
+    "name": "TS Warehouse",
     "slug": "tswhapp",
     "version": "0.0.2",
     "orientation": "portrait",
@@ -26,16 +26,17 @@
       },
       "permissions": [
         "android.permission.NFC"
-      ]
+      ],
+      "package": "com.tswarehouse.app"
     },
     "plugins": [
-      "react-native-nfc-manager",
       [
         "expo-barcode-scanner",
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
         }
-      ]
+      ],
+      "react-native-nfc-manager"
     ],
     "web": {
       "favicon": "./assets/favicon.png",
