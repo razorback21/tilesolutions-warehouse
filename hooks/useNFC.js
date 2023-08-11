@@ -8,10 +8,14 @@ const useNFC = () => {
     let [data, setData] =  React.useState(false);
 
     const initialize = async () => {
-        setIsDeviceSupported(await NfcManager.isSupported());
+        setIsDeviceSupported(async () => {
+            return await NfcManager.isSupported();
+        });
         if(isDeviceSupported && !started.current) {
             await NfcManager.start();
-            setStarted(true);
+            setStarted(() => {
+                return true;
+            });
         }
     }
 
