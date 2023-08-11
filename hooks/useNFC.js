@@ -2,8 +2,8 @@ import React from 'react';
 import NfcManager, {NfcTech,  Ndef } from 'react-native-nfc-manager';
 
 const useNFC = () => {
-    let [started, setStarted ]= React.useState(false);
     let [isDeviceSupported, setIsDeviceSupported]=  React.useState(false);
+    let [started, setStarted ]= React.useState(false);
     let [scanning, setScanning]=  React.useState(false);
     let [data, setData] =  React.useState(false);
 
