@@ -33,10 +33,17 @@ export default (props) => {
     const params = useLocalSearchParams();
     const {tsQuery} = useApi();
     const toast = useToast();
-    const [NFCInitialize, NFCScanning, isNFCSupported, NFCStopScan, NFCScanTag] = useNFC();
     const nfcModalRef = React.useRef(null);
     const [isOpenNfcModal, setIsOpenNfcModal] =  React.useState(false)
-
+    const [
+        NFCStart,
+        NFCStarted,
+        isNFCSupported,
+        NFCScanTag,
+        NFCStopScan,
+        NFCScanning,
+        NFCData
+    ] = useNFC();
 
     const gotoActualPicking = (item) => {
         console.log("REAMING TO BE PICK : ", pickItemDataQuery.data.RemainingToBePick)
@@ -64,8 +71,7 @@ export default (props) => {
     })
 
     const nfcScan = async () => {
-        await NFCInitialize();
-
+        await NFCStart();
         if(!NFCScanning) {
             const scan = await NFCScanTag();
 
@@ -82,11 +88,10 @@ export default (props) => {
                 }
             })
         }
-
     }
 
-    const StopNFCScan = () => {
-        NFCStopScan();
+    const StopNFCScan = async () => {
+        await NFCStopScan();
         setIsOpenNfcModal(false);
     }
 
