@@ -7,13 +7,17 @@ const useNFC = () => {
     let [NFCScanning, setNFCScanning]=  React.useState(false);
     let [NFCData, setNFCData] =  React.useState(false);
 
-    const NFCInitialize = async () => {
-        const supported = await NfcManager.isSupported();
-        setIsNFCSupported(supported);
-
-        if(supported && !NFCStarted) {
-            await NfcManager.start();
-            setNFCStarted(true);
+    const NFCStart = async () => {
+        try {
+            const supported = await NfcManager.isSupported();
+            setIsNFCSupported(supported);
+            console.log('NFC SUPPORTED', supported)
+            if(supported && !NFCStarted) {
+                await NfcManager.start();
+                setNFCStarted(true);
+            }
+        } catch (e) {
+            alert('TEST', e);
         }
     }
 
@@ -49,10 +53,8 @@ const useNFC = () => {
         }
     }
 
-
     return [
-        NfcManager,
-        NFCInitialize,
+        NFCStart,
         NFCStarted,
         isNFCSupported,
         NFCScanTag,
