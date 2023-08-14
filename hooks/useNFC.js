@@ -11,13 +11,12 @@ const useNFC = () => {
         try {
             const supported = await NfcManager.isSupported();
             setIsNFCSupported(supported);
-            console.log('NFC SUPPORTED', supported)
             if(supported && !NFCStarted) {
                 await NfcManager.start();
                 setNFCStarted(true);
             }
         } catch (e) {
-            alert('TEST', e);
+            console.log('NFC Error', e);
         }
     }
 
