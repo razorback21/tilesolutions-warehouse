@@ -33,7 +33,7 @@ export default (props) => {
     const params = useLocalSearchParams();
     const {tsQuery} = useApi();
     const toast = useToast();
-    const NFC = useNFC();
+    const [NFCInitialize, NFCScanning, isNFCSupported, NFCStopScan, NFCScanTag] = useNFC();
     const nfcModalRef = React.useRef(null);
     const [isOpenNfcModal, setIsOpenNfcModal] =  React.useState(false)
 
@@ -64,18 +64,18 @@ export default (props) => {
     })
 
     const nfcScan = async () => {
-        await NFC.initialize();
+        await NFCInitialize();
 
-        if(!NFC.scanning) {
-            const scan = await NFC.scanTag();
+        if(!NFCScanning) {
+            const scan = await NFCScanTag();
 
             scan.then(() => {
-                if(!NFC.isDeviceSupported) {
+                if(!isNFCSupported) {
                     alert('Your device does not support NFC');
                     return false
                 }
 
-                if(NFC.scanning) {
+                if(NFCScanning) {
                     setIsOpenNfcModal(true);
                 } else {
                     setIsOpenNfcModal(false);
@@ -85,8 +85,8 @@ export default (props) => {
 
     }
 
-    const nfcStopScan = () => {
-        NFC.stopScan();
+    const StopNFCScan = () => {
+        NFCStopScan();
         setIsOpenNfcModal(false);
     }
 
@@ -99,7 +99,7 @@ export default (props) => {
                         <Center>
                             <Icon as={MaterialIcons} name="nfc" size="10" color="green.400"/>
                             <Text fontWeight={600} fontSize={14}>Place your device near NFC tag</Text>
-                            <Button style={{width:"100%",marginTop:10}} onPress={nfcStopScan}>Cancel</Button>
+                            <Button style={{width:"100%",marginTop:10}} onPress={StopNFCScan}>Cancel</Button>
                         </Center>
                     </Modal.Body>
                 </Modal.Content>
