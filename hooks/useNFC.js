@@ -2,25 +2,23 @@ import React from 'react';
 import NfcManager, {NfcTech,  Ndef } from 'react-native-nfc-manager';
 
 const useNFC = () => {
-    let [isDeviceSupported, setIsDeviceSupported]=  React.useState(false);
-    let [started, setStarted ]= React.useState(false);
-    let [scanning, setScanning]=  React.useState(false);
-    let [data, setData] =  React.useState(false);
+    let [isNFCSupported, setIsNFCSupported]=  React.useState(false);
+    let [NFCStarted, setNFCStarted ]= React.useState(false);
+    let [NFCScanning, setNFCScanning]=  React.useState(false);
+    let [NFCData, setNFCData] =  React.useState(false);
 
-    const initialize = async () => {
-        setIsDeviceSupported(async () => {
-            return await NfcManager.isSupported();
-        });
-        if(isDeviceSupported && !started.current) {
+    const NFCInitialize = async () => {
+        const supported = await NfcManager.isSupported();
+        setIsNFCSupported(supported);
+
+        if(supported && !NFCStarted) {
             await NfcManager.start();
-            setStarted(() => {
-                return true;
-            });
+            setNFCStarted(true);
         }
     }
 
-    const scanTag = async () => {
-        setScanning(true);
+    const NFCScanTag = async () => {
+        setNFCScanning(true);
         try {
             await NfcManager.requestTechnology(NfcTech.Ndef);
             const tag = await NfcManager.getTag();
@@ -29,7 +27,7 @@ const useNFC = () => {
                 let payload = tag.ndefMessage[0].payload;
                 try {
                     if (Ndef.isType(tag.ndefMessage[0], Ndef.TNF_WELL_KNOWN, Ndef.RTD_TEXT)) {
-                        setData(Ndef.text.decodePayload(payload));
+                        setNFCData(Ndef.text.decodePayload(payload));
                     }
                 } catch (e) {
                     console.log(e);
@@ -39,28 +37,29 @@ const useNFC = () => {
         } catch (ex) {
             console.log('NFC Error!', ex);
         } finally {
-            stopScan();
+            await NFCStopScan();
         }
     }
 
-    const stopScan = async () => {
-        if(started) {
+    const NFCStopScan = async () => {
+        if(NFCStarted) {
             await NfcManager.cancelTechnologyRequest();
-            setStarted(false);
-            setScanning(false);
+            setNFCStarted(false);
+            setNFCScanning(false);
         }
     }
 
-    return {
+
+    return [
         NfcManager,
-        initialize,
-        started,
-        isDeviceSupported,
-        scanTag,
-        stopScan,
-        scanning,
-        data
-    }
+        NFCInitialize,
+        NFCStarted,
+        isNFCSupported,
+        NFCScanTag,
+        NFCStopScan,
+        NFCScanning,
+        NFCData
+    ];
 }
 
 export default useNFC;
