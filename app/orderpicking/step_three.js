@@ -71,22 +71,20 @@ export default (props) => {
     })
 
     const nfcScan = async () => {
+        setIsOpenNfcModal(false);
         await NFCStart();
         if(!NFCScanning) {
             const scan = await NFCScanTag();
-
             scan.then(() => {
                 if(!isNFCSupported) {
                     alert('Your device does not support NFC');
                     return false
-                }
-
-                if(NFCScanning) {
-                    setIsOpenNfcModal(true);
                 } else {
-                    setIsOpenNfcModal(false);
+                    setIsOpenNfcModal(true);
                 }
             })
+        } else {
+            setIsOpenNfcModal(true);
         }
     }
 
