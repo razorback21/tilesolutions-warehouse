@@ -8,8 +8,8 @@ import SpinnerModal from "../shared/SpinnerLoader";
 
 export default () => {
     const {appLogin, appLogout} = useAuth();
-    const [emailValue, setEmailValue] = useState('razorback21@gmail.com');
-    const [passwordValue, setPasswordValue] = useState('dev@qwerty');
+    const [emailValue, setEmailValue] = useState('');
+    const [passwordValue, setPasswordValue] = useState('');
     const [modalTitle, setModalTitle ] = useState('Message');
     const [modalMessage, setModalMessage ] = useState('');
     const [spinnerVisible, setSpinnerVisible] = useState(false);
