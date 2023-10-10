@@ -4,9 +4,9 @@ module.exports = function(api) {
     presets: ['babel-preset-expo'],
     plugins: [
       "expo-router/babel",
+      '@babel/plugin-transform-export-namespace-from',
       //This Plugin should be last
       'react-native-reanimated/plugin',
-      '@babel/plugin-transform-export-namespace-from'
     ],
   };
 };
