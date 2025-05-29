@@ -29,9 +29,9 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "scheme": "tswh",
-    "appConfig": {
-      "apiEndpoint" : "http://192.168.1.13/tswarehouseapi",
-    }
+    "scheme": "tswh"
+    // "appConfig": {
+    //   "apiEndpoint" : "http://192.168.1.13/tswarehouseapi",
+    // }
   }
 }
