@@ -27,7 +27,7 @@
       "permissions": [
         "android.permission.NFC"
       ],
-      "package": "com.tswarehouse.app"
+      "package": "com.tswhapp.app"
     },
     "plugins": [
       [
@@ -38,13 +38,9 @@
       ],
       "react-native-nfc-manager"
     ],
-    "web": {
-      "favicon": "./assets/favicon.png",
-      "bundler": "metro"
-    },
-    "scheme": "tswh",
-    "appConfig": {
-      "apiEndpoint" : "http://192.168.1.99/tswarehouseapi"
-    }
+    "scheme": "tswh"
+    // "appConfig": {
+    //   "apiEndpoint" : "tswarehouseapi"
+    // }
   }
 }
